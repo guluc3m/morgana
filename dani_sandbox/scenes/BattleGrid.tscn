@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://dani_sandbox/scripts/BattleGrid.gd" type="Script" id=1]
+[ext_resource path="res://dani_sandbox/scenes/BattleHand.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/prototipos/albertoV_dungeon_background.png" type="Texture" id=4]
 
 [node name="Main" type="Node2D"]
@@ -55,3 +56,18 @@ margin_bottom = 137.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="hand_location" type="HBoxContainer" parent="."]
+margin_right = 288.0
+margin_bottom = 24.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hand" parent="hand_location" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 144.0
+margin_right = 144.0
+margin_bottom = 24.0

@@ -12,6 +12,11 @@ var enemies = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = load("res://dani_sandbox/scenes/BattlePlayer.tscn").instance()
+	
+	for card in $hand_location/Hand/HBoxContainer.get_children():
+		card.player = player
+		card.type = "attack"
+	
 	for i in range(3):
 		enemies.append(load("res://dani_sandbox/scenes/BattleEnemy.tscn").instance())
 	get_node("Player").add_child(player)
