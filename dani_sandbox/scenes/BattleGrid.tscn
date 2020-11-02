@@ -1,8 +1,37 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://dani_sandbox/scripts/BattleGrid.gd" type="Script" id=1]
 [ext_resource path="res://dani_sandbox/scenes/BattleHand.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/prototipos/albertoV_dungeon_background.png" type="Texture" id=4]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.185185, 0.785185 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.914063, 0.66814, 0.0856934, 1, 0.953125, 0.107971, 0.107971, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0.462025, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.981013, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 3, 0.5, 0 )
+flag_disable_z = true
+gravity = Vector3( 0, -98, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 25.0
+angle = 45.0
+scale = 3.0
+scale_random = 0.4
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -21,6 +50,22 @@ motion_scale = Vector2( 0.1, 1 )
 texture = ExtResource( 4 )
 centered = false
 
+[node name="Fire" type="Particles2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 111.643, 52.6441 )
+amount = 30
+lifetime = 0.6
+speed_scale = 0.5
+visibility_rect = Rect2( -2.97436, -18.045, 5.95432, 18.5341 )
+process_material = SubResource( 1 )
+
+[node name="Fire2" type="Particles2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 271.313, 52.3635 )
+amount = 30
+lifetime = 0.6
+speed_scale = 0.5
+visibility_rect = Rect2( -2.97436, -18.045, 5.95432, 18.5341 )
+process_material = SubResource( 1 )
+
 [node name="Player" type="CenterContainer" parent="."]
 margin_left = 61.0
 margin_top = 115.0
@@ -32,27 +77,27 @@ __meta__ = {
 
 [node name="Enemy_0" type="CenterContainer" parent="."]
 margin_left = 176.0
-margin_top = 134.0
+margin_top = 131.0
 margin_right = 200.0
-margin_bottom = 142.0
+margin_bottom = 139.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Enemy_1" type="CenterContainer" parent="."]
 margin_left = 224.0
-margin_top = 134.0
+margin_top = 131.0
 margin_right = 238.0
-margin_bottom = 143.0
+margin_bottom = 140.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Enemy_2" type="CenterContainer" parent="."]
 margin_left = 264.0
-margin_top = 134.0
+margin_top = 131.0
 margin_right = 272.0
-margin_bottom = 137.0
+margin_bottom = 134.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

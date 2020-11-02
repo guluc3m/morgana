@@ -1,24 +1,10 @@
 extends "res://dani_sandbox/scripts/BattleCharacter.gd"
 
-signal playerAttack
-
-func _ready():
-	play_idle()
-
-
-func _process(delta):
-	pass
-
-
-func _on_Character_animation_finished():
-	if $Character.animation == "attack":
-		play_idle()
-
-
-func play_idle():
-	$Character.animation = "idle"
-	$Character.play()
-
+var target
 
 func _on_Battle_Player_playerAttack():
 	$Weapon/AnimationPlayer.play("attack")
+	var bleed = load("res://dani_sandbox/scenes/bleed.tscn").instance()
+	bleed.set_emitting(true)
+	target.add_child(bleed)
+	

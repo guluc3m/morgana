@@ -13,5 +13,7 @@ func _ready():
 
 func _on_Button_pressed():
 	player.get_node("Character").animation = type
+	if target:
+		player.target = target
 	player.emit_signal("playerAttack")
 	player.get_node("Character").play()
