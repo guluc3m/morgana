@@ -16,14 +16,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Morgana"
+run/main_scene="res://adri_sandbox/CardBase.tscn"
 config/icon="res://icon.png"
-
-[autoload]
-
-PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
-IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
-RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
-UserData="*res://addons/github-integration/scripts/user_data.gd"
 
 [editor_plugins]
 
