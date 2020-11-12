@@ -16,18 +16,32 @@ _global_script_class_icons={
 [application]
 
 config/name="Morgana"
+run/main_scene="res://dani_sandbox/scenes/BattleGrid.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
-IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
-RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
-UserData="*res://addons/github-integration/scripts/user_data.gd"
+PluginSettings="res://addons/github-integration/scripts/PluginSettings.gd"
+IconLoaderGithub="res://addons/github-integration/scripts/IconLoaderGithub.gd"
+RestHandler="res://addons/github-integration/scenes/RestHandler.tscn"
+UserData="res://addons/github-integration/scripts/user_data.gd"
+
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 
 enabled=PoolStringArray(  )
+
+[input]
+
+mouse_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 
 [rendering]
 
