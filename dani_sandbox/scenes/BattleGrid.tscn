@@ -1,23 +1,23 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://dani_sandbox/scripts/BattleGrid.gd" type="Script" id=1]
 [ext_resource path="res://dani_sandbox/scenes/BattleHand.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/prototipos/albertoV_dungeon_background.png" type="Texture" id=4]
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.185185, 0.785185 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.914063, 0.66814, 0.0856934, 1, 0.953125, 0.107971, 0.107971, 1 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0.462025, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.981013, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=5]
-curve = SubResource( 4 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
 emission_box_extents = Vector3( 3, 0.5, 0 )
 flag_disable_z = true
@@ -30,8 +30,24 @@ linear_accel = 25.0
 angle = 45.0
 scale = 3.0
 scale_random = 0.4
-scale_curve = SubResource( 5 )
-color_ramp = SubResource( 3 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 2
+emission_box_extents = Vector3( 28, 1, 1 )
+flag_disable_z = true
+direction = Vector3( -30, 45, 0 )
+spread = 15.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 34.48
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 45.0
+angle_random = 0.5
+scale = 2.0
+color = Color( 0.0235294, 0.541176, 1, 1 )
+hue_variation_random = 0.34
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -44,7 +60,6 @@ zoom = Vector2( 0.28, 0.26 )
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.1, 1 )
 
 [node name="Background" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource( 4 )
@@ -56,7 +71,7 @@ amount = 30
 lifetime = 0.6
 speed_scale = 0.5
 visibility_rect = Rect2( -2.97436, -18.045, 5.95432, 18.5341 )
-process_material = SubResource( 1 )
+process_material = SubResource( 5 )
 
 [node name="Fire2" type="Particles2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2( 271.313, 52.3635 )
@@ -64,7 +79,15 @@ amount = 30
 lifetime = 0.6
 speed_scale = 0.5
 visibility_rect = Rect2( -2.97436, -18.045, 5.95432, 18.5341 )
-process_material = SubResource( 1 )
+process_material = SubResource( 5 )
+
+[node name="Particles2D" type="Particles2D" parent="ParallaxBackground/ParallaxLayer"]
+visible = false
+position = Vector2( 193.552, 106.453 )
+amount = 1000
+lifetime = 2.0
+visibility_rect = Rect2( -77.6558, -0.972345, 105.549, 67.0956 )
+process_material = SubResource( 6 )
 
 [node name="Player" type="CenterContainer" parent="."]
 margin_left = 61.0
@@ -102,17 +125,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="hand_location" type="HBoxContainer" parent="."]
-margin_right = 288.0
-margin_bottom = 24.0
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Hand" parent="hand_location" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 144.0
-margin_right = 144.0
-margin_bottom = 24.0
+[node name="Hand" parent="." instance=ExtResource( 2 )]
+margin_right = 85.0
+margin_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 85, 50 )

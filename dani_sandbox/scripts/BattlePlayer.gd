@@ -2,6 +2,9 @@ extends "res://dani_sandbox/scripts/BattleCharacter.gd"
 
 var target
 
+func _ready():
+	add_to_group("player")
+
 func _on_Battle_Player_playerAttack():
 	$Weapon/AnimationPlayer.play("attack")
 	var bleed = load("res://dani_sandbox/scenes/bleed.tscn").instance()

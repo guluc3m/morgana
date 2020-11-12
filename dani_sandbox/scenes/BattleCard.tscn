@@ -3,10 +3,11 @@
 [ext_resource path="res://dani_sandbox/scripts/BattleCard.gd" type="Script" id=1]
 
 [node name="Card" type="Control"]
-anchor_right = 0.039
-anchor_bottom = 0.08
-margin_right = 0.0639992
+anchor_right = 0.376
+margin_right = -345.024
+margin_bottom = 48.0
 rect_min_size = Vector2( 40, 48 )
+mouse_default_cursor_shape = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -28,4 +29,6 @@ text = "card"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="mouse_entered" from="Button" to="." method="_on_Button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_Button_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
