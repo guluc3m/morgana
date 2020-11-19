@@ -1,6 +1,5 @@
 extends Control
 
-signal playerAttack
 
 var player = ""
 var target = ""
@@ -26,13 +25,10 @@ func _on_Button_pressed():
 
 
 func _on_Button_mouse_entered():
-	print("Enter")
 	set_process_input(true)
 
 
 func _on_Button_mouse_exited():
-	# if not mouse_pressed:
-	print("stop")
 	set_process_input(false)
 	
 
@@ -47,7 +43,6 @@ func _process(delta):
 
 
 func _input(event):
-	
 	if event.is_action_pressed("mouse_left"):
 		mouse_pressed = true
 		mouse_pos_init = get_local_mouse_position()
@@ -60,3 +55,15 @@ func _input(event):
 	
 	if mouse_pressed and event is InputEventMouseMotion:
 		mouse_pos_end = get_local_mouse_position()
+		
+		# No me gusta esto, pero por ahora funciona. Probablemente luego se pueda hacer mejor...
+		for _target in get_tree().get_nodes_in_group("targeteable"):
+			# target es el nodo raiz de BattleEnemy, un Area2D
+			if _target.global_position.distance_to(get_global_mouse_position()) < 13:
+				if not _target.mouse_over:
+					_target.mouse_over = true
+					_target.emit_signal("card_target")
+			else:
+				if _target.mouse_over:
+					_target.mouse_over = false
+					_target.emit_signal("card_target")

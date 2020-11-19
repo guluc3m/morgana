@@ -1,6 +1,5 @@
 extends Area2D
 
-signal playerAttack
 var screen_size
 
 func _ready():
