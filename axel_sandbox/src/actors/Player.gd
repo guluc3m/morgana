@@ -1,7 +1,10 @@
 extends Actor
 
+onready var card_database = preload("res://adri_sandbox/CardsDatabase.gd").DATA
+onready var funciones = preload("res://adri_sandbox/Effects.gd").new()
+
 signal open_door(body)
-signal item_collision()
+signal item_collision(body)
 
 func get_direction() -> Vector2:
 	var velocity: = Vector2()
@@ -41,7 +44,7 @@ func process_traps():
 func process_overlapping_bodies_actions(overlapping_bodies):
 	for body in overlapping_bodies:
 		if body.is_in_group("items"):
-			emit_signal("item_collision")
+			emit_signal("item_collision", body)
 		if body.is_in_group("doors"):
 			emit_signal("open_door", body)
 
@@ -50,12 +53,21 @@ func _process(delta):
 	_velocity = direction.normalized() * speed
 	run_animation(delta)
 	_velocity = move_and_slide(_velocity)
+
+func _input(event):
 	var overlapping_bodies = $PlayerInfluece.get_overlapping_bodies()
-	if Input.is_action_pressed('attack') and len(overlapping_bodies):
+	if event.is_action_pressed("attack") and len(overlapping_bodies):
 		process_overlapping_bodies_actions(overlapping_bodies)
 
 func _on_CollisionObjects_body_entered(body):
 	if body.is_in_group("traps"):
+		# TODO: move [65:69] to GameManager
+		for card in ["Sword", "Potion", "Fire"]:
+			for i in card_database[card]["actions"]:
+				var funcion = funcref(funciones, i[0])
+				funcion.call_funcv(i[1])
+			print()
+
 		process_traps()
 	if body is KinematicBody2D and body.is_in_group("enemies"):
 		print("Enemy killed")
