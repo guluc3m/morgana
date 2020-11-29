@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://dani_sandbox/scripts/BattleGrid.gd" type="Script" id=1]
 [ext_resource path="res://dani_sandbox/scenes/BattleHand.tscn" type="PackedScene" id=2]
+[ext_resource path="res://dani_sandbox/scenes/MouseCollision.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/prototipos/albertoV_dungeon_background.png" type="Texture" id=4]
 
 [sub_resource type="Gradient" id=1]
@@ -131,3 +132,5 @@ margin_bottom = 50.0
 grow_horizontal = 0
 grow_vertical = 0
 rect_min_size = Vector2( 85, 50 )
+
+[node name="MouseCollision" parent="." instance=ExtResource( 3 )]

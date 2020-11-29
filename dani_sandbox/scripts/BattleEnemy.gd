@@ -6,7 +6,9 @@ var mouse_over = false
 
 func _ready():
 	add_to_group("enemies")
-	add_to_group("targeteable")
+	# Se añaden al grupo de "targetebles" cuando se empieza a usar una carta
+	# para evitar colisiones cuando no debe
+	## add_to_group("targeteable")
 
 
 func _on_Battle_Enemy_Swampy_card_target():
