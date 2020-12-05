@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0.00632912, 0.669318 ), 0.0, 0.0, 0, 0, Vector2( 0.373418, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 45.0
+angle_random = 0.5
+scale = 1.5
+scale_curve = SubResource( 2 )
+color = Color( 0.968627, 0.00392157, 0.00392157, 1 )
+
+[node name="bleed" type="Particles2D"]
+emitting = false
+amount = 100
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.3
+randomness = 0.5
+process_material = SubResource( 3 )
