@@ -7,9 +7,9 @@ extends Node
 #	func_name(objectives, kwargs)
 	
 
-func modify_health(objetives, amount):
-	for objetive in objetives:
-		objetive.modify_health(amount)
+func modify_health(kwargs):
+	for objetive in kwargs["objetives"]:
+		objetive.modify_health(kwargs["amount"])
 
 
 func damage(objectives, damage):
@@ -20,14 +20,14 @@ func apply_condition(objectives, damage, condition):
 	print("Oh, no! estoy " + condition + " y eso me hace " + damage + " puntos de daño.")
 
 
-func set_armor(objetives, amount):
-	for objetive in objetives:
-		objetive.set_armor(amount)
+func set_armor(kwargs):
+	for objetive in kwargs["objetives"]:
+		objetive.set_armor(kwargs["amount"])
 
 
-func draw_card(objetives, amount):
-	for objetive in objetives:
-		objetive.draw_card(amount)
+func draw_card(kwargs):
+	for objetive in kwargs["objetives"]:
+		objetive.draw_card(kwargs["amount"])
 
 
 func exile_card(card):
@@ -35,28 +35,28 @@ func exile_card(card):
 	pass
 
 
-func destroy_card(card, owner):
-	owner.send_to_graveyard(card)
+func destroy_card(kwargs):
+	kwargs["owner"].send_to_graveyard(kwargs["card"])
 
 
 func increase_damage(objetives, amount):
 	pass
 
 
-func add_temporally_card(objetives, card_name):
+func add_temporally_card(kwargs):
 	#Hacer versión exiliada de la carta
-	for objetive in objetives:
-		objetive.add_card(card_name)
+	for objetive in kwargs["objetives"]:
+		objetive.add_card(kwargs["card_name"])
 
 
-func suffle_deck(objetives):
-	for objetive in objetives:
+func suffle_deck(kwargs):
+	for objetive in kwargs["objetives"]:
 		objetive.suffle_deck()
 
 
-func set_energy(objetives, amount):
-	for objetive in objetives:
-		objetive.set_energy(amount)
+func set_energy(kwargs):
+	for objetive in kwargs["objetives"]:
+		objetive.set_energy(kwargs["amount"])
 
 
 # TODO: Las cartas de daño pueden tener un atributo de tipo de daño
