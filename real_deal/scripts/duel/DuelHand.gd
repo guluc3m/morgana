@@ -3,6 +3,8 @@
 """
 extends Control
 
+signal removeCard
+
 const CardBase = preload("res://real_deal/scenes/duel/DuelCardBase.tscn")
 
 var _cards = []
@@ -42,3 +44,10 @@ func add_to_hand(card):
 	var width_cards = $cards.get_child_count()*self.card_width
 	# var current_position = get_position()
 	set_position(Vector2(self.hand_width-width_cards, 0))
+
+
+func _on_Hand_removeCard(card_path):
+	""" Elimina la carta de la mano
+	"""
+	# Todo, alguna animación o algo antes de, o quizás al momento de jugarla en CardBase
+	get_node(card_path).queue_free()

@@ -17,5 +17,6 @@ func _on_Battle_Enemy_Swampy_card_target():
 	"""
 	print("Enable target")
 
+
 func _on_Battle_Enemy_Swampy_not_card_target():
 	print("Disable target")

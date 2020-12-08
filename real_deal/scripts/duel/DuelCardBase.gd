@@ -5,6 +5,7 @@ signal playCard
 onready var card_database = preload("res://real_deal/scripts/utils/CardsDatabase.gd").DATA
 onready var card_functions = preload("res://real_deal/scripts/duel/Effects.gd").new()
 var card_data = null
+var card_target = null
 
 var mouse_pos_init = null
 var mouse_pos_end = null
@@ -52,18 +53,15 @@ func _input(event):
 	if event.is_action_pressed("mouse_left"):
 		mouse_pressed = true
 		mouse_pos_init = get_local_mouse_position()
+		add_to_group("card")
 		
 		for _target in get_tree().get_nodes_in_group("enemies"):
 			_target.add_to_group("targeteable")
 
 	if mouse_pressed and event.is_action_released("mouse_left"):
-		set_process_input(false)
-		mouse_pos_init = null
-		mouse_pos_end = null
-		mouse_pressed = false
-		
-		for _target in get_tree().get_nodes_in_group("targeteable"):
-			_target.remove_from_group("targeteable")
+		if self.card_target:
+			self.play_card()
+		self.release_card()
 	
 	if mouse_pressed and event is InputEventMouseMotion:
 		mouse_pos_end = get_local_mouse_position()
@@ -84,20 +82,42 @@ func _on_BattleCardBase_mouse_exited():
 	set_process_input(false)
 
 
-# TODO
-#func _on_BattleCardBase_pressed():
-#	# Esto habría que ver como implementarlo con las funciones de las cartas
-#	player.get_node("Character").animation = type
-#	if target:
-#		player.target = target
-#	player.emit_signal("playerAttack")
-#	player.get_node("Character").play()
-
-
-func _on_BattleCardBase_playCard(target_id):
+func play_card():
 	""" Ejecuta las acciones de la carta
 	"""
 	# FALTARÍA QUE SE APLIQUE AL OBJETIVO
 	for f in card_data['actions']:
-		var funcion = funcref(card_functions, f[0])
-		funcion.call_funcv(f[1])
+		var func_name = f[0]
+		var args = f[1]
+		args['objectives'] = [self.card_target]
+		card_functions.card_func(func_name, args)
+#		var funcion = funcref(card_functions, f[0])
+#		funcion.call_funcv(f[1])
+
+	# Recupera la mano
+	get_parent().get_parent().emit_signal("removeCard", get_path())
+
+
+func _on_BattleCardBase_playCard(target_id):
+	self.play_card()
+
+
+func get_target(target):
+	""" Guarda el objetivo de la carta (en caso de ser jugada)
+	"""
+	self.card_target = target
+
+
+func release_card():
+	""" Resetea valores de la carta en caso de ser jugada/no jugada
+	"""
+	set_process_input(false)
+	mouse_pos_init = null
+	mouse_pos_end = null
+	mouse_pressed = false
+	
+	for _target in get_tree().get_nodes_in_group("targeteable"):
+		_target.remove_from_group("targeteable")
+	
+	remove_from_group("card")
+	self.card_target = ""

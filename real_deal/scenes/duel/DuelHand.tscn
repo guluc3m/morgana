@@ -19,3 +19,4 @@ __meta__ = {
 [node name="cards" type="HBoxContainer" parent="."]
 grow_horizontal = 0
 grow_vertical = 0
+[connection signal="removeCard" from="." to="." method="_on_Hand_removeCard"]

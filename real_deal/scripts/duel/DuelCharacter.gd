@@ -62,6 +62,7 @@ func load_deck(card_names):
 func modify_health(amount):
 	# TODO: control de vida máxima y condición de muerte
 	# TODO: control de daño pasando por armadura y resistencias
+	print("He colega, que me curo ", amount)
 	self._health += amount
 
 

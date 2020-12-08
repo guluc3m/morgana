@@ -5,58 +5,55 @@ extends Node
 # otras cosas en todas las funciones
 #func apply(objectives, func_name, **kwargs):
 #	func_name(objectives, kwargs)
-	
 
-func modify_health(kwargs):
-	for objetive in kwargs["objetives"]:
-		objetive.modify_health(kwargs["amount"])
+func card_func(func_name, kwargs={}):
+	var objectives = kwargs.get("objectives", [])
+	for objective in objectives:
+		var function = funcref(self, func_name)
+		function.call_func(objective, kwargs)
+		
 
-
-func damage(objectives, damage):
-	print("Oh, no! he recibido " + damage + " puntos de daño.")
-
-
-func apply_condition(objectives, damage, condition):
-	print("Oh, no! estoy " + condition + " y eso me hace " + damage + " puntos de daño.")
+func base_damage(objective, kwargs):
+	objective.modify_health(kwargs["amount"])
 
 
-func set_armor(kwargs):
-	for objetive in kwargs["objetives"]:
-		objetive.set_armor(kwargs["amount"])
+func apply_condition(objective, kwargs):
+	print("Oh, no! estoy ", kwargs["condition"], " y eso me hace ", kwargs["amount"], " puntos de daño.")
 
 
-func draw_card(kwargs):
-	for objetive in kwargs["objetives"]:
-		objetive.draw_card(kwargs["amount"])
+func set_armor(objective, kwargs):
+	objective.set_armor(kwargs["amount"])
 
 
-func exile_card(card):
+func draw_card(objective, kwargs):
+	objective.draw_card(kwargs["amount"])
+
+
+func exile_card(objective, kwargs):
 	# Será usada si hay cartas que tengan el poder de exiliar otras cartas
+	objective.exile()
+
+
+func destroy_card(objective, kwargs):
+	objective.send_to_graveyard()
+	#kwargs["owner"].send_to_graveyard(kwargs["card"])
+
+
+func increase_damage(objective, kwargs):
 	pass
 
 
-func destroy_card(kwargs):
-	kwargs["owner"].send_to_graveyard(kwargs["card"])
-
-
-func increase_damage(objetives, amount):
-	pass
-
-
-func add_temporally_card(kwargs):
+func add_temporaly_card(objective, kwargs):
 	#Hacer versión exiliada de la carta
-	for objetive in kwargs["objetives"]:
-		objetive.add_card(kwargs["card_name"])
+	objective.add_card(kwargs["card_name"])
 
 
-func suffle_deck(kwargs):
-	for objetive in kwargs["objetives"]:
-		objetive.suffle_deck()
+func suffle_deck(objective, kwargs):
+	objective.suffle_deck()
 
 
-func set_energy(kwargs):
-	for objetive in kwargs["objetives"]:
-		objetive.set_energy(kwargs["amount"])
+func set_energy(objective, kwargs):
+	objective.set_energy(kwargs["amount"])
 
 
 # TODO: Las cartas de daño pueden tener un atributo de tipo de daño

@@ -3,6 +3,7 @@ extends Node2D
 
 var player = ""
 var enemies = []
+var turn = "" # Id del nodo
 
 # TESTING VARS
 onready var _player_instance = preload("res://real_deal/scenes/duel/DuelPlayer.tscn")
@@ -10,8 +11,7 @@ const _enemies_scenes = [
 	preload("res://real_deal/scenes/duel/DuelEnemy.tscn"),
 	preload("res://real_deal/scenes/duel/DuelEnemy.tscn")
 ]
-	
-	
+
 var test_deck = ["sword", "potion", "fire"]
 var test_deck2 = ["sword", "fire"]
 
@@ -20,6 +20,9 @@ func _init_entities(player_instance, _enemies_scenes):
 	player = player_instance.instance()
 	player._init_params(self.test_deck)
 	get_node("Player").add_child(player)
+	
+	# TESTING quizás luego es random o algo, yuqse
+	self.turn = player
 
 	for i in _enemies_scenes.size():
 		var enemy = _enemies_scenes[i].instance()
