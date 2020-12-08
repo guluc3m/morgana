@@ -21,12 +21,10 @@ func _on_MouseCollision_area_entered(area):
 				# y para saber que sigue funcionando y no hemos roto el apuntar
 				_target.emit_signal("card_target")
 				get_tree().call_group("card", "get_target", _target)
-				
 
 
 func _on_MouseCollision_area_exited(area):
 	for _target in get_tree().get_nodes_in_group("targeteable"):
 		if _target.mouse_over:
-			_target.mouse_over = false
 			_target.emit_signal("not_card_target")
-			get_tree().call_group("card", "get_target", false)
+		get_tree().call_group("card", "get_target", false)

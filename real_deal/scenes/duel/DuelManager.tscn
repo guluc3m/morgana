@@ -132,3 +132,4 @@ __meta__ = {
 [node name="Hand" parent="." instance=ExtResource( 2 )]
 
 [node name="MouseCollision" parent="." instance=ExtResource( 1 )]
+[connection signal="playCard" from="." to="." method="_on_Main_playCard"]

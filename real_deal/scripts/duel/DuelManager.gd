@@ -1,5 +1,8 @@
 extends Node2D
 
+signal playCard
+
+onready var card_functions = preload("res://real_deal/scripts/duel/Effects.gd").new()
 
 var player = ""
 var enemies = []
@@ -43,3 +46,23 @@ func basura():
 	# var new_card = CardBase.instance()
 	# new_card.card_data = card_database[Compendium[randi() % 3]]
 	# $Cards.add_child(new_card)
+
+
+func _on_Main_playCard(card_path, card_data, target):
+	""" Ejecuta las acciones de la carta
+	"""
+	for f in card_data['actions']:
+		var func_name = f[0]
+		var args = f[1]
+		args['objectives'] = [target]
+		card_functions.card_func(func_name, args)
+#		var funcion = funcref(card_functions, f[0])
+#		funcion.call_funcv(f[1])
+
+	# Elimina la carta de la mano visible
+	if self.turn.player:
+		$Hand.emit_signal("removeCard", card_path)
+	# Elimina la carta de la estructura de la mano
+	self.turn.remove_card(card_data)
+	
+	

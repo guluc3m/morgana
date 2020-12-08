@@ -83,12 +83,23 @@ func draw_card(amount):
 
 
 # NO PROBADA
-func use_card(card):
-	print("Usando ", card)
+func remove_card(card):
+	""" Elimina la carta de la mano del jugador
+		y si no se exilia, la manda al cementerio
+		
+		@card: Diccionario de la carta en la base de datos
+	"""
 	self._hand.remove(self._hand.find(card))  # No he encontrado la función para eliminar un objeto de la lista
+	
+	if not card["exiled"]:
+		self.send_to_graveyard(card)
 
 
 func send_to_graveyard(card):  # Atentos a que no la elimina de la mano o de donde sea
+	""" Manda una carta al cementerio
+	
+		@card: Diccionario de la carta en la base de datos
+	"""
 	self._graveyard.append(card)
 
 
@@ -97,7 +108,7 @@ func increase_damage(amount):
 	self._bonus += amount
 
 
-func add_temporally_card_to_hand(card_name):
+func add_temporaly_card_to_hand(card_name):
 	#Hacer versión exiliada de la carta
 	var card = card_database[card_name].duplicate(true)
 	card["exiled"] = true

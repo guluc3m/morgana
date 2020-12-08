@@ -35,7 +35,7 @@ const DATA = {
 		"cost": 7,
 		"dexterity": 7,
 		"description": "Bwahaha ha ha",
-		"exiled": false,
+		"exiled": true,
 		"actions": [
 			["base_damage", {"amount": 1}],
 			["apply_condition", {"amount": 5, "condition": "ardiendo"}],

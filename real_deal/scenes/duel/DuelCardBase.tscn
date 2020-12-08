@@ -164,4 +164,3 @@ text = "Soy una carta super poderosa.
 WAAAA"
 [connection signal="mouse_entered" from="." to="." method="_on_BattleCardBase_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_BattleCardBase_mouse_exited"]
-[connection signal="playCard" from="." to="." method="_on_BattleCardBase_playCard" binds= [ "" ]]

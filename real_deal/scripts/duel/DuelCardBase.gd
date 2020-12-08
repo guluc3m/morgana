@@ -1,6 +1,5 @@
 extends Control
 
-signal playCard
 
 onready var card_database = preload("res://real_deal/scripts/utils/CardsDatabase.gd").DATA
 onready var card_functions = preload("res://real_deal/scripts/duel/Effects.gd").new()
@@ -60,7 +59,9 @@ func _input(event):
 
 	if mouse_pressed and event.is_action_released("mouse_left"):
 		if self.card_target:
-			self.play_card()
+			get_tree().current_scene.emit_signal(
+				"playCard", get_path(), self.card_data, self.card_target
+			)
 		self.release_card()
 	
 	if mouse_pressed and event is InputEventMouseMotion:
@@ -82,26 +83,6 @@ func _on_BattleCardBase_mouse_exited():
 	set_process_input(false)
 
 
-func play_card():
-	""" Ejecuta las acciones de la carta
-	"""
-	# FALTARÍA QUE SE APLIQUE AL OBJETIVO
-	for f in card_data['actions']:
-		var func_name = f[0]
-		var args = f[1]
-		args['objectives'] = [self.card_target]
-		card_functions.card_func(func_name, args)
-#		var funcion = funcref(card_functions, f[0])
-#		funcion.call_funcv(f[1])
-
-	# Recupera la mano
-	get_parent().get_parent().emit_signal("removeCard", get_path())
-
-
-func _on_BattleCardBase_playCard(target_id):
-	self.play_card()
-
-
 func get_target(target):
 	""" Guarda el objetivo de la carta (en caso de ser jugada)
 	"""
@@ -117,7 +98,8 @@ func release_card():
 	mouse_pressed = false
 	
 	for _target in get_tree().get_nodes_in_group("targeteable"):
+		_target.emit_signal("not_card_target")
 		_target.remove_from_group("targeteable")
 	
 	remove_from_group("card")
-	self.card_target = ""
+	self.card_target = false

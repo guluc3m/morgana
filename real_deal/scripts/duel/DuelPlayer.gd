@@ -2,6 +2,7 @@ extends "res://real_deal/scripts/duel/DuelCharacter.gd"
 
 signal playerAttack
 
+var player = true
 var target
 
 

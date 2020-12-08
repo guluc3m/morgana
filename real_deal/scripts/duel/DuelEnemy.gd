@@ -3,6 +3,7 @@ extends "res://real_deal/scripts/duel/DuelCharacter.gd"
 signal card_target
 signal not_card_target
 
+var player = false
 var mouse_over = false
 
 func _ready():
@@ -19,4 +20,5 @@ func _on_Battle_Enemy_Swampy_card_target():
 
 
 func _on_Battle_Enemy_Swampy_not_card_target():
+	self.mouse_over = false
 	print("Disable target")
