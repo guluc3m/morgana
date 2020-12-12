@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://real_deal/scripts/duel/DuelEnemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/prototipos/characters_sprites/swampy_idle_anim_f0.png" type="Texture" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://assets/prototipos/characters_sprites/swampy_run_anim_f2.png" type="Texture" id=7]
 [ext_resource path="res://assets/prototipos/characters_sprites/swampy_run_anim_f3.png" type="Texture" id=8]
 [ext_resource path="res://assets/prototipos/characters_sprites/swampy_idle_anim_f3.png" type="Texture" id=9]
+[ext_resource path="res://assets/prototipos/characters_sprites/skelet_idle_anim_f0.png" type="Texture" id=10]
+[ext_resource path="res://assets/prototipos/characters_sprites/skelet_idle_anim_f1.png" type="Texture" id=11]
+[ext_resource path="res://assets/prototipos/characters_sprites/skelet_idle_anim_f2.png" type="Texture" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -16,6 +19,11 @@ animations = [ {
 "loop": true,
 "name": "idle",
 "speed": 4.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": false,
+"name": "dead",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ), null, ExtResource( 7 ), null, ExtResource( 7 ) ],
 "loop": false,

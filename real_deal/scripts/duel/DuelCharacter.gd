@@ -9,8 +9,8 @@ var _graveyard = null
 export var _max_hand_size = 5
 
 # Estadíscitas básicas
-export var _health = 100
-export var _max_health = 100
+export var _health = 1
+export var _max_health = 1
 export var _energy = 0
 export var _max_energy = 100
 
@@ -19,12 +19,13 @@ var _armor = null
 var _damage_bonus = null
 
 # Estados
+var is_alive = true
 var _burned = null
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	play_idle()
+	play_animation("idle")
 	
 	
 func _init_params(deck, max_hand_size=_max_hand_size, health=_health,
@@ -62,9 +63,10 @@ func load_deck(card_names):
 func modify_health(amount):
 	# TODO: control de vida máxima y condición de muerte
 	# TODO: control de daño pasando por armadura y resistencias
-	print("He colega, que me curo ", amount)
 	self._health += amount
-
+	if self._health <= 0:
+		self.is_alive = false
+		play_animation("dead")
 
 # NO PROBADA
 func set_armor(amount):
@@ -142,9 +144,11 @@ func get_hand():
 
 func _on_Character_animation_finished():
 	if $Character.animation == "attack":
-		play_idle()
+		play_animation("idle")
 
 
-func play_idle():
-	$Character.animation = "idle"
+func play_animation(animation):
+	""" Play the animation specified by parameter
+	"""
+	$Character.animation = animation
 	$Character.play()

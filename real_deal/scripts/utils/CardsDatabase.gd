@@ -15,7 +15,7 @@ const DATA = {
 		"description": "Úsame... \n ¡y mata!",
 		"exiled": false,
 		"actions": [
-			["base_damage", {"amount": 1}],
+			["base_damage", {"amount": -1}],
 		],
 	},
 	"potion": {
@@ -37,8 +37,8 @@ const DATA = {
 		"description": "Bwahaha ha ha",
 		"exiled": true,
 		"actions": [
-			["base_damage", {"amount": 1}],
-			["apply_condition", {"amount": 5, "condition": "ardiendo"}],
+			["base_damage", {"amount": -1}],
+			["apply_condition", {"amount": -5, "condition": "ardiendo"}],
 		],
 	},
 }

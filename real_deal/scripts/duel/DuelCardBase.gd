@@ -55,7 +55,8 @@ func _input(event):
 		add_to_group("card")
 		
 		for _target in get_tree().get_nodes_in_group("enemies"):
-			_target.add_to_group("targeteable")
+			if _target.is_alive:
+				_target.add_to_group("targeteable")
 
 	if mouse_pressed and event.is_action_released("mouse_left"):
 		if self.card_target:
