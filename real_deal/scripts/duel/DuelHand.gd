@@ -4,10 +4,11 @@
 extends Control
 
 signal removeCard
+signal addCard
 
 const CardBase = preload("res://real_deal/scenes/duel/DuelCardBase.tscn")
 
-var _cards = []
+var _cards = []  # Esta lista es la misma referencia que la de DuelCharacter
 
 var card_height = 48
 var card_width = 40
@@ -20,8 +21,8 @@ func _init_hand(cards=_cards):
 	"""
 	self._cards = cards
 	
-	for c in self._cards:
-		add_to_hand(c)
+#	for c in self._cards:
+#		add_to_hand(c)
 
 
 # Called when the node enters the scene tree for the first time.
