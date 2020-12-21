@@ -15,13 +15,13 @@ const _enemies_scenes = [
 	preload("res://real_deal/scenes/duel/DuelEnemy.tscn")
 ]
 
-var test_deck = ["sword", "potion", "fire"]
+var test_deck = ["sword", "potion", "fire", "sword", "potion", "fire", "sword", "potion", "fire", "sword", "potion", "fire"]
 var test_deck2 = ["sword", "fire"]
 
 
 func _init_entities(player_instance, _enemies_scenes):
 	player = player_instance.instance()
-	player._init_params(self.test_deck)
+	player._init_params(self.test_deck, $Hand)
 	get_node("Player").add_child(player)
 	
 	# TESTING quizás luego es random o algo, yuqse
@@ -29,7 +29,7 @@ func _init_entities(player_instance, _enemies_scenes):
 
 	for i in _enemies_scenes.size():
 		var enemy = _enemies_scenes[i].instance()
-		enemy._init_params(self.test_deck2)
+		enemy._init_params([], null)
 		enemies.append(enemy)
 		get_node("Enemy_{i}".format({'i':i})).add_child(enemies[i])
 		
@@ -60,3 +60,12 @@ func _on_Main_playCard(card_path, card_data, target):
 	self.turn.remove_card(card_data)
 	
 	
+func _on_start_turn(character_node):
+	character_node.start_turn($Hand)
+	
+
+
+func _on_Button_pressed():
+	print(len(player._hand), " ", len(player._deck), " ", len(player._graveyard))
+	_on_start_turn(player)
+	print(len(player._hand), " ", len(player._deck), " ", len(player._graveyard))
