@@ -2,7 +2,7 @@ extends Node2D
 
 signal playCard
 
-onready var card_functions = preload("res://real_deal/scripts/duel/Effects.gd").new()
+onready var card_functions = preload("res://real_deal/scripts/duel/CardEffects.gd").new()
 
 var player = ""
 var enemies = []
@@ -40,12 +40,6 @@ func _init_entities(player_instance, _enemies_scenes):
 func _ready():
 	_init_entities(self._player_instance, self._enemies_scenes)
 	#set_process(true)
-
-func basura():
-	pass
-	# var new_card = CardBase.instance()
-	# new_card.card_data = card_database[Compendium[randi() % 3]]
-	# $Cards.add_child(new_card)
 
 
 func _on_Main_playCard(card_path, card_data, target):
