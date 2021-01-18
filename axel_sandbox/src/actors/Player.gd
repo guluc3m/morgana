@@ -2,7 +2,6 @@ extends Actor
 
 onready var card_database = preload("res://adri_sandbox/CardsDatabase.gd").DATA
 onready var funciones = preload("res://adri_sandbox/Effects.gd").new()
-var next_scene = preload("res://adri_sandbox/MainMenu.tscn")
 
 signal open_door(body)
 signal item_collision(body)
@@ -57,7 +56,7 @@ func _process(delta):
 
 func _input(event):
 	if Input.is_action_pressed("ui_right"):
-		get_tree().change_scene("res://adri_sandbox/MainMenu.tscn")
+		SceneManager.goto_scene("res://adri_sandbox/MainMenu.tscn")
 	var overlapping_bodies = $PlayerInfluece.get_overlapping_bodies()
 	if event.is_action_pressed("attack") and len(overlapping_bodies):
 		process_overlapping_bodies_actions(overlapping_bodies)
@@ -75,3 +74,4 @@ func _on_CollisionObjects_body_entered(body):
 	if body is KinematicBody2D and body.is_in_group("enemies"):
 		print("Enemy killed")
 		body.queue_free()
+		SceneManager.goto_scene("res://real_deal/scenes/duel/DuelManager.tscn")

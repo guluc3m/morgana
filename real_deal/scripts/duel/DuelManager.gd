@@ -8,6 +8,8 @@ var player = ""
 var enemies = []
 var turn = "" # Id del nodo
 
+var scene_to_return = "res://axel_sandbox/src/levels/LevelTemplate.tscn"
+
 # TESTING VARS
 onready var _player_instance = preload("res://real_deal/scenes/duel/DuelPlayer.tscn")
 const _enemies_scenes = [
@@ -69,3 +71,7 @@ func _on_Button_pressed():
 	print(len(player._hand), " ", len(player._deck), " ", len(player._graveyard))
 	_on_start_turn(player)
 	print(len(player._hand), " ", len(player._deck), " ", len(player._graveyard))
+
+func _input(event):
+	if Input.is_action_pressed("ui_right"):
+		SceneManager.goto_scene(scene_to_return)

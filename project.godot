@@ -29,6 +29,10 @@ _global_script_class_icons={
 config/name="Morgana"
 config/icon="res://icon.png"
 
+[autoload]
+
+SceneManager="*res://real_deal/scripts/utils/SceneManager.gd"
+
 [display]
 
 window/stretch/mode="2d"
