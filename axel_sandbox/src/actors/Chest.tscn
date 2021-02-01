@@ -18,18 +18,19 @@ animations = [ {
 "name": "closed",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 1 ) ],
-"loop": false,
-"name": "open_full",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ) ],
 "loop": false,
 "name": "open_empty",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 1 ) ],
+"loop": false,
+"name": "open_full",
+"speed": 5.0
 } ]
 
 [node name="Chest" type="KinematicBody2D" groups=[
+"Sensitive",
 "items",
 ]]
 collision_layer = 32

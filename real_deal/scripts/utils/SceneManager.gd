@@ -10,7 +10,7 @@ func _ready():
 	# Both the current scene (the one with the button) and Global.gd are children of root, but autoloaded
 	# nodes are always first. This means that the last child of root is always the loaded scene.
 
-	
+
 func goto_scene(path):
 	# This function will usually be called from a signal callback,
 	# or some other function in the current scene.
@@ -20,7 +20,7 @@ func goto_scene(path):
 
 	# The solution is to defer the load to a later time, when
 	# we can be sure that no code from the current scene is running:
-
+	GameSaver.save_game()
 	call_deferred("_deferred_goto_scene", path)
 
 
@@ -33,6 +33,10 @@ func _deferred_goto_scene(path):
 
 	# Instance the new scene.
 	current_scene = s.instance()
+	
+	# NEW by Adri.
+	# Loads from save files
+	#GameSaver.load_game()
 
 	# Add it to the active scene, as child of root.
 	get_tree().get_root().add_child(current_scene)
