@@ -26,7 +26,7 @@ const DATA = {
 		"description": "Yo curo :)",
 		"exiled": false,
 		"actions": [
-			["apply_condition", {"amount": -4, "condition": "curandome"}],
+			["apply_condition", {"amount": +4, "condition": "curandome"}],
 		],
 	},
 	"fire": {

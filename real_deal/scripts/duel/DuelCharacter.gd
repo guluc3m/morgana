@@ -1,6 +1,7 @@
 extends Area2D
 
 var card_database = preload("res://real_deal/scripts/utils/CardsDatabase.gd").DATA
+var floating_text = preload("res://real_deal/scenes/utils/FloatingText.tscn")
 # Quizá podríamos pasar a usar getters y setters
 # Estructuras
 var _hand = null
@@ -22,6 +23,15 @@ var _damage_bonus = null
 # Estados
 var is_alive = true
 var _burned = null
+
+
+func draw_text(draw, color=[0,0,0]):
+	""" Draw the text over the character sprite
+	"""
+	var text = floating_text.instance()
+	text.text = draw
+	text.color = color
+	add_child(text)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -64,13 +74,23 @@ func load_deck(card_names):
 func modify_health(amount):
 	# TODO: control de vida máxima y condición de muerte
 	# TODO: control de daño pasando por armadura y resistencias
+	
+	# Aquí se dibuja el daño, rojo si es daño, verde si es positivo
+	if amount >= 0:
+		self.draw_text(amount, [0,255,0])
+	else:
+		self.draw_text(abs(amount), [255,0,0])
+	
 	self._health += amount
 	if self._health <= 0:
 		self.is_alive = false
 		play_animation("dead")
+		
 
 # NO PROBADA
 func set_armor(amount):
+	# Aquí se dibuja la armadura obtenida en color amarillo-marrón
+	self.draw_text(abs(amount), [226,185,0])
 	self._armor += amount
 
 

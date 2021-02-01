@@ -66,11 +66,11 @@ func _on_start_turn(character_node):
 	character_node.start_turn($Hand)
 	
 
-
 func _on_Button_pressed():
 	print(len(player._hand), " ", len(player._deck), " ", len(player._graveyard))
 	_on_start_turn(player)
 	print(len(player._hand), " ", len(player._deck), " ", len(player._graveyard))
+
 
 func _input(event):
 	if Input.is_action_pressed("ui_right"):

@@ -1,0 +1,110 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://real_deal/scripts/menu/MainMenu.gd" type="Script" id=1]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.494118, 0.129412, 0.129412, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftIcons" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 984.0
+margin_bottom = 560.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/LeftIcons"]
+margin_right = 48.0
+margin_bottom = 560.0
+mouse_filter = 2
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/LeftIcons/VBoxContainer"]
+margin_right = 48.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+text = "Menú"
+align = 2
+
+[node name="CenterIcons" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 984.0
+margin_bottom = 560.0
+mouse_filter = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterIcons"]
+margin_left = 417.0
+margin_right = 566.0
+margin_bottom = 560.0
+mouse_filter = 2
+custom_constants/separation = 10
+alignment = 1
+
+[node name="TitleName" type="Label" parent="MarginContainer/CenterIcons/VBoxContainer"]
+margin_top = 227.0
+margin_right = 149.0
+margin_bottom = 258.0
+text = "PERO MIRA QUE JUEGO
+MÁS BONICO"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/CenterIcons/VBoxContainer"]
+margin_top = 268.0
+margin_right = 149.0
+margin_bottom = 272.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="MarginContainer/CenterIcons/VBoxContainer"]
+margin_top = 282.0
+margin_right = 149.0
+margin_bottom = 302.0
+mouse_default_cursor_shape = 2
+text = "QUE EMPIENZA"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="MarginContainer/CenterIcons/VBoxContainer"]
+margin_top = 312.0
+margin_right = 149.0
+margin_bottom = 332.0
+mouse_default_cursor_shape = 2
+text = "Bueno, si eso luego"
+
+[node name="RightIcons" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 984.0
+margin_bottom = 560.0
+mouse_filter = 2
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RightIcons"]
+margin_left = 984.0
+margin_right = 984.0
+margin_bottom = 560.0
+mouse_filter = 2
+alignment = 2
+[connection signal="pressed" from="MarginContainer/LeftIcons/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterIcons/VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterIcons/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
