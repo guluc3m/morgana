@@ -88,13 +88,15 @@ shape = SubResource( 2 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 497.67, 104.566 )
 collision_layer = 1
-collision_mask = 4
 
 [node name="Camera2D" parent="Player" index="1"]
 position = Vector2( -2.00226, 2.17174 )
 limit_top = -450
 limit_right = 2880
 limit_bottom = 800
+
+[node name="CollisionShape2D" parent="Player/PlayerInfluece" index="0"]
+scale = Vector2( 1.00131, 1 )
 
 [node name="EnemyOne" parent="." instance=ExtResource( 4 )]
 position = Vector2( 647.396, 83.4273 )

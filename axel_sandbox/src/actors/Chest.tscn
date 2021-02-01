@@ -30,7 +30,6 @@ animations = [ {
 } ]
 
 [node name="Chest" type="KinematicBody2D" groups=[
-"Sensitive",
 "items",
 ]]
 collision_layer = 32

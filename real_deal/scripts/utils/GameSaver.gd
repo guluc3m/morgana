@@ -54,8 +54,7 @@ func load_game():
 	# For our example, we will accomplish this by deleting saveable objects.
 	var save_nodes = get_tree().get_nodes_in_group("Sensitive")
 	for i in save_nodes:
-		print(i.name)
-		print("he eliminado cosas")
+		print("he eliminado ",  i.name)
 		i.queue_free()
 
 	# Load the file line by line and process that dictionary to restore
@@ -69,11 +68,11 @@ func load_game():
 		var new_object = load(node_data["filename"]).instance()
 		get_node(node_data["parent"]).add_child(new_object)
 		new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
+		#new_object.name = node_data["name"]
 
 		# Now we set the remaining variables.
 		for i in node_data.keys():
-			print("jajajajaja")
-			print(i)
+			print("keys", i)
 			if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
 				continue
 			new_object.set(i, node_data[i])
