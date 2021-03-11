@@ -19,6 +19,7 @@ func base_damage(objective, kwargs):
 
 
 func apply_condition(objective, kwargs):
+	objective.modify_health(kwargs["amount"])
 	print("Oh, no! estoy ", kwargs["condition"], " y eso me hace ", kwargs["amount"], " puntos de daño.")
 
 

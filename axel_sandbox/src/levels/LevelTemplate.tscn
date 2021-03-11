@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://axel_sandbox/src/actors/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://axel_sandbox/src/levels/LevelTemplate.tres" type="TileSet" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://axel_sandbox/src/actors/Chest.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/prototipos/characters_sprites/doors_leaf_closed.png" type="Texture" id=6]
 [ext_resource path="res://axel_sandbox/src/levels/Door.gd" type="Script" id=7]
+[ext_resource path="res://axel_sandbox/src/levels/LevelTemplate.gd" type="Script" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -25,6 +26,7 @@ animations = [ {
 extents = Vector2( 16.135, 15.017 )
 
 [node name="LevelTemplate" type="Node2D"]
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 800.0 ],
 "_edit_vertical_guides_": [ 2878.0 ]
@@ -86,13 +88,15 @@ shape = SubResource( 2 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 497.67, 104.566 )
 collision_layer = 1
-collision_mask = 4
 
 [node name="Camera2D" parent="Player" index="1"]
 position = Vector2( -2.00226, 2.17174 )
 limit_top = -450
 limit_right = 2880
 limit_bottom = 800
+
+[node name="CollisionShape2D" parent="Player/PlayerInfluece" index="0"]
+scale = Vector2( 1.00131, 1 )
 
 [node name="EnemyOne" parent="." instance=ExtResource( 4 )]
 position = Vector2( 647.396, 83.4273 )
