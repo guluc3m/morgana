@@ -1,4 +1,4 @@
-extends Actor
+extends ActorA
 
 onready var card_database = preload("res://adri_sandbox/CardsDatabase.gd").DATA
 onready var funciones = preload("res://adri_sandbox/Effects.gd").new()

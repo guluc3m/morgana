@@ -28,4 +28,4 @@ func _on_Quit_pressed():
 
 func _on_Start_pressed():
 	# Cambia la escena al juego
-	SceneManager.goto_scene("res://real_deal/scenes/duel/DuelManager.tscn")
+	SceneManager.goto_scene("res://real_deal/scenes/exploration/levels/LevelTemplate.tscn")

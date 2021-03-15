@@ -12,16 +12,28 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Actor",
 "language": "GDScript",
-"path": "res://axel_sandbox/src/actors/Actor.gd"
+"path": "res://real_deal/scripts/exploration/actors/Actor.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "ActorA",
+"language": "GDScript",
+"path": "res://axel_sandbox/src/actors/ActorA.gd"
 }, {
 "base": "Actor",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://axel_sandbox/src/actors/Enemy.gd"
+"path": "res://real_deal/scripts/exploration/actors/Enemy.gd"
+}, {
+"base": "Actor",
+"class": "EnemyA",
+"language": "GDScript",
+"path": "res://axel_sandbox/src/actors/EnemyA.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
-"Enemy": ""
+"ActorA": "",
+"Enemy": "",
+"EnemyA": ""
 }
 
 [application]

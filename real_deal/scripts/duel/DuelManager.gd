@@ -8,7 +8,7 @@ var player = ""
 var enemies = []
 var turn = "" # Id del nodo
 
-var scene_to_return = "res://axel_sandbox/src/levels/LevelTemplate.tscn"
+var scene_to_return = "res://real_deal/scenes/exploration/levels/LevelTemplate.tscn"
 
 # TESTING VARS
 onready var _player_instance = preload("res://real_deal/scenes/duel/DuelPlayer.tscn")
