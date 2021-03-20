@@ -8,7 +8,7 @@ var enemies = []
 func _ready():
 	#set_process(true)
 	
-	player = load("res://dani_sandbox/scenes/BattlePlayer.tscn").instance()
+	player = load("res://dani_sandbox/scenes/battle/BattlePlayer.tscn").instance()
 	
 	$Hand/hand/CardBase.player = player
 	$Hand/hand/CardBase.type = "attack"
@@ -16,7 +16,7 @@ func _ready():
 	get_node("Player").add_child(player)
 	
 	for i in range(3):
-		enemies.append(load("res://dani_sandbox/scenes/BattleEnemy.tscn").instance())
+		enemies.append(load("res://dani_sandbox/scenes/battle/BattleEnemy.tscn").instance())
 	for i in enemies.size():
 		get_node("Enemy_{i}".format({'i':i})).add_child(enemies[i])
 		

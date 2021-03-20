@@ -1,4 +1,4 @@
-extends "res://dani_sandbox/scripts/BattleCharacter.gd"
+extends "res://dani_sandbox/scripts/battle/BattleCharacter_a.gd"
 
 signal playerAttack
 

@@ -10,7 +10,7 @@ func _ready():
 
 func _on_OptionsButton_pressed():
 	# Carga la escena
-	var optionsMenu = load("res://dani_sandbox/scenes/OptionsMenu.tscn").instance()
+	var optionsMenu = load("res://dani_sandbox/scenes/menu/OptionsMenu.tscn").instance()
 	# La añade al árbol
 	add_child(optionsMenu)
 	# Conectamos su señal con la función presente en este fichero (nombre señal, script que se enlaza, función del script)
@@ -28,4 +28,4 @@ func _on_Quit_pressed():
 
 func _on_Start_pressed():
 	# Cambia la escena al juego
-	SceneManager.goto_scene("res://dani_sandbox/scenes/BattleGrid.tscn")
+	SceneManager.goto_scene("res://dani_sandbox/scenes/battle/BattleGrid.tscn")

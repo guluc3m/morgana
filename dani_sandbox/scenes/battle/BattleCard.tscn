@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://dani_sandbox/scripts/BattleCard.gd" type="Script" id=1]
+[ext_resource path="res://dani_sandbox/scripts/battle/BattleCard_a.gd" type="Script" id=1]
 
 [node name="Card" type="Control"]
 anchor_right = 0.376

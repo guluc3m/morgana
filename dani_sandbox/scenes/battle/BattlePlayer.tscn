@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://dani_sandbox/scripts/BattlePlayer.gd" type="Script" id=1]
+[ext_resource path="res://dani_sandbox/scripts/battle/BattlePlayer_a.gd" type="Script" id=1]
 [ext_resource path="res://assets/prototipos/characters_sprites/knight_f_idle_anim_f1.png" type="Texture" id=2]
 [ext_resource path="res://assets/prototipos/characters_sprites/knight_f_hit_anim_f0.png" type="Texture" id=3]
 [ext_resource path="res://assets/prototipos/characters_sprites/knight_f_idle_anim_f0.png" type="Texture" id=4]
