@@ -2,8 +2,6 @@
 
 [ext_resource path="res://dani_sandbox/scripts/menu/OptionsMenu_a.gd" type="Script" id=1]
 
-
-
 [node name="OptionsMenu" type="Control"]
 anchor_left = 0.5
 anchor_top = 0.5
