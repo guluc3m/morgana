@@ -7,6 +7,12 @@ extends Node
 #	func_name(objectives, kwargs)
 
 func card_func(func_name, kwargs={}):
+	""" Ejecuta la función especificada
+	
+	Todas las cartas poseeen en su atributo "actions" las funciones que ejecutan
+	al ser jugadas junto con sus parámetros. Esta función gestiona de manera
+	generalista las llamadas a las funciones.
+	"""
 	var objectives = kwargs.get("objectives", [])
 	for objective in objectives:
 		var function = funcref(self, func_name)

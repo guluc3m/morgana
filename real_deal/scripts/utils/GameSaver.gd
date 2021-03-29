@@ -55,8 +55,9 @@ func load_game():
 	var save_nodes = get_tree().get_nodes_in_group("Sensitive")
 	for i in save_nodes:
 		print("he eliminado ",  i.name)
-		i.queue_free()
-
+		i.free()
+	
+	save_nodes = get_tree().get_nodes_in_group("Sensitive")
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.
 	save_game.open(path_save_directory + "saves/savegame.sav", File.READ)

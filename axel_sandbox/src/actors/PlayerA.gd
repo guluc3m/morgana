@@ -1,4 +1,4 @@
-extends Actor
+extends ActorA
 
 onready var card_database = preload("res://adri_sandbox/CardsDatabase.gd").DATA
 onready var funciones = preload("res://adri_sandbox/Effects.gd").new()
@@ -80,7 +80,7 @@ func _process(delta):
 
 func _input(event):
 	if Input.is_action_pressed("ui_right"):
-		SceneManager.goto_scene("res://adri_sandbox/MainMenu.tscn")
+		SceneManager.goto_scene("res://adri_sandbox/MainMenu.tscn", null)
 	var overlapping_bodies = $PlayerInfluece.get_overlapping_bodies()
 	if event.is_action_pressed("attack") and len(overlapping_bodies):
 		process_overlapping_bodies_actions(overlapping_bodies)

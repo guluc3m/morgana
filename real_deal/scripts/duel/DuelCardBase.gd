@@ -3,6 +3,7 @@ extends Control
 
 onready var card_database = preload("res://real_deal/scripts/utils/CardsDatabase.gd").DATA
 onready var card_functions = preload("res://real_deal/scripts/duel/CardEffects.gd").new()
+
 var card_data = null
 var card_target = null
 

@@ -1,18 +1,13 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://axel_sandbox/src/actors/PlayerA.tscn" type="PackedScene" id=1]
+[ext_resource path="res://real_deal/scenes/exploration/actors/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://axel_sandbox/src/levels/LevelTemplate.tres" type="TileSet" id=2]
 [ext_resource path="res://assets/prototipos/characters_sprites/doors_leaf_open.png" type="Texture" id=3]
-[ext_resource path="res://axel_sandbox/src/actors/EnemyA.tscn" type="PackedScene" id=4]
-[ext_resource path="res://axel_sandbox/src/actors/ChestA.tscn" type="PackedScene" id=5]
+[ext_resource path="res://real_deal/scenes/exploration/actors/Chest.tscn" type="PackedScene" id=4]
+[ext_resource path="res://real_deal/scenes/exploration/actors/Enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/prototipos/characters_sprites/doors_leaf_closed.png" type="Texture" id=6]
-[ext_resource path="res://axel_sandbox/src/levels/DoorA.gd" type="Script" id=7]
-[ext_resource path="res://axel_sandbox/src/levels/LevelTemplateA.gd" type="Script" id=8]
-
-
-
-
-
+[ext_resource path="res://real_deal/scripts/exploration/levels/LevelTemplate.gd" type="Script" id=7]
+[ext_resource path="res://real_deal/scripts/exploration/levels/Door.gd" type="Script" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -31,7 +26,7 @@ animations = [ {
 extents = Vector2( 16.135, 15.017 )
 
 [node name="LevelTemplate" type="Node2D"]
-script = ExtResource( 8 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 800.0 ],
 "_edit_vertical_guides_": [ 2878.0 ]
@@ -81,7 +76,7 @@ tile_data = PoolIntArray( -786401, 17, 0, -786400, 17, 0, -786399, 17, 0, -78639
 position = Vector2( 496.055, 16.2786 )
 collision_layer = 16
 collision_mask = 3
-script = ExtResource( 7 )
+script = ExtResource( 10 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Door"]
 frames = SubResource( 1 )
@@ -94,24 +89,14 @@ shape = SubResource( 2 )
 position = Vector2( 497.67, 104.566 )
 collision_layer = 1
 
-[node name="Camera2D" parent="Player" index="1"]
-position = Vector2( -2.00226, 2.17174 )
-limit_top = -450
-limit_right = 2880
-limit_bottom = 800
-
-[node name="CollisionShape2D" parent="Player/PlayerInfluece" index="0"]
-scale = Vector2( 1.00131, 1 )
-
-[node name="EnemyOne" parent="." instance=ExtResource( 4 )]
-position = Vector2( 647.396, 83.4273 )
-
-[node name="EmptyChest" parent="." instance=ExtResource( 5 )]
+[node name="EmptyChest" parent="." instance=ExtResource( 4 )]
 position = Vector2( 216.911, 132.149 )
 
-[node name="FullChest" parent="." instance=ExtResource( 5 )]
+[node name="FullChest" parent="." instance=ExtResource( 4 )]
 position = Vector2( 521.255, -139.491 )
-full = true
+
+[node name="EnemyOne" parent="." instance=ExtResource( 5 )]
+position = Vector2( 647.396, 83.4273 )
 [connection signal="item_collision" from="Player" to="EmptyChest" method="_on_Player_item_collision"]
 [connection signal="item_collision" from="Player" to="FullChest" method="_on_Player_item_collision"]
 [connection signal="open_door" from="Player" to="Door" method="_on_Player_open_door"]

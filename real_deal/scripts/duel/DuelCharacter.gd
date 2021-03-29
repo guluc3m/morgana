@@ -1,5 +1,6 @@
 extends Area2D
 
+# TODO: Meter esta variable en autoload
 var card_database = preload("res://real_deal/scripts/utils/CardsDatabase.gd").DATA
 var floating_text = preload("res://real_deal/scenes/utils/FloatingText.tscn")
 # Quizá podríamos pasar a usar getters y setters
@@ -11,8 +12,8 @@ export var _max_hand_size = 5
 export var _draw_amount = 3
 
 # Estadíscitas básicas
-export var _health = 100
-export var _max_health = 100
+export var _health = 10
+export var _max_health = 10
 export var _energy = 0
 export var _max_energy = 100
 
@@ -69,7 +70,7 @@ func load_deck(card_names):
 		deck.append(card_database[card_name].duplicate(true))
 	deck.shuffle()  # La semilla es siempre la misma
 	return deck
-		
+
 
 func modify_health(amount):
 	# TODO: control de vida máxima y condición de muerte
@@ -100,7 +101,8 @@ func draw_card(amount, hand_node):
 	for i in range(amount):
 		var card = self._deck.pop_front()
 		self._hand.append(card)
-		hand_node.add_to_hand(card)
+		if hand_node: # Los enemigos no tienen
+			hand_node.add_to_hand(card)
 		
 	# TODO: Controlar que se acaben las cartas (quizá en el getter)
 	# llamar a reshuffle() ???
@@ -113,11 +115,15 @@ func start_turn(hand_node):
 		for card in self._graveyard:
 			self._deck.append(card)
 		suffle_deck()
-	print("recuperas energía y avanzan los contadores")
+	self._update_state()
 	self.draw_card(min(self._max_hand_size - len(self._hand), self._draw_amount), hand_node)
+
+func _update_state():
+	print("recuperas energía y avanzan los contadores")
 
 
 # NO PROBADA
+# TODO: Controlar cuando la carta es eliminada por el efecto de una carta
 func remove_card(card):
 	""" Elimina la carta de la mano del jugador
 		y si no se exilia, la manda al cementerio
@@ -144,14 +150,14 @@ func increase_damage(amount):
 
 
 func add_temporaly_card_to_hand(card_name):
-	#Hacer versión exiliada de la carta
+	# Hacer versión exiliada de la carta
 	var card = card_database[card_name].duplicate(true)
 	card["exiled"] = true
 	self._hand.append(card)
 
 
 func add_temporally_card_to_deck(card_name):
-	#Hacer versión exiliada de la carta
+	# Hacer versión exiliada de la carta
 	var card = card_database[card_name].duplicate(true)
 	card["exiled"] = true
 	self._deck.append(card)
