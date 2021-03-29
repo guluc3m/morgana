@@ -1,10 +1,12 @@
-extends ActorA
+extends Actor
 
 onready var card_database = preload("res://adri_sandbox/CardsDatabase.gd").DATA
 onready var funciones = preload("res://adri_sandbox/Effects.gd").new()
 
 signal open_door
 signal item_collision
+
+var health = 15
 
 func _ready():
 	# TODO
@@ -75,12 +77,15 @@ func _process(delta):
 	_velocity = direction.normalized() * speed
 	run_animation(delta)
 	_velocity = move_and_slide(_velocity)
+	
+	# TESTING
+	print(self.health)
 
 
 
 func _input(event):
 	if Input.is_action_pressed("ui_right"):
-		SceneManager.goto_scene("res://adri_sandbox/MainMenu.tscn")
+		SceneManager.goto_scene("res://real_deal/scenes/menu//MainMenu.tscn", null)
 	var overlapping_bodies = $PlayerInfluece.get_overlapping_bodies()
 	if event.is_action_pressed("attack") and len(overlapping_bodies):
 		process_overlapping_bodies_actions(overlapping_bodies)
@@ -98,7 +103,7 @@ func _on_CollisionObjects_body_entered(body):
 	if body is KinematicBody2D and body.is_in_group("enemies"):
 		print("Enemy killed")
 		body.queue_free()
-		SceneManager.goto_scene("res://real_deal/scenes/duel/DuelManager.tscn")
+		SceneManager.goto_scene("res://real_deal/scenes/duel/DuelManager.tscn", {"health": health})
 
 
 # Adri things for save manager
@@ -111,3 +116,6 @@ func save():
 		"name" : "Player"
 	}
 	return save_dict
+
+func caca(h):
+	self.health = h

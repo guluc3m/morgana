@@ -12,8 +12,8 @@ export var _max_hand_size = 5
 export var _draw_amount = 3
 
 # Estadíscitas básicas
-export var _health = 100
-export var _max_health = 100
+export var _health = 10
+export var _max_health = 10
 export var _energy = 0
 export var _max_energy = 100
 
@@ -101,7 +101,8 @@ func draw_card(amount, hand_node):
 	for i in range(amount):
 		var card = self._deck.pop_front()
 		self._hand.append(card)
-		hand_node.add_to_hand(card)
+		if hand_node: # Los enemigos no tienen
+			hand_node.add_to_hand(card)
 		
 	# TODO: Controlar que se acaben las cartas (quizá en el getter)
 	# llamar a reshuffle() ???

@@ -2,8 +2,9 @@ extends "res://real_deal/scripts/duel/DuelCharacter.gd"
 
 signal card_target
 signal not_card_target
+signal playCard
 
-var player = false
+var player = false # Comprobar si sobra
 var mouse_over = false
 
 func _ready():
@@ -22,3 +23,12 @@ func _on_Battle_Enemy_Swampy_card_target():
 func _on_Battle_Enemy_Swampy_not_card_target():
 	self.mouse_over = false
 	print("Disable target")
+
+func select_card():
+	""" En esta función reside la inteligencia de los enemigos.
+	Al llamarla, estos escogen que carta quieren jugar y la retornan.
+	"""
+	if self._hand:
+		print("voy a jugar:  ")
+		return self._hand[0]
+	return false

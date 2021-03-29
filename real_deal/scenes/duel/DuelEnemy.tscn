@@ -47,4 +47,5 @@ flip_h = true
 shape = SubResource( 2 )
 [connection signal="card_target" from="." to="." method="_on_Battle_Enemy_Swampy_card_target"]
 [connection signal="not_card_target" from="." to="." method="_on_Battle_Enemy_Swampy_not_card_target"]
+[connection signal="playCard" from="." to="." method="_on_Battle_Enemy_Swampy_playCard"]
 [connection signal="animation_finished" from="Character" to="." method="_on_Character_animation_finished"]
