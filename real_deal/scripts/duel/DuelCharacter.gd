@@ -119,7 +119,7 @@ func start_turn(hand_node):
 	self.draw_card(min(self._max_hand_size - len(self._hand), self._draw_amount), hand_node)
 
 func _update_state():
-	print("recuperas energía y avanzan los contadores")
+	print(self.name, " recupera energía y avanzan los contadores")
 
 
 # NO PROBADA

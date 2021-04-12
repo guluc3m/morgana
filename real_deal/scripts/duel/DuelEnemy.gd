@@ -17,18 +17,18 @@ func _ready():
 func _on_Battle_Enemy_Swampy_card_target():
 	""" Start being a targeteable object
 	"""
-	print("Enable target")
+	#print("Enable target")
 
 
 func _on_Battle_Enemy_Swampy_not_card_target():
 	self.mouse_over = false
-	print("Disable target")
+	#print("Disable target")
 
 func select_card():
 	""" En esta función reside la inteligencia de los enemigos.
 	Al llamarla, estos escogen que carta quieren jugar y la retornan.
 	"""
 	if self._hand:
-		print("voy a jugar:  ")
+		print(self.name, " va a jugar: ", _hand[0]["name"])
 		return self._hand[0]
 	return false

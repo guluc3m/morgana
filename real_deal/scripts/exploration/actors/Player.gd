@@ -6,8 +6,6 @@ onready var funciones = preload("res://adri_sandbox/Effects.gd").new()
 signal open_door
 signal item_collision
 
-var health = 15
-
 func _ready():
 	# TODO
 	# Pasar a generico por grupo de objetos
@@ -79,7 +77,7 @@ func _process(delta):
 	_velocity = move_and_slide(_velocity)
 	
 	# TESTING
-	print(self.health)
+	print("playerManager.healt", PlayerManager.health)
 
 
 
@@ -101,9 +99,8 @@ func _on_CollisionObjects_body_entered(body):
 
 		process_traps()
 	if body is KinematicBody2D and body.is_in_group("enemies"):
-		print("Enemy killed")
 		body.queue_free()
-		SceneManager.goto_scene("res://real_deal/scenes/duel/DuelManager.tscn", {"health": health})
+		SceneManager.goto_scene("res://real_deal/scenes/duel/DuelManager.tscn", body.data)
 
 
 # Adri things for save manager
@@ -117,5 +114,3 @@ func save():
 	}
 	return save_dict
 
-func caca(h):
-	self.health = h

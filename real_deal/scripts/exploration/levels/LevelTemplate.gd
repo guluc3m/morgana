@@ -38,9 +38,6 @@ func update_data(data):
 	
 func _update_player(data):
 	var player = get_tree().get_root().find_node("Player", true, false)
-	if data:
-		$Player.caca(data["health"])
-		print($Player.health)
 	
 	
 func _update_enemies(data):

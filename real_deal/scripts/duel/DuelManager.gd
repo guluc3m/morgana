@@ -26,7 +26,7 @@ var test_deck2 = ["sword", "sword", "sword", "sword", "sword"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_init_entities(self._player_instance, self._enemies_scenes)
+	_init_entities(self._player_instance, self._enemies_scenes)  # Esto lo tiene que llamar el scene manager
 	#set_process(true)
 	
 func _process(delta):
@@ -44,7 +44,7 @@ func _process(delta):
 	# Enemy turn 
 	if self.current_turn.is_alive:
 		var card_to_play = self.current_turn.select_card()
-		while card_to_play:  
+		while card_to_play:
 			self._on_Main_playCard(
 				null,
 				card_to_play,
@@ -55,7 +55,16 @@ func _process(delta):
 
 func _init_entities(player_instance, _enemies_scenes):
 	player = player_instance.instance()
-	player._init_params(self.test_deck, $Hand)
+	#player._init_params(self.test_deck, $Hand)
+	player._init_params(  # Quizá cambiar esto para pasar directamente un diccionario y que la clase se gestione
+		PlayerManager.deck,
+		$Hand,
+		PlayerManager.max_hand_size,
+		PlayerManager.health,
+		PlayerManager.max_health,
+		PlayerManager.energy,
+		PlayerManager.max_energy
+	)
 	get_node("Player").add_child(player)
 	
 	# TESTING quizás luego es random o algo, yuqse
@@ -128,8 +137,10 @@ func _player_lose_duel():
 
 func _player_win_duel():
 	print("has ganado")
+	PlayerManager.health = self.player._health # TODO: Cambiar acceso a estas variables
+	PlayerManager.energy = self.player._energy
+	PlayerManager.save()
 	SceneManager.goto_scene(scene_to_return, {
-		"health": self.player._health,
 		"enemy_defeat": true
 	})
 	
