@@ -53,7 +53,7 @@ func load():
 		# Get the saved dictionary from the next line in the save file
 		var node_data = parse_json(save_game.get_line())
 		for i in node_data.keys():
-			print("keys", i)
+			#print("keys", i)
 			if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
 				continue
 			self.set(i, node_data[i])

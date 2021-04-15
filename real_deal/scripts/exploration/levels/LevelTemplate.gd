@@ -4,9 +4,7 @@ func _ready():
 	var r = get_tree().get_nodes_in_group("Sensitive")
 	GameSaver.load_game()
 	r = get_tree().get_nodes_in_group("Sensitive")
-	print("jajaja")
 	set_owner(get_tree().get_nodes_in_group("Sensitive"))
-	print("oooooooooooooooo")
 	"""
 	var player = get_tree().get_root().find_node("Player", true, false)
 	var chest = get_tree().get_root().find_node("EmptyChest", true, false)
@@ -20,9 +18,7 @@ func _ready():
 # No recuerdo para que valia esto
 func set_owner(clueless_nodes):
 	for clueless_node in clueless_nodes:
-		print(clueless_node.owner)
 		clueless_node.owner = self
-		print(clueless_node.owner)
 		#set_owner(clueless_node.get_children())
 
 func update_data(data):

@@ -25,14 +25,14 @@ _global_script_classes=[ {
 "path": "res://real_deal/scripts/exploration/dungeon_manager.gd"
 }, {
 "base": "Actor",
-"class": "Enemy",
-"language": "GDScript",
-"path": "res://real_deal/scripts/exploration/actors/Enemy.gd"
-}, {
-"base": "Actor",
 "class": "EnemyA",
 "language": "GDScript",
 "path": "res://axel_sandbox/src/actors/EnemyA.gd"
+}, {
+"base": "Actor",
+"class": "EnemyGroup",
+"language": "GDScript",
+"path": "res://real_deal/scripts/exploration/actors/enemy_group.gd"
 }, {
 "base": "Node",
 "class": "Room",
@@ -43,8 +43,8 @@ _global_script_class_icons={
 "Actor": "",
 "ActorA": "",
 "DungeonManager": "",
-"Enemy": "",
 "EnemyA": "",
+"EnemyGroup": "",
 "Room": ""
 }
 

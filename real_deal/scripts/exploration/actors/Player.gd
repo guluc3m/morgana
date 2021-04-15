@@ -75,10 +75,6 @@ func _process(delta):
 	_velocity = direction.normalized() * speed
 	run_animation(delta)
 	_velocity = move_and_slide(_velocity)
-	
-	# TESTING
-	print("playerManager.healt", PlayerManager.health)
-
 
 
 func _input(event):
@@ -100,7 +96,7 @@ func _on_CollisionObjects_body_entered(body):
 		process_traps()
 	if body is KinematicBody2D and body.is_in_group("enemies"):
 		body.queue_free()
-		SceneManager.goto_scene("res://real_deal/scenes/duel/DuelManager.tscn", body.data)
+		SceneManager.goto_scene("res://real_deal/scenes/duel/DuelManager.tscn", body.enemies)
 
 
 # Adri things for save manager

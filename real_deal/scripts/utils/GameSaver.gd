@@ -55,15 +55,12 @@ func load_game():
 	var save_game = File.new()
 	if not save_game.file_exists(path_save_directory + "saves/savegame.sav"):
 		return # Error! We don't have a save to load.
-	print(path_save_directory + "saves/savegame.sav")
-	print(save_game.file_exists(path_save_directory + "saves/savegame.sav"))
 	# We need to revert the game state so we're not cloning objects
 	# during loading. This will vary wildly depending on the needs of a
 	# project, so take care with this step.
 	# For our example, we will accomplish this by deleting saveable objects.
 	var save_nodes = get_tree().get_nodes_in_group("Sensitive")
 	for i in save_nodes:
-		print("he eliminado ",  i.name)
 		i.free()
 	
 	save_nodes = get_tree().get_nodes_in_group("Sensitive")
@@ -82,7 +79,7 @@ func load_game():
 
 		# Now we set the remaining variables.
 		for i in node_data.keys():
-			print("keys", i)
+			#print("keys", i)
 			if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
 				continue
 			new_object.set(i, node_data[i])
