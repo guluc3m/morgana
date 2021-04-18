@@ -1,0 +1,37 @@
+{
+	"portal": {
+		"hacia": <aquí se escribe el nombre del siguiente nivel que habría que cargar>
+	},
+	"enemigos": [  
+		<Al ser una lista, cada elemento debe llevar un atributo "nombre", ya que
+		aquí se especificarán casos concretos>
+		{
+			"nombre": 
+			<El atributo nombre en este caso en una lista porque queremos ponerle a
+			todos estos enemigos las mismas "características">
+			[
+				"enemigo1","enemigo2","enemigo3","enemigo4",
+				"enemigo5","enemigo6","enemigo7","enemigo8"
+			],
+			"tipo": <aquí definimos el tipo de enemigo que será. El nombre de los enemigos
+			vendrá definido en el siguiente formato para poder generarlos "automáticamente"
+			<nombre-del-enemigo>_<categoría [basico,minijefe,jefe]>_<nivel>. Ejemplos:
+				slime_basico_1 <-- Slime normal, categoría básico de nivel 1
+				slime-fuego_minijefe_3 <-- Slime de fuego, categoría minijefe y nivel 3>
+		},
+		{
+			"nombre":
+			<El atributo nombre aquí no es una lista porque queremos aplicar estas características
+			a un único personaje>
+				"minijefe1,
+			"tipo": "slime-fuego_minijefe_1"
+		}
+	],
+	"cofres": {
+		<Al contrario que en "enemigos" al no ser esto una lista se entiende que queremos definir
+		estas características a TODOS los elementos en el grupo>
+		"recompensa": <Aquí se define el tipo de recompensa para los cofres, puede ser [random/fija]
+		  si la recompensa es "fija", además habría que especificar una clave más "objetos" con los recompensas TBD>
+			"random"
+	}
+}

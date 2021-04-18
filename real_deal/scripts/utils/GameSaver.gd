@@ -37,7 +37,7 @@ func save_game():
 		# Store the save dictionary as a new line in the save file.
 		save_game.store_line(to_json(node_data))
 	save_game.close()
-	
+
 # Note: This can be called from anywhere inside the tree. This function
 # is path independent.
 func load_game():
