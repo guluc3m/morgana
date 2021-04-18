@@ -41,4 +41,26 @@ const DATA = {
 			["apply_condition", {"amount": -5, "condition": "ardiendo"}],
 		],
 	},
+	"thump": {
+		"name": "Thump",
+		"type": "attack",
+		"cost": 1,
+		"dexterity": 1,
+		"description": "Toma guantazo",
+		"exiled": false,
+		"actions": [
+			["base_damage", {"amount": -1}],
+		],
+	},
+	"super_thump": {
+		"name": "Super Thump",
+		"type": "attack",
+		"cost": 2,
+		"dexterity": 1,
+		"description": "Toma guantazo lleno de odio",
+		"exiled": true,
+		"actions": [
+			["base_damage", {"amount": -3}],
+		],
+	}
 }

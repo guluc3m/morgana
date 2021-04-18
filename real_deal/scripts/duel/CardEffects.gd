@@ -21,12 +21,12 @@ func card_func(func_name, kwargs={}):
 
 func base_damage(objective, kwargs):
 	objective.modify_health(kwargs["amount"])
-	print(kwargs["amount"], " puntos de daño")
+	print(objective.name, " recibe ", kwargs["amount"], " puntos de daño")
 
 
 func apply_condition(objective, kwargs):
 	objective.modify_health(kwargs["amount"])
-	print("Oh, no! estoy ", kwargs["condition"], " y eso me hace ", kwargs["amount"], " puntos de daño.")
+	print(objective.name, " se cura ", kwargs["amount"], " puntos de daño.")
 
 
 func set_armor(objective, kwargs):
