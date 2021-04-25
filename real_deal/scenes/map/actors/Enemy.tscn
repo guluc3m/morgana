@@ -1,32 +1,26 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/prototipos/characters_sprites/necromancer_idle_anim_f1.png" type="Texture" id=1]
+[ext_resource path="res://assets/prototipos/enemigos/enemy_slime_normal.png" type="Texture" id=1]
 [ext_resource path="res://real_deal/scripts/map/actors/Enemy.gd" type="Script" id=2]
-[ext_resource path="res://assets/prototipos/characters_sprites/necromancer_idle_anim_f2.png" type="Texture" id=3]
-[ext_resource path="res://assets/prototipos/characters_sprites/necromancer_idle_anim_f0.png" type="Texture" id=4]
-[ext_resource path="res://assets/prototipos/characters_sprites/necromancer_idle_anim_f3.png" type="Texture" id=5]
-[ext_resource path="res://assets/prototipos/characters_sprites/necromancer_run_anim_f1.png" type="Texture" id=6]
-[ext_resource path="res://assets/prototipos/characters_sprites/necromancer_run_anim_f3.png" type="Texture" id=7]
-[ext_resource path="res://assets/prototipos/characters_sprites/necromancer_run_anim_f0.png" type="Texture" id=8]
-[ext_resource path="res://assets/prototipos/characters_sprites/necromancer_run_anim_f2.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5.68452, 9.24081 )
+extents = Vector2( 97.0212, 92.6258 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 7 ) ],
+"frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 } ]
 
 [node name="Enemy" type="KinematicBody2D" groups=[
+"Sensitive",
 "enemies",
 ]]
 collision_layer = 2
@@ -39,5 +33,6 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 6.34961, 3.96851 )
 frames = SubResource( 2 )
 animation = "idle"

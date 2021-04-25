@@ -6,12 +6,16 @@ onready var funciones = preload("res://real_deal/scripts/duel/CardEffects.gd").n
 signal portal_collision
 signal item_collision
 
-var health = 15
-
 
 func _ready():
 	# TODO
 	pass
+	
+	
+#func _input(event):
+#	if Input.is_action_pressed("ui_right"):
+#		SceneManager.goto_scene("res://real_deal/scenes/menu//MainMenu.tscn", null)
+
 
 func get_direction() -> Vector2:
 	var velocity: = Vector2()
@@ -39,7 +43,7 @@ func is_movement() -> bool:
 		return false
 
 
-func run_animation(delta):
+func run_animation():
 	if is_movement():
 		$Sprite.flip_h = _velocity.x < 0
 	else:
@@ -49,22 +53,16 @@ func run_animation(delta):
 func _process(delta):
 	var direction: = get_direction()
 	_velocity = direction.normalized() * speed
-	run_animation(delta)
+	run_animation()
 	_velocity = move_and_slide(_velocity)
-
-
-# Adri things for save manager
-func save():
-	var save_dict = {
-		"filename" : get_filename(),
-		"parent" : get_parent().get_path(),
-		"pos_x" : position.x, # Vector2 is not supported by JSON
-		"pos_y" : position.y,
-		"name" : "Player"
-	}
-	return save_dict
 
 
 func _on_PlayerInfluece_body_entered(body):
 	if body.is_in_group("portal"):
 		emit_signal("portal_collision", body.get_path())
+		
+	if body is KinematicBody2D and body.is_in_group("enemies"):
+		body.queue_free()
+		print(body)
+		print(body.enemies)
+		SceneManager.goto_scene("res://real_deal/scenes/duel/DuelManager.tscn", {"enemigos": body.enemies})

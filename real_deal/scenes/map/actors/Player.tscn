@@ -9,7 +9,7 @@ extents = Vector2( 7.46059, 7.57044 )
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 190, 211 )
+region = Rect2( 190, 0, 190, 211 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
@@ -19,17 +19,17 @@ region = Rect2( 190, 0, 190, 211 )
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 380, 0, 190, 211 )
+region = Rect2( 570, 0, 190, 211 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 570, 0, 190, 211 )
+region = Rect2( 380, 0, 190, 211 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 380, 0, 190, 211 )
+region = Rect2( 0, 0, 190, 211 )
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
@@ -39,43 +39,43 @@ region = Rect2( 190, 0, 190, 211 )
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 570, 0, 190, 211 )
+region = Rect2( 380, 0, 190, 211 )
 
 [sub_resource type="AtlasTexture" id=9]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 190, 0, 190, 211 )
+region = Rect2( 570, 0, 190, 211 )
 
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
-"loop": false,
-"name": "attack",
-"speed": 8.0
-}, {
-"frames": [ SubResource( 6 ) ],
+"frames": [ SubResource( 2 ) ],
 "loop": true,
-"name": "walk-side",
+"name": "idle",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 7 ) ],
+"frames": [ SubResource( 3 ) ],
 "loop": true,
 "name": "walk-down",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 8 ) ],
+"frames": [ SubResource( 4 ) ],
 "loop": true,
 "name": "walk-up",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 9 ) ],
+"frames": [ SubResource( 5 ) ],
 "loop": true,
-"name": "idle",
+"name": "walk-side",
 "speed": 1.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": false,
+"name": "attack",
+"speed": 8.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 47.0448, 52.8813 )
+extents = Vector2( 96.119, 104.094 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "Sensitive",
@@ -86,18 +86,19 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 50.0 ]
 }
+speed = 400
 
 [node name="PhysicsCollisions" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 2, 2 )
 limit_left = -100000000
 limit_top = -100000000
 limit_smoothed = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 10 )
 animation = "attack"
 

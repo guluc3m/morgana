@@ -26,7 +26,8 @@ func goto_scene(path, data):
 
 func _deferred_goto_scene(path, data):
 	# It is now safe to remove the current scene
-	current_scene.free()
+	get_tree().get_root().remove_child(current_scene)
+	current_scene.queue_free() #(current_scene) #.free()
 
 	# Load the new scene.
 	var s = ResourceLoader.load(path)
@@ -40,10 +41,7 @@ func _deferred_goto_scene(path, data):
 
 	# Add it to the active scene, as child of root.
 	get_tree().get_root().add_child(current_scene)
-	if data:
-		current_scene.update_data(data)
 	# Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(current_scene)
-	
-	var jaja = get_tree().current_scene
-
+	if data:
+		current_scene.update_data(data)

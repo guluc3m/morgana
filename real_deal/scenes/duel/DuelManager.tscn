@@ -59,9 +59,6 @@ anchor_mode = 0
 current = true
 zoom = Vector2( 0.28, 0.26 )
 
-[node name="Camera2D2" type="Camera2D" parent="."]
-anchor_mode = 0
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]

@@ -30,6 +30,7 @@ func _ready():
 	deck = ["sword", "potion", "fire", "sword", "potion", "fire", "sword", "potion", "fire", "sword", "potion", "fire"]
 	inventory = []
 
+
 func save():
 	var save_game = File.new()
 	save_game.open(path_save_directory, File.WRITE)
@@ -45,7 +46,8 @@ func save():
 	}
 	save_game.store_line(to_json(save_dict))
 	save_game.close()
-	
+
+
 func load():
 	var save_game = File.new()
 	save_game.open(path_save_directory, File.READ)
