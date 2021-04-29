@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://dani_sandbox/scripts/battle/BattleHand_a.gd" type="Script" id=2]
+[ext_resource path="res://dani_sandbox/scenes/battle/BattleCardBase.tscn" type="PackedScene" id=3]
+
+[node name="Hand" type="Control"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hand" type="HBoxContainer" parent="."]
+margin_right = 84.0
+margin_bottom = 48.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CardBase" parent="hand" instance=ExtResource( 3 )]
+
+[node name="CardBase2" parent="hand" instance=ExtResource( 3 )]
+margin_left = 84.0
+margin_right = 164.0

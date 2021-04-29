@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/prototipos/elementos/limb_portal.png" type="Texture" id=1]
+[ext_resource path="res://real_deal/scripts/map/actors/Portal.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 120.268, 112.245 )
+
+[node name="Portal" type="KinematicBody2D" groups=[
+"portal",
+]]
+z_index = 100
+collision_layer = 32
+collision_mask = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 50.0 ]
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )

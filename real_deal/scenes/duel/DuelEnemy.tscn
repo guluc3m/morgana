@@ -20,14 +20,14 @@ animations = [ {
 "name": "idle",
 "speed": 4.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
-"loop": false,
-"name": "dead",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 7 ), null, ExtResource( 7 ), null, ExtResource( 7 ) ],
 "loop": false,
 "name": "attack",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": false,
+"name": "dead",
 "speed": 5.0
 } ]
 

@@ -10,8 +10,8 @@ var current_turn = "" # Id del nodo
 var turn_sequence = []  # TODO: Trnasformar en estructura de cola
 var turn_sequence_index = 0
 
-var scene_to_return = "res://real_deal/scenes/exploration/levels/LevelTemplate.tscn"
-var scene_main_menu = "res://real_deal/scenes/exploration/levels/LevelTemplate.tscn"
+var scene_to_return = "res://real_deal/scenes/map/mvp_nivel1.tscn"
+var scene_main_menu = "res://real_deal/scenes/menu/MainMenu.tscn"
 
 # TESTING VARS
 onready var _player_instance = preload("res://real_deal/scenes/duel/DuelPlayer.tscn")
@@ -26,8 +26,9 @@ var test_deck2 = ["sword", "sword", "sword", "sword", "sword"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_init_entities(self._player_instance, self._enemies_scenes)
+	pass#_init_entities(self._player_instance, self._enemies_scenes)  # Esto lo tiene que llamar el scene manager
 	#set_process(true)
+	
 	
 func _process(delta):
 	# HABRÍA QUE REVISAR ESTO PORQUE ES UN POCO PEGOTE
@@ -44,7 +45,7 @@ func _process(delta):
 	# Enemy turn 
 	if self.current_turn.is_alive:
 		var card_to_play = self.current_turn.select_card()
-		while card_to_play:  
+		while card_to_play:
 			self._on_Main_playCard(
 				null,
 				card_to_play,
@@ -52,32 +53,44 @@ func _process(delta):
 			)
 			card_to_play = self.current_turn.select_card()
 	self._on_finish_turn()
+	
 
-func _init_entities(player_instance, _enemies_scenes):
-	player = player_instance.instance()
-	player._init_params(self.test_deck, $Hand)
+func _init_entities(enemy_datas):
+	# Init player
+	player = _player_instance.instance()
+	player._init_params(  # Quizá cambiar esto para pasar directamente un diccionario y que la clase se gestione
+		PlayerManager.deck,
+		$Hand,
+		PlayerManager.max_hand_size,
+		PlayerManager.health,
+		PlayerManager.max_health,
+		PlayerManager.energy,
+		PlayerManager.max_energy
+	)
 	get_node("Player").add_child(player)
 	
 	# TESTING quizás luego es random o algo, yuqse
 	self.turn_sequence.append(player)
 	self.current_turn = player
 
-	for i in _enemies_scenes.size():
-		var enemy = _enemies_scenes[i].instance()
+	# Init enemies
+	for enemy_data in enemy_datas:
+		var enemy = enemy_data["scene"].instance()
 		enemy._init_params(#[], null)
-			test_deck2,
+			enemy_data["deck"],
 			null,
-			2,
-			6,
-			6,
-			3,
-			3
+			enemy_data["max_hand_size"],
+			enemy_data["max_health"],
+			enemy_data["max_health"],
+			enemy_data["max_energy"],
+			enemy_data["max_energy"]
 		)
 		self.enemies.append(enemy)
 		self.turn_sequence.append(enemy)
-		get_node("Enemy_{i}".format({'i':i})).add_child(enemies[i])
+		get_node("Enemy_{i}".format({'i':enemies.size() - 1})).add_child(enemies[enemies.size() - 1])
 		
 	$Hand._init_hand(player._hand)
+
 
 func _on_Main_playCard(card_path, card_data, target):
 	""" Ejecuta las acciones de la carta
@@ -102,16 +115,15 @@ func _on_finish_turn():
 	self.turn_sequence_index = (self.turn_sequence_index + 1) % self.turn_sequence.size()
 	self.current_turn = self.turn_sequence[self.turn_sequence_index]
 	_on_start_turn(self.current_turn)
-	
+
+
 func _on_start_turn(character_node):
 	if self.turn_sequence_index == 0:
 		character_node.start_turn($Hand)
 	character_node.start_turn(null)
 
+
 func _on_Button_pressed():
-	print(len(player._hand), " ", len(player._deck), " ", len(player._graveyard))
-	#_on_start_turn(player)
-	print(len(player._hand), " ", len(player._deck), " ", len(player._graveyard))
 	self._on_finish_turn()
 
 
@@ -120,17 +132,18 @@ func _input(event):
 		SceneManager.goto_scene(scene_to_return, null)
 		
 		
-		
-		
 func _player_lose_duel():
 	print("has pedido")
 	SceneManager.goto_scene("res://real_deal/scenes/menu//MainMenu.tscn", null)
 
+
 func _player_win_duel():
 	print("has ganado")
+	PlayerManager.health = self.player._health # TODO: Cambiar acceso a estas variables
+	PlayerManager.energy = self.player._energy
+	PlayerManager.save()
 	SceneManager.goto_scene(scene_to_return, {
-		"health": self.player._health,
-		"enemy_defeat": true
+		"enemy_defeat": true  #TODO Lista con el path del nodo que no hay que cargar
 	})
 	
 
@@ -142,4 +155,7 @@ func _are_enemies_dead():
 
 
 func update_data(data):
-	self.player._health = data["health"]
+	var enemies_data = []
+	for enemy_name in data['enemigos']:
+		enemies_data.append(EnemiesDatabase.DATA[enemy_name])
+	_init_entities(enemies_data)  # Esto quiza lo tiene que llamar el scene manager (aunque indirectamente lo hace)
