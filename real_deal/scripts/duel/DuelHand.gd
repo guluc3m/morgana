@@ -30,8 +30,9 @@ func _ready():
 	""" Como se llama al instanciar, en el DuelManager se llama a este método antes
 		de que se haya definido las cartas que tiene la mano. Por eso no pinta nada aquí
 	"""
+	self.rect_scale = Vector2(0.1, 0.1) # Esto es lo que controla como de grandes se ven las cartas
 	self.hand_width = get_viewport().get_visible_rect().size.x * 0.28 / 2
-	rect_scale = Vector2(0.5, 0.5)
+	var a = get_viewport().get_visible_rect().size.x
 	# $cards.set_size(Vector2(self.hand_width, self.hand_height))
 
 
@@ -42,9 +43,13 @@ func add_to_hand(card):
 	new_card.card_data = card
 
 	$cards.add_child(new_card)
-	var width_cards = $cards.get_child_count()*self.card_width
+	var width_cards = $cards.get_child_count() * self.card_width * new_card.current_scale.x
+	var t = $cards.get_child_count() * self.card_width * new_card.current_scale.x
+	var h = $cards.get_child_count()
 	# var current_position = get_position()
-	set_position(Vector2(self.hand_width-width_cards, 0))
+	#set_position(Vector2(self.hand_width-width_cards, 0))
+	print(new_card.rect_position)
+	print(new_card.get_global_rect().position)
 
 
 func _on_Hand_removeCard(card_path):

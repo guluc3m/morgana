@@ -1,7 +1,7 @@
 extends Actor
 
-onready var card_database = preload("res://adri_sandbox/CardsDatabase.gd").DATA
-onready var funciones = preload("res://adri_sandbox/Effects.gd").new()
+onready var card_database = preload("res://real_deal/scripts/utils/CardsDatabase.gd").DATA
+onready var funciones = preload("res://real_deal/scripts/duel/CardEffects.gd").new()
 
 signal open_door
 signal item_collision

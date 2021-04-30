@@ -1,6 +1,7 @@
 const DATA = {
 	"placeholder": {
 		"name": "placeholder",
+		"file": "placeholder",
 		"type": "placeholder",
 		"cost": 7,
 		"dexterity": 7,
@@ -9,6 +10,7 @@ const DATA = {
 	},
 	"sword": {
 		"name": "Sword",
+		"file": "sword",
 		"type": "attack",
 		"cost": 1,
 		"dexterity": 3,
@@ -18,8 +20,57 @@ const DATA = {
 			["base_damage", {"amount": -1}],
 		],
 	},
+	"attack_1": {
+		"name": "Sword",
+		"file": "attack_1",
+		"type": "attack",
+		"cost": 1,
+		"dexterity": 3,
+		"description": "Úsame... \n ¡y mata!",
+		"exiled": false,
+		"actions": [
+			["base_damage", {"amount": -1}],
+		],
+	},
+	"attack_2": {
+		"name": "Sword+",
+		"file": "attack_2",
+		"type": "attack",
+		"cost": 1,
+		"dexterity": 3,
+		"description": "Yo no corto, yo rajo.",
+		"exiled": false,
+		"actions": [
+			["base_damage", {"amount": -3}],
+		],
+	},
+	"attack_3": {
+		"name": "Sword++",
+		"file": "attack_3",
+		"type": "attack",
+		"cost": 1,
+		"dexterity": 3,
+		"description": "Prearate a morir",
+		"exiled": false,
+		"actions": [
+			["base_damage", {"amount": -5}],
+		],
+	},
+	"water": {
+		"name": "Sword",
+		"file": "sword",
+		"type": "attack",
+		"cost": 1,
+		"dexterity": 3,
+		"description": "A veh si te lavas",
+		"exiled": false,
+		"actions": [
+			["apply_condition", {"amount": +6, "condition": "water_damage"}],
+		],
+	},
 	"potion": {
 		"name": "Potion",
+		"file": "potion",
 		"type": "magic",
 		"cost": 2,
 		"dexterity": 2,
@@ -31,6 +82,7 @@ const DATA = {
 	},
 	"fire": {
 		"name": "Fire",
+		"file": "fire",
 		"type": "magic",
 		"cost": 7,
 		"dexterity": 7,
@@ -43,6 +95,7 @@ const DATA = {
 	},
 	"thump": {
 		"name": "Thump",
+		"file": "thump",
 		"type": "attack",
 		"cost": 1,
 		"dexterity": 1,
@@ -54,6 +107,7 @@ const DATA = {
 	},
 	"super_thump": {
 		"name": "Super Thump",
+		"file": "super_thump",
 		"type": "attack",
 		"cost": 2,
 		"dexterity": 1,
