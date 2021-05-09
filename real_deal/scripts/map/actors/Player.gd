@@ -65,4 +65,8 @@ func _on_PlayerInfluece_body_entered(body):
 		body.queue_free()
 		print(body)
 		print(body.enemies)
-		SceneManager.goto_scene("res://real_deal/scenes/duel/DuelManager.tscn", {"enemigos": body.enemies})
+		SceneManager.goto_scene(
+			"res://real_deal/scenes/duel/DuelManager.tscn",
+			{"enemigos": body.enemies},
+			true
+		)
