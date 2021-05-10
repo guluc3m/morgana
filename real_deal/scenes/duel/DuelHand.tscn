@@ -4,7 +4,7 @@
 
 [node name="Hand" type="CenterContainer"]
 anchor_left = 0.5
-anchor_right = 0.5
+anchor_right = 0.757
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -12,11 +12,15 @@ __meta__ = {
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
+margin_left = 131.0
+margin_right = 131.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="cards" type="HBoxContainer" parent="."]
+margin_left = 131.0
+margin_right = 131.0
 grow_horizontal = 0
 grow_vertical = 0
 [connection signal="removeCard" from="." to="." method="_on_Hand_removeCard"]

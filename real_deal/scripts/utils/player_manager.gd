@@ -22,12 +22,25 @@ var max_energy
 func _ready():
 	max_hand_size = 5
 	draw_amount = 3
-	health = 15
-	max_health = 15
+	health = 50
+	max_health = 50
 	energy = 3
 	max_energy = 3
 	
-	deck = ["sword", "potion", "fire", "sword", "potion", "fire", "sword", "potion", "fire", "sword", "potion", "fire"]
+	deck = [
+		"attack_1",
+		"attack_1",
+		"attack_1",
+		"attack_2",
+		"attack_2",
+		"attack_2",
+		"attack_3",
+		"attack_3",
+		"potion",
+		"potion",
+		"fire",
+		"fire"
+	]
 	inventory = []
 
 

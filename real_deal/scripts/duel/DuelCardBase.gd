@@ -1,4 +1,4 @@
-extends Control
+extends MarginContainer
 
 
 onready var card_database = preload("res://real_deal/scripts/utils/CardsDatabase.gd").DATA
@@ -11,6 +11,7 @@ var mouse_pos_init = null
 var mouse_pos_end = null
 var mouse_pressed = false
 
+var current_scale = Vector2(1,1) # Esto ya no es necesario porque escalamos la mano
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,8 +26,9 @@ func _ready():
 	var cost = card_data["cost"]
 	var dexterity = card_data["dexterity"]
 	var description = card_data["description"]
-	$Background.texture = load(str("res://assets/sprites/cards_marks/mark_" + type + ".png"))
-	$Bars/Illustration.texture = load(str("res://assets/sprites/cards_ilustrations/ilustration_" + name.to_lower() + ".png"))
+	$Background.texture = load(str("res://assets/sprites/cards/" + card_data["file"] + ".png"))
+	#$Background.texture = load(str("res://assets/sprites/cards_marks/mark_" + type + ".png"))
+	#$Bars/Illustration.texture = load(str("res://assets/sprites/cards_ilustrations/ilustration_" + name.to_lower() + ".png"))
 	#$Ilustration.scale *= rect_size/$Ilustration.texture.get_size()
 	$Bars/Colums/Cost/NinePatchRect/Number.text = str(cost)
 	$Bars/Colums/Name/Name.text = name
@@ -39,7 +41,8 @@ func _draw():
 	"""
 	if mouse_pos_end:
 		draw_line(mouse_pos_init, mouse_pos_end, Color(255, 0, 0), 2)
-
+	#rect_scale = current_scale # Esto ya no es necesario porque escalamos la mano
+	#print(self.rect_position)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
