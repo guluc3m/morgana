@@ -29,5 +29,4 @@ func _on_Quit_pressed():
 
 func _on_Start_pressed():
 	# Cambia la escena al juego
-	PlayerManager._ready()
 	SceneManager.goto_scene("res://real_deal/scenes/map/mvp_limbo.tscn", {"escena": "mvp_limbo"})

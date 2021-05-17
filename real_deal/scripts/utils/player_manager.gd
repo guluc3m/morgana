@@ -42,6 +42,13 @@ func _ready():
 		"fire"
 	]
 	inventory = []
+	
+
+func restore_player():
+	""" Pone la vida y la energía al máximo
+	"""
+	self.health = self.max_health
+	self.energy = self.max_energy
 
 
 func save():
