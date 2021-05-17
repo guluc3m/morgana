@@ -10,7 +10,6 @@ var current_turn = "" # Id del nodo
 var turn_sequence = []  # TODO: Trnasformar en estructura de cola
 var turn_sequence_index = 0
 
-var scene_to_return = "res://real_deal/scenes/map/mvp_nivel1.tscn"
 var scene_main_menu = "res://real_deal/scenes/menu/MainMenu.tscn"
 
 # TESTING VARS
@@ -128,8 +127,9 @@ func _on_Button_pressed():
 
 
 func _input(event):
-	if Input.is_action_pressed("ui_right"):
-		SceneManager.goto_scene(scene_to_return, null)
+	pass
+	# if Input.is_action_pressed("ui_right"):
+	# 	SceneManager.goto_scene(scene_to_return, null)
 		
 		
 func _player_lose_duel():
@@ -142,7 +142,7 @@ func _player_win_duel():
 	PlayerManager.health = self.player._health # TODO: Cambiar acceso a estas variables
 	PlayerManager.energy = self.player._energy
 	PlayerManager.save()
-	SceneManager.goto_scene(scene_to_return, {
+	SceneManager.goto_scene(SceneManager.previous_scene, {
 		"enemy_defeat": true  #TODO Lista con el path del nodo que no hay que cargar
 	})
 	

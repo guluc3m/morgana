@@ -15,7 +15,8 @@ func _on_OptionsButton_pressed():
 	add_child(optionsMenu)
 	# Conectamos su señal con la función presente en este fichero (nombre señal, script que se enlaza, función del script)
 	get_node("OptionsMenu").connect("CloseOptionsMenu", self, "close_options_menu")
-	
+
+
 func close_options_menu():
 	# Cierra la ventana de opciones
 	get_node("OptionsMenu").queue_free()
@@ -28,4 +29,5 @@ func _on_Quit_pressed():
 
 func _on_Start_pressed():
 	# Cambia la escena al juego
+	PlayerManager._ready()
 	SceneManager.goto_scene("res://real_deal/scenes/map/mvp_limbo.tscn", {"escena": "mvp_limbo"})
