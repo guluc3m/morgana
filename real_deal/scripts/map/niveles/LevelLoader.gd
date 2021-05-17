@@ -90,6 +90,11 @@ func _enter_tree():
 
 func cambiar_nivel(portal_path):
 	var portal = get_node(portal_path)
+	# TODO esto lo ideal es pasar algún tipo de "callback" o funciones extras" para no hacer casos concretos
+	# A NO SER que solo vaya a existir este "if"
+	if "limbo" in portal.hacia:
+		PlayerManager.restore_player()
+		
 	SceneManager.goto_scene(
 		"res://real_deal/scenes/map/{}.tscn".format([portal.hacia], "{}"),
 		{"escena": portal.hacia}
