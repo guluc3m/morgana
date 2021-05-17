@@ -27,8 +27,8 @@ const DATA = {
 		"strategy": "basic",
 		"skills": [],
 		"loot": [
-			["Slime remains", 1.0], # Object and probability
-			["Slime remains", 0.3]
+			[SlimeRemains, 1.0], # Object and probability
+			[SlimeRemains, 0.3]
 		]
 	},
 	"fire_slime": {
