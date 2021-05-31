@@ -3,8 +3,7 @@
 [ext_resource path="res://real_deal/scripts/duel/DuelHand.gd" type="Script" id=1]
 
 [node name="Hand" type="CenterContainer"]
-anchor_left = 0.5
-anchor_right = 0.757
+margin_right = 263.168
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

@@ -1,11 +1,10 @@
-extends Control
+extends Node2D
 
 signal playCard
 
 onready var card_functions = preload("res://real_deal/scripts/duel/CardEffects.gd").new()
 
 var player = ""
-var mano = null
 var enemies = []
 var current_turn = "" # Id del nodo
 var turn_sequence = []  # TODO: Trnasformar en estructura de cola
@@ -26,7 +25,6 @@ var test_deck2 = ["sword", "sword", "sword", "sword", "sword"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.mano = $UI_Elements/HBox/Hand;
 	pass#_init_entities(self._player_instance, self._enemies_scenes)  # Esto lo tiene que llamar el scene manager
 	#set_process(true)
 	
@@ -61,7 +59,7 @@ func _init_entities(enemy_datas):
 	player = _player_instance.instance()
 	player._init_params(  # Quizá cambiar esto para pasar directamente un diccionario y que la clase se gestione
 		PlayerManager.deck,
-		self.mano,
+		$Hand,
 		PlayerManager.max_hand_size,
 		PlayerManager.health,
 		PlayerManager.max_health,
@@ -88,9 +86,9 @@ func _init_entities(enemy_datas):
 		)
 		self.enemies.append(enemy)
 		self.turn_sequence.append(enemy)
-		get_node("Enemigos/Enemy_{i}".format({'i':enemies.size() - 1})).add_child(enemies[enemies.size() - 1])
+		get_node("Enemy_{i}".format({'i':enemies.size() - 1})).add_child(enemies[enemies.size() - 1])
 		
-	self.mano._init_hand(player._hand)
+	$Hand._init_hand(player._hand)
 
 
 func _on_Main_playCard(card_path, card_data, target):
@@ -106,7 +104,7 @@ func _on_Main_playCard(card_path, card_data, target):
 
 	# Elimina la carta de la mano visible
 	if self.current_turn.player:
-		self.mano.emit_signal("removeCard", card_path)
+		$Hand.emit_signal("removeCard", card_path)
 	# Elimina la carta de la estructura de la mano
 	self.current_turn.remove_card(card_data)
 	
@@ -120,7 +118,7 @@ func _on_finish_turn():
 
 func _on_start_turn(character_node):
 	if self.turn_sequence_index == 0:
-		character_node.start_turn(self.mano)
+		character_node.start_turn($Hand)
 	character_node.start_turn(null)
 
 
