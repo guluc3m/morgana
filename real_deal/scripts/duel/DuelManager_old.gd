@@ -1,11 +1,10 @@
-extends Control
+extends Node2D
 
 signal playCard
 
 onready var card_functions = preload("res://real_deal/scripts/duel/CardEffects.gd").new()
 
 var player = ""
-var mano = null
 var enemies = []
 var current_turn = "" # Id del nodo
 var turn_sequence = []  # TODO: Trnasformar en estructura de cola
@@ -26,7 +25,6 @@ var test_deck2 = ["sword", "sword", "sword", "sword", "sword"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.mano = $UI_Elements/HBox/Hand;
 	pass#_init_entities(self._player_instance, self._enemies_scenes)  # Esto lo tiene que llamar el scene manager
 	#set_process(true)
 	
@@ -61,7 +59,7 @@ func _init_entities(enemy_datas):
 	player = _player_instance.instance()
 	player._init_params(  # Quizá cambiar esto para pasar directamente un diccionario y que la clase se gestione
 		PlayerManager.deck,
-		self.mano,
+		$Hand,
 		PlayerManager.max_hand_size,
 		PlayerManager.health,
 		PlayerManager.max_health,
@@ -77,12 +75,20 @@ func _init_entities(enemy_datas):
 	# Init enemies
 	for enemy_data in enemy_datas:
 		var enemy = enemy_data["scene"].instance()
-		enemy.set_data(enemy_data)
+		enemy._init_params(#[], null)
+			enemy_data["deck"],
+			null,
+			enemy_data["max_hand_size"],
+			enemy_data["max_health"],
+			enemy_data["max_health"],
+			enemy_data["max_energy"],
+			enemy_data["max_energy"]
+		)
 		self.enemies.append(enemy)
 		self.turn_sequence.append(enemy)
-		get_node("Enemigos/Enemy_{i}".format({'i':enemies.size() - 1})).add_child(enemies[enemies.size() - 1])
+		get_node("Enemy_{i}".format({'i':enemies.size() - 1})).add_child(enemies[enemies.size() - 1])
 		
-	self.mano._init_hand(player._hand)
+	$Hand._init_hand(player._hand)
 
 
 func _on_Main_playCard(card_path, card_data, target):
@@ -98,7 +104,7 @@ func _on_Main_playCard(card_path, card_data, target):
 
 	# Elimina la carta de la mano visible
 	if self.current_turn.player:
-		self.mano.emit_signal("removeCard", card_path)
+		$Hand.emit_signal("removeCard", card_path)
 	# Elimina la carta de la estructura de la mano
 	self.current_turn.remove_card(card_data)
 	
@@ -112,7 +118,7 @@ func _on_finish_turn():
 
 func _on_start_turn(character_node):
 	if self.turn_sequence_index == 0:
-		character_node.start_turn(self.mano)
+		character_node.start_turn($Hand)
 	character_node.start_turn(null)
 
 
@@ -133,8 +139,6 @@ func _player_lose_duel():
 
 func _player_win_duel():
 	print("has ganado")
-	var reward = _get_reward()
-	PlayerManager.add_reward(reward)
 	PlayerManager.health = self.player._health # TODO: Cambiar acceso a estas variables
 	PlayerManager.energy = self.player._energy
 	PlayerManager.save()
@@ -149,19 +153,6 @@ func _are_enemies_dead():
 			return false
 	return true
 
-func _get_reward():
-	"""
-	Al terminar el duelo se obtienen las posibles recompensas de los enemigos
-	y cargan en un diccionario que será incluido en el inventario del jugador.
-	Ese diccionario también se pasará al cambiar de escenar para mostrar las
-	recompensas obtenidas.
-	"""
-	var reward = []
-	for enemy in self.enemies:
-		for item in enemy.loot:
-			reward.append(item)
-	print(reward)
-	return reward
 
 func update_data(data):
 	var enemies_data = []

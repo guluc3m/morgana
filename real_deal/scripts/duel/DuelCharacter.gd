@@ -86,7 +86,7 @@ func modify_health(amount):
 	if self._health <= 0:
 		self.is_alive = false
 		play_animation("dead")
-		
+
 
 # NO PROBADA
 func set_armor(amount):
@@ -108,6 +108,7 @@ func draw_card(amount, hand_node):
 	# llamar a reshuffle() ???
 	# TODO: Quizá añadir el nodo, la instancia y demás cosas visuales
 
+
 func start_turn(hand_node):
 	# Aquí va restauración de energía, cooldown de contadores y efectos al empezar el turno
 	if not self._deck:
@@ -117,6 +118,7 @@ func start_turn(hand_node):
 		suffle_deck()
 	self._update_state()
 	self.draw_card(min(self._max_hand_size - len(self._hand), self._draw_amount), hand_node)
+
 
 func _update_state():
 	print(self.name, " recupera energía y avanzan los contadores")

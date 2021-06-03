@@ -21,26 +21,25 @@ func _ready():
 	# Desactiva el input de inicio, ya que solo queremos que se dispare cuando se está encima de la carta
 	set_process_input(false)
 	
-	var name = card_data["name"]
-	var type = card_data["type"]
-	var cost = card_data["cost"]
-	var dexterity = card_data["dexterity"]
-	var description = card_data["description"]
-	$Background.texture = load(str("res://assets/sprites/cards/" + card_data["file"] + ".png"))
-	#$Background.texture = load(str("res://assets/sprites/cards_marks/mark_" + type + ".png"))
-	#$Bars/Illustration.texture = load(str("res://assets/sprites/cards_ilustrations/ilustration_" + name.to_lower() + ".png"))
-	#$Ilustration.scale *= rect_size/$Ilustration.texture.get_size()
-	$Bars/Colums/Cost/NinePatchRect/Number.text = str(cost)
-	$Bars/Colums/Name/Name.text = name
-	$Bars/Colums/Dexterity/NinePatchRect2/Number.text = str(dexterity)
-	$Bars/Description/Description.text = description
+	# var name = self.card_data["name"]
+	# var type = card_data["type"]
+	# var cost = self.card_data["cost"]
+	# var dexterity = self.card_data["dexterity"]
+	#var description = self.card_data["description"]
+	
+	$Background.texture = load(str("res://assets/sprites/cards/" + self.card_data["file"] + ".png"))
+	
+	$Bars/Colums/Cost/NinePatchRect/Number.text = str(self.card_data["cost"])
+	$Bars/Colums/Name/Name.text = self.card_data["name"]
+	$Bars/Colums/Dexterity/NinePatchRect2/Number.text = str(self.card_data["dexterity"])
+	$Bars/Description/Description.text = self.card_data["description"]
 	
 
 func _draw():
 	""" Pinta la línea que se usa para seleccionar al objetivo
 	"""
-	if mouse_pos_end:
-		draw_line(mouse_pos_init, mouse_pos_end, Color(255, 0, 0), 2)
+	if self.mouse_pos_end:
+		draw_line(self.mouse_pos_init, self.mouse_pos_end, Color(255, 0, 0), 2)
 	#rect_scale = current_scale # Esto ya no es necesario porque escalamos la mano
 	#print(self.rect_position)
 
@@ -54,23 +53,33 @@ func _input(event):
 	""" Procesa eventos de I/O cuando se está sobre la carta
 	"""
 	if event.is_action_pressed("mouse_left"):
-		mouse_pressed = true
-		mouse_pos_init = get_local_mouse_position()
+		#Aquí se añade a una lista los posibles objetivos de la carta
+		self.mouse_pressed = true
+		self.mouse_pos_init = get_local_mouse_position()
 		add_to_group("card")
 		
-		for _target in get_tree().get_nodes_in_group("enemies"):
-			if _target.is_alive:
+		if self.card_data["target"] in ["enemy", "both"]:
+			for _target in get_tree().get_nodes_in_group("enemies"):
+				if _target.is_alive:
+					_target.add_to_group("targeteable")
+					
+		if self.card_data["target"] in ["player", "both"]:
+			# Solo debería ser 1, pero como devuelve una lista...
+			for _target in get_tree().get_nodes_in_group("player"):
 				_target.add_to_group("targeteable")
 
-	if mouse_pressed and event.is_action_released("mouse_left"):
+	if self.mouse_pressed and event.is_action_released("mouse_left"):
+		# Al soltar la carta sobre un objetivo, se aplica el efecto de la carta
 		if self.card_target:
+			print(get_path())
 			get_tree().current_scene.emit_signal(
 				"playCard", get_path(), self.card_data, self.card_target
 			)
 		self.release_card()
 	
-	if mouse_pressed and event is InputEventMouseMotion:
-		mouse_pos_end = get_local_mouse_position()
+	if self.mouse_pressed and event is InputEventMouseMotion:
+		# Actualiza posición para pintar la línea
+		self.mouse_pos_end = get_local_mouse_position()
 
 
 func _on_BattleCardBase_mouse_entered():
@@ -98,9 +107,9 @@ func release_card():
 	""" Resetea valores de la carta en caso de ser jugada/no jugada
 	"""
 	set_process_input(false)
-	mouse_pos_init = null
-	mouse_pos_end = null
-	mouse_pressed = false
+	self.mouse_pos_init = null
+	self.mouse_pos_end = null
+	self.mouse_pressed = false
 	
 	for _target in get_tree().get_nodes_in_group("targeteable"):
 		_target.emit_signal("not_card_target")

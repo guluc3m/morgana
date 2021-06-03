@@ -1,148 +1,95 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://real_deal/scenes/utils/MouseCollision.tscn" type="PackedScene" id=1]
 [ext_resource path="res://real_deal/scenes/duel/DuelHand.tscn" type="PackedScene" id=2]
 [ext_resource path="res://real_deal/scripts/duel/DuelManager.gd" type="Script" id=3]
-[ext_resource path="res://assets/prototipos/albertoV_dungeon_background.png" type="Texture" id=4]
+[ext_resource path="res://assets/prototipos/escena_tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://assets/prototipos/characters_sprites/crate.png" type="Texture" id=5]
+[ext_resource path="res://real_deal/scenes/duel/DuelLife.tscn" type="PackedScene" id=6]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.185185, 0.785185 )
-colors = PoolColorArray( 1, 1, 1, 1, 0.914063, 0.66814, 0.0856934, 1, 0.953125, 0.107971, 0.107971, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[sub_resource type="Curve" id=3]
-_data = [ Vector2( 0.462025, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.981013, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=5]
-emission_shape = 2
-emission_box_extents = Vector3( 3, 0.5, 0 )
-flag_disable_z = true
-gravity = Vector3( 0, -98, 0 )
-initial_velocity = 1.0
-initial_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = 25.0
-angle = 45.0
-scale = 3.0
-scale_random = 0.4
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 2 )
-
-[sub_resource type="ParticlesMaterial" id=6]
-emission_shape = 2
-emission_box_extents = Vector3( 28, 1, 1 )
-flag_disable_z = true
-direction = Vector3( -30, 45, 0 )
-spread = 15.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 34.48
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-angle = 45.0
-angle_random = 0.5
-scale = 2.0
-color = Color( 0.0235294, 0.541176, 1, 1 )
-hue_variation_random = 0.34
-
-[node name="Main" type="Node2D"]
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 3 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-current = true
-zoom = Vector2( 0.28, 0.26 )
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-
-[node name="Background" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-texture = ExtResource( 4 )
-centered = false
-
-[node name="Fire" type="Particles2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( 111.643, 52.6441 )
-amount = 30
-lifetime = 0.6
-speed_scale = 0.5
-visibility_rect = Rect2( -2.97436, -18.045, 5.95432, 18.5341 )
-process_material = SubResource( 5 )
-
-[node name="Fire2" type="Particles2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( 271.313, 52.3635 )
-amount = 30
-lifetime = 0.6
-speed_scale = 0.5
-visibility_rect = Rect2( -2.97436, -18.045, 5.95432, 18.5341 )
-process_material = SubResource( 5 )
-
-[node name="Particles2D" type="Particles2D" parent="ParallaxBackground/ParallaxLayer"]
-visible = false
-position = Vector2( 193.552, 106.453 )
-amount = 1000
-lifetime = 2.0
-visibility_rect = Rect2( -77.6558, -0.972345, 105.549, 67.0956 )
-process_material = SubResource( 6 )
-
-[node name="Player" type="CenterContainer" parent="."]
-margin_left = 61.0
-margin_top = 115.0
-margin_right = 69.0
-margin_bottom = 149.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
-
-[node name="Enemy_0" type="CenterContainer" parent="."]
-margin_left = 176.0
-margin_top = 131.0
-margin_right = 200.0
-margin_bottom = 139.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Enemy_1" type="CenterContainer" parent="."]
-margin_left = 224.0
-margin_top = 131.0
-margin_right = 238.0
-margin_bottom = 140.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Enemy_2" type="CenterContainer" parent="."]
-margin_left = 264.0
-margin_top = 131.0
-margin_right = 272.0
-margin_bottom = 134.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Hand" parent="." instance=ExtResource( 2 )]
 
 [node name="MouseCollision" parent="." instance=ExtResource( 1 )]
 
-[node name="Button" type="Button" parent="."]
+[node name="Fondo" type="Node2D" parent="."]
+
+[node name="Base" type="TileMap" parent="Fondo"]
+scale = Vector2( 0.5, 0.5 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 400, 400 )
+cell_custom_transform = Transform2D( 400, 0, 0, 400, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 0, 8, 0, 1, 8, 0, 2, 8, 0, 3, 8, 0, 4, 8, 0, 5, 8, 0, 131071, 8, 0, 65536, 8, 0, 65537, 8, 0, 65538, 8, 0, 65539, 8, 0, 65540, 8, 0, 65541, 8, 0, 196607, 8, 0, 131072, 8, 0, 131073, 8, 0, 131074, 8, 0, 131075, 8, 0, 131076, 8, 0, 131077, 8, 0, 262143, 8, 0, 196608, 8, 0, 196609, 8, 0, 196610, 8, 0, 196611, 8, 0, 196612, 8, 0, 196613, 8, 0 )
+
+[node name="Nubes" type="TileMap" parent="Fondo"]
+scale = Vector2( 0.5, 0.5 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 400, 400 )
+cell_custom_transform = Transform2D( 400, 0, 0, 400, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 65535, 15, 0, 0, 15, 0, 1, 11, 0, 2, 10, 0, 3, 13, 0, 4, 15, 0, 5, 15, 0, 131071, 10, 0, 65536, 10, 0, 65537, 12, 0, 65539, 14, 0, 65540, 10, 0, 65541, 10, 0, 131072, 8, 0, 131073, 8, 0, 131074, 8, 0, 131075, 8, 0, 131076, 8, 0 )
+
+[node name="UI_Elements" type="MarginContainer" parent="."]
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 3.93362
-margin_top = 124.278
-margin_right = 31.9336
-margin_bottom = 152.278
+anchor_bottom = 1.0
+margin_left = -341.0
+margin_top = -60.8434
+margin_right = 91.0
+margin_bottom = -32.8434
+rect_scale = Vector2( 1.5, 1.5 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HBox" type="HBoxContainer" parent="UI_Elements"]
+margin_right = 432.0
+margin_bottom = 28.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UI_Elements/HBox"]
+margin_left = 196.0
+margin_right = 224.0
+margin_bottom = 28.0
 icon = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Hand" parent="UI_Elements/HBox" instance=ExtResource( 2 )]
+margin_left = 228.0
+margin_right = 228.0
+margin_bottom = 28.0
+
+[node name="Vida" parent="UI_Elements/HBox" instance=ExtResource( 6 )]
+margin_left = 232.0
+margin_right = 236.0
+rect_scale = Vector2( 1, 1 )
+
+[node name="Player" type="Position2D" parent="."]
+position = Vector2( 1380.94, 299.762 )
+
+[node name="Enemigos" type="Node" parent="."]
+
+[node name="Enemy_0" type="Position2D" parent="Enemigos"]
+position = Vector2( 516.433, 241.43 )
+
+[node name="Enemy_1" type="Position2D" parent="Enemigos"]
+position = Vector2( 192.042, 265.002 )
+
+[node name="Enemy_2" type="Position2D" parent="Enemigos"]
+position = Vector2( 819.498, 267.247 )
 [connection signal="playCard" from="." to="." method="_on_Main_playCard"]
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="UI_Elements/HBox/Button" to="." method="_on_Button_pressed"]

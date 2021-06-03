@@ -7,7 +7,7 @@ var target
 
 
 func _ready():
-	add_to_group("player")
+	add_to_group("real_player")
 
 
 func _on_Battle_Player_playerAttack():
