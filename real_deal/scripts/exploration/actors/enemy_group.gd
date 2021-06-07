@@ -8,7 +8,7 @@ class_name EnemyGroup
 
 # El grupo se define por los nombres de los enemigos que lo componen.
 # Todos sus datos son accesibles con el nombre en la base de datos.
-export var enemies = ["normal_slime", "normal_slime"]
+export var enemies = ["normal_slime"]#, "fire_slime"]
 
 
 # Called when the node enters the scene tree for the first time.

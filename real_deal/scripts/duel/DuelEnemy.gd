@@ -33,7 +33,11 @@ func set_data(enemy_data):
 		enemy_data["max_energy"],
 		enemy_data["max_energy"]
 	)
+	$HealthBar.max_value = enemy_data["max_health"]
+	$HealthBar.value = $HealthBar.max_value
 	self.enemy_name = enemy_data["name"]
+	$Character.frames = load("res://assets/animations/{}.tres".format([enemy_data["animation"]], "{}"))
+	$Character.animation = "idle"
 	self.enemy_class = enemy_data["class"]
 	self.type = enemy_data["type"]
 	self.level = enemy_data["level"]
@@ -41,6 +45,9 @@ func set_data(enemy_data):
 	self.skills = enemy_data["skills"]
 	self.loot = self._generate_loot(enemy_data["loot"])
 
+func modify_health(amount):
+	.modify_health(amount)
+	$HealthBar.value += amount
 
 func _generate_loot(loot_posibilities):
 	var loot = []
@@ -55,13 +62,13 @@ func _on_Battle_Enemy_Swampy_card_target():
 	""" Start being a targeteable object
 	"""
 	get_tree().call_group("card", "get_target", self)
-	#print("Enable target")
+	print("Enable target")
 
 
 func _on_Battle_Enemy_Swampy_not_card_target():
 	self.mouse_over = false
 	get_tree().call_group("card", "get_target", false)
-	#print("Disable target")
+	print("Disable target")
 
 
 func select_card():
