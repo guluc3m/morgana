@@ -11,7 +11,6 @@ var mouse_pos_init = null
 var mouse_pos_end = null
 var mouse_pressed = false
 
-var current_scale = Vector2(1,1) # Esto ya no es necesario porque escalamos la mano
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,7 +24,7 @@ func _ready():
 	# var type = card_data["type"]
 	# var cost = self.card_data["cost"]
 	# var dexterity = self.card_data["dexterity"]
-	#var description = self.card_data["description"]
+	# var description = self.card_data["description"]
 	
 	$Background.texture = load(str("res://assets/sprites/cards/" + self.card_data["file"] + ".png"))
 	
@@ -40,8 +39,7 @@ func _draw():
 	"""
 	if self.mouse_pos_end:
 		draw_line(self.mouse_pos_init, self.mouse_pos_end, Color(255, 0, 0), 2)
-	#rect_scale = current_scale # Esto ya no es necesario porque escalamos la mano
-	#print(self.rect_position)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

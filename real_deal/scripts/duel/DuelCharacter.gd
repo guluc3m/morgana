@@ -40,7 +40,7 @@ func _ready():
 	play_animation("idle")
 	
 	
-func _init_params(deck, hand_node, max_hand_size=_max_hand_size, health=_health,
+func _init_params(deck, is_player, max_hand_size=_max_hand_size, health=_health,
 		   max_health=_max_health, energy=_energy, max_energy=_max_energy):
 	""" Inicializa valores base para todos los personajes
 	"""
@@ -55,7 +55,7 @@ func _init_params(deck, hand_node, max_hand_size=_max_hand_size, health=_health,
 	self._energy = energy
 	self._max_energy = max_energy
 	
-	draw_card(self._draw_amount, hand_node)
+	draw_card(self._draw_amount, is_player)
 
 
 func _process(delta):
@@ -95,21 +95,23 @@ func set_armor(amount):
 	self._armor += amount
 
 
-func draw_card(amount, hand_node):
+func draw_card(amount, is_player):
 	if amount > self._deck.size():
 		amount = self._deck.size()
 	for i in range(amount):
 		var card = self._deck.pop_front()
 		self._hand.append(card)
-		if hand_node: # Los enemigos no tienen
-			hand_node.add_to_hand(card)
+		if is_player: # Los enemigos no tienen
+			get_tree().current_scene.emit_signal(
+				"addCard", card
+			)
 		
 	# TODO: Controlar que se acaben las cartas (quizá en el getter)
 	# llamar a reshuffle() ???
 	# TODO: Quizá añadir el nodo, la instancia y demás cosas visuales
 
 
-func start_turn(hand_node):
+func start_turn(is_player):
 	# Aquí va restauración de energía, cooldown de contadores y efectos al empezar el turno
 	if not self._deck:
 		print("recargamos deck")  # quizá gestionar a nivel de diseño que siempre esté el mínimo de cartas para robar
@@ -117,7 +119,7 @@ func start_turn(hand_node):
 			self._deck.append(card)
 		suffle_deck()
 	self._update_state()
-	self.draw_card(min(self._max_hand_size - len(self._hand), self._draw_amount), hand_node)
+	self.draw_card(min(self._max_hand_size - len(self._hand), self._draw_amount), is_player)
 
 
 func _update_state():
