@@ -1,8 +1,12 @@
 extends Control
 
 signal playCard
+signal removeCard
+signal addCard
 
+const CardBase = preload("res://real_deal/scenes/duel/DuelCardBase.tscn")
 onready var card_functions = preload("res://real_deal/scripts/duel/CardEffects.gd").new()
+onready var _player_instance = preload("res://real_deal/scenes/duel/DuelPlayer.tscn")
 
 var player = ""
 var mano = null
@@ -13,24 +17,23 @@ var turn_sequence_index = 0
 
 var scene_main_menu = "res://real_deal/scenes/menu/MainMenu.tscn"
 
-# TESTING VARS
-onready var _player_instance = preload("res://real_deal/scenes/duel/DuelPlayer.tscn")
-const _enemies_scenes = [
-	preload("res://real_deal/scenes/duel/DuelEnemy.tscn"),
-	preload("res://real_deal/scenes/duel/DuelEnemy.tscn")
-]
+###### Variables para la mano
+# Referencia: https://www.youtube.com/watch?v=gUNhn5BJlJ0
+onready var hand_center = get_viewport().get_visible_rect().size * Vector2(0.5, 1.4)
+onready var h_rad = get_viewport().get_visible_rect().size.x * 0.45
+onready var v_rad = get_viewport().get_visible_rect().size.y * 0.4
 
-var test_deck = ["sword", "potion", "fire", "sword", "potion", "fire", "sword", "potion", "fire", "sword", "potion", "fire"]
-var test_deck2 = ["sword", "sword", "sword", "sword", "sword"]
+var card_size = Vector2(200/2, 275/2)
+var angle = deg2rad(90) - 0.5
+var OvalAngleVector = Vector2()
+#################
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.mano = $UI_Elements/HBox/Hand;
-	pass#_init_entities(self._player_instance, self._enemies_scenes)  # Esto lo tiene que llamar el scene manager
-	#set_process(true)
-	
-	
+	pass
+
+
 func _process(delta):
 	# HABRÍA QUE REVISAR ESTO PORQUE ES UN POCO PEGOTE
 	if self.current_turn == player:
@@ -59,16 +62,17 @@ func _process(delta):
 func _init_entities(enemy_datas):
 	# Init player
 	player = _player_instance.instance()
-	player._init_params(  # Quizá cambiar esto para pasar directamente un diccionario y que la clase se gestione
+	get_node("Player").add_child(player)
+	# Quizá cambiar esto para pasar directamente un diccionario y que la clase se gestione
+	player._init_params(
 		PlayerManager.deck,
-		self.mano,
+		true,
 		PlayerManager.max_hand_size,
 		PlayerManager.health,
 		PlayerManager.max_health,
 		PlayerManager.energy,
 		PlayerManager.max_energy
 	)
-	get_node("Player").add_child(player)
 	
 	# TESTING quizás luego es random o algo, yuqse
 	self.turn_sequence.append(player)
@@ -77,20 +81,30 @@ func _init_entities(enemy_datas):
 	# Init enemies
 	for enemy_data in enemy_datas:
 		var enemy = enemy_data["scene"].instance()
+		self.enemies.append(enemy)
+		self.turn_sequence.append(enemy)
+		get_node("Enemigos/Enemy_{i}".format({'i':enemies.size() - 1})).add_child(enemies[enemies.size() - 1])
+		
 		enemy._init_params(#[], null)
 			enemy_data["deck"],
-			null,
+			false,
 			enemy_data["max_hand_size"],
 			enemy_data["max_health"],
 			enemy_data["max_health"],
 			enemy_data["max_energy"],
 			enemy_data["max_energy"]
 		)
-		self.enemies.append(enemy)
-		self.turn_sequence.append(enemy)
-		get_node("Enemigos/Enemy_{i}".format({'i':enemies.size() - 1})).add_child(enemies[enemies.size() - 1])
-		
-	self.mano._init_hand(player._hand)
+
+
+func add_to_hand(card):
+	""" Actualiza visualmente las cartas de la mano del jugador
+	"""
+	var new_card = CardBase.instance()
+	new_card.card_data = card
+	
+	self.place_card(new_card)
+	
+	$Hand.add_child(new_card)
 
 
 func _on_Main_playCard(card_path, card_data, target):
@@ -106,11 +120,31 @@ func _on_Main_playCard(card_path, card_data, target):
 
 	# Elimina la carta de la mano visible
 	if self.current_turn.player:
-		self.mano.emit_signal("removeCard", card_path)
+		self.remove_card(card_path)
+
 	# Elimina la carta de la estructura de la mano
 	self.current_turn.remove_card(card_data)
 	
 	
+func remove_card(card_path):
+	""" Elimina la carta de la mano
+	"""
+	# TODO, alguna animación o algo antes de, o quizás al momento de jugarla en CardBase
+	get_node(card_path).queue_free()
+
+
+func place_card(card):
+	""" Reordena las cartas de la mano para que no haya espacios en vacíos
+	"""
+	self.OvalAngleVector = Vector2(self.h_rad * cos(self.angle), -self.v_rad * sin(self.angle))
+	
+	card.rect_position = self.hand_center + self.OvalAngleVector - card.rect_size * Vector2(0.25, 0.5)
+	card.rect_scale = self.card_size/card.rect_size
+	card.rect_rotation = (90 - rad2deg(self.angle))/4
+
+	self.angle += 0.25
+
+
 func _on_finish_turn():
 	# TODO: efectos de finalizar el turno
 	self.turn_sequence_index = (self.turn_sequence_index + 1) % self.turn_sequence.size()
@@ -120,7 +154,11 @@ func _on_finish_turn():
 
 func _on_start_turn(character_node):
 	if self.turn_sequence_index == 0:
-		character_node.start_turn(self.mano)
+		# Reordena las cartas de la mano
+		self.angle = deg2rad(90) - 0.5
+		for card in $Hand.get_children():
+			self.place_card(card)
+		character_node.start_turn(true)
 	character_node.start_turn(null)
 
 
@@ -161,3 +199,19 @@ func update_data(data):
 	for enemy_name in data['enemigos']:
 		enemies_data.append(EnemiesDatabase.DATA[enemy_name])
 	_init_entities(enemies_data)  # Esto quiza lo tiene que llamar el scene manager (aunque indirectamente lo hace)
+
+
+func _on_Main_addCard(card):
+	""" Llama a la función para añadir carta a la mano
+		Esto es simplemente un alias para poder llamarlo desde
+		otras escenas
+	"""
+	self.add_to_hand(card)
+
+
+func _on_Main_removeCard(card_path):
+	""" Llama a la función para eliminar una carta de la mano
+		Esto es simplemente un alias para poder llamarlo desde
+		otras escenas
+	"""
+	self.remove_card(card_path)
