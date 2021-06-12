@@ -39,10 +39,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://real_deal/scripts/exploration/actors/enemy_group.gd"
 }, {
+"base": "Object",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://real_deal/scripts/utils/player/inventory.gd"
+}, {
+"base": "Object",
+"class": "Item",
+"language": "GDScript",
+"path": "res://real_deal/scripts/utils/player/item.gd"
+}, {
+"base": "Item",
+"class": "Potion",
+"language": "GDScript",
+"path": "res://real_deal/scripts/utils/player/items/potion.gd"
+}, {
 "base": "Node",
 "class": "Room",
 "language": "GDScript",
 "path": "res://real_deal/scripts/exploration/room.gd"
+}, {
+"base": "Item",
+"class": "SlimeRemains",
+"language": "GDScript",
+"path": "res://real_deal/scripts/utils/player/items/slime_remains.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
@@ -51,7 +71,11 @@ _global_script_class_icons={
 "Enemy": "",
 "EnemyA": "",
 "EnemyGroup": "",
-"Room": ""
+"Inventory": "",
+"Item": "",
+"Potion": "",
+"Room": "",
+"SlimeRemains": ""
 }
 
 [application]
@@ -64,7 +88,7 @@ config/icon="res://icon.png"
 
 SceneManager="*res://real_deal/scripts/utils/SceneManager.gd"
 GameSaver="*res://real_deal/scripts/utils/GameSaver.gd"
-PlayerManager="*res://real_deal/scripts/utils/player_manager.gd"
+PlayerManager="*res://real_deal/scripts/utils/player/player_manager.gd"
 EnemiesDatabase="*res://real_deal/scripts/utils/enemies_database.gd"
 
 [display]

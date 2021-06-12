@@ -84,16 +84,9 @@ func _init_entities(enemy_datas):
 		self.enemies.append(enemy)
 		self.turn_sequence.append(enemy)
 		get_node("Enemigos/Enemy_{i}".format({'i':enemies.size() - 1})).add_child(enemies[enemies.size() - 1])
-		
-		enemy._init_params(#[], null)
-			enemy_data["deck"],
-			false,
-			enemy_data["max_hand_size"],
-			enemy_data["max_health"],
-			enemy_data["max_health"],
-			enemy_data["max_energy"],
-			enemy_data["max_energy"]
-		)
+		enemy.set_data(enemy_data)
+
+
 
 
 func add_to_hand(card):
@@ -179,6 +172,8 @@ func _player_lose_duel():
 
 func _player_win_duel():
 	print("has ganado")
+	var reward = _get_reward()
+	PlayerManager.add_reward(reward)
 	PlayerManager.health = self.player._health # TODO: Cambiar acceso a estas variables
 	PlayerManager.energy = self.player._energy
 	PlayerManager.save()
@@ -193,6 +188,19 @@ func _are_enemies_dead():
 			return false
 	return true
 
+func _get_reward():
+	"""
+	Al terminar el duelo se obtienen las posibles recompensas de los enemigos
+	y cargan en un diccionario que será incluido en el inventario del jugador.
+	Ese diccionario también se pasará al cambiar de escenar para mostrar las
+	recompensas obtenidas.
+	"""
+	var reward = []
+	for enemy in self.enemies:
+		for item in enemy.loot:
+			reward.append(item)
+	print(reward)
+	return reward
 
 func update_data(data):
 	var enemies_data = []

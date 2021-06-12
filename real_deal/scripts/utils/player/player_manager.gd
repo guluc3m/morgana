@@ -41,7 +41,7 @@ func _ready():
 		"fire",
 		"fire"
 	]
-	inventory = []
+	inventory = Inventory.new()
 	
 
 func restore_player():
@@ -80,3 +80,10 @@ func load():
 				continue
 			self.set(i, node_data[i])
 	save_game.close()
+
+func add_reward(reward):
+	for item in reward:
+		self.inventory.add_item(item)
+
+func _process(delta):
+	pass#print(self.inventory.get_items())

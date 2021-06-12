@@ -6,7 +6,8 @@ func _ready():
 const DATA = {
 	"normal_slime": {
 		"name": "Slime",
-		"scene": preload("res://real_deal/scenes/duel/DuelEnemy.tscn"),
+		"scene": preload("res://real_deal/scenes/duel/DuelEnemy.tscn"), # Quizá ésta habría que quitarla
+		"animation": "slime_normal",
 		"class": "slime",
 		"type": "ordinary",
 		"level": 1, # Algunas cosas podrías ser calculadas con funciones en el futuro
@@ -27,13 +28,14 @@ const DATA = {
 		"strategy": "basic",
 		"skills": [],
 		"loot": [
-			["Slime remains", 1.0], # Object and probability
-			["Slime remains", 0.3]
+			[SlimeRemains, 1.0], # Object and probability
+			[SlimeRemains, 0.3]
 		]
 	},
 	"fire_slime": {
 		"name": "Fire Slime",
 		"scene": preload("res://real_deal/scenes/duel/DuelEnemy.tscn"),
+		"animation": "slime_fire",
 		"class": "slime",
 		"type": "ordinary",
 		"level": 2, # Algunas cosas podrías ser calculadas con funciones en el futuro
