@@ -1,6 +1,7 @@
 {
 	"portal": {
-		"hacia": "mvp_nivel2"
+		"hacia": "mvp_nivel2",
+		"abierto": false
 	},
 	"enemy": [
 		{

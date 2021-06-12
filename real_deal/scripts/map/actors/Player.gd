@@ -4,6 +4,7 @@ onready var card_database = preload("res://real_deal/scripts/utils/CardsDatabase
 onready var funciones = preload("res://real_deal/scripts/duel/CardEffects.gd").new()
 
 signal portal_collision
+signal chest_collision
 signal item_collision
 
 
@@ -61,7 +62,10 @@ func _on_PlayerInfluece_body_entered(body):
 	if body.is_in_group("portal"):
 		emit_signal("portal_collision", body.get_path())
 		
-	if body is KinematicBody2D and body.is_in_group("enemies"):
+	elif body.is_in_group("chest"):
+		emit_signal("chest_collision", body.get_path())
+		
+	elif body is KinematicBody2D and body.is_in_group("enemies"):
 		body.queue_free()
 		SceneManager.goto_scene(
 			"res://real_deal/scenes/duel/DuelManager.tscn",

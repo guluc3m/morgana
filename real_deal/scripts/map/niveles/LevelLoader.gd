@@ -64,7 +64,7 @@ func init_level(nombre_escena):
 									element.set_indexed(vals, subset[vals])
 							get_tree().get_current_scene().call_deferred("add_child", element)
 				# Se aplica a un elemento individual del grupo
-				elif typeof(subset["nombre"]) == typeof(Dictionary()):
+				elif typeof(subset["nombre"]) == typeof(String()):
 					var element_node = get_tree().get_nodes_in_group(k)
 					for sub_node in element_node:
 						if sub_node.name == subset['nombre']:
@@ -89,7 +89,12 @@ func _enter_tree():
 
 
 func cambiar_nivel(portal_path):
+	""" Función para interactuar con los portales
+	"""
 	var portal = get_node(portal_path)
+	
+	if not portal.abierto:
+		return
 	# TODO esto lo ideal es pasar algún tipo de "callback" o funciones extras" para no hacer casos concretos
 	# A NO SER que solo vaya a existir este "if"
 	if "limbo" in portal.hacia:
