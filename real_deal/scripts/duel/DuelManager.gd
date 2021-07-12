@@ -204,7 +204,9 @@ func _get_reward():
 
 func update_data(data):
 	var enemies_data = []
-	for enemy_name in data['enemigos']:
+	var enemy_name = ""
+	for enemy in data['enemigos']:
+		enemy_name = enemy.split("-")[0]
 		enemies_data.append(EnemiesDatabase.DATA[enemy_name])
 	_init_entities(enemies_data)  # Esto quiza lo tiene que llamar el scene manager (aunque indirectamente lo hace)
 

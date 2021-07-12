@@ -7,8 +7,8 @@
         },
         {
             "nombre": "portal2",
-            "hacia": "mvp_nivel2",
-            "abierto": false
+            "hacia": "mvp_nivel1-2",
+            "abierto": true
         },
         {
             "nombre": "portal3",

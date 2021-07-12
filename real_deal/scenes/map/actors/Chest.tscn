@@ -4,7 +4,7 @@
 [ext_resource path="res://real_deal/scripts/map/actors/Chest.gd" type="Script" id=2]
 [ext_resource path="res://assets/prototipos/elementos/limb_chest_open.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 113.639, 83.1505 )
 
 [sub_resource type="SpriteFrames" id=2]
@@ -36,7 +36,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="." groups=[
 "items",

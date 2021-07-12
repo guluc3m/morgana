@@ -11,12 +11,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
 __meta__ = {
-"_edit_lock_": true
+"_edit_lock_": true,
+"_edit_vertical_guides_": [ 539.699 ]
 }
 
 [node name="MouseCollision" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1380.94, 168.19 )
 
 [node name="Fondo" type="Node2D" parent="."]
+position = Vector2( 27.7183, 0 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Base" type="TileMap" parent="Fondo"]
 scale = Vector2( 0.5, 0.5 )
@@ -79,13 +85,13 @@ position = Vector2( 1380.94, 299.762 )
 [node name="Enemigos" type="Node" parent="."]
 
 [node name="Enemy_0" type="Position2D" parent="Enemigos"]
-position = Vector2( 516.433, 241.43 )
+position = Vector2( 539.699, 234.756 )
 
 [node name="Enemy_1" type="Position2D" parent="Enemigos"]
-position = Vector2( 192.042, 265.002 )
+position = Vector2( 184.033, 267.247 )
 
 [node name="Enemy_2" type="Position2D" parent="Enemigos"]
-position = Vector2( 819.498, 267.247 )
+position = Vector2( 836.851, 267.247 )
 [connection signal="addCard" from="." to="." method="_on_Main_addCard"]
 [connection signal="playCard" from="." to="." method="_on_Main_playCard"]
 [connection signal="removeCard" from="." to="." method="_on_Main_removeCard"]

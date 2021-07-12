@@ -16,15 +16,15 @@
 			"tipo": <aquí definimos el tipo de enemigo que será. El nombre de los enemigos
 			vendrá definido en el siguiente formato para poder generarlos "automáticamente"
 			<nombre-del-enemigo>_<categoría [basico,minijefe,jefe]>_<nivel>. Ejemplos:
-				slime_basico_1 <-- Slime normal, categoría básico de nivel 1
-				slime-fuego_minijefe_3 <-- Slime de fuego, categoría minijefe y nivel 3>
+				slime_normal-basico-1 <-- Slime normal, categoría básico de nivel 1
+				slime_fuego-minijefe-3 <-- Slime de fuego, categoría minijefe y nivel 3>
 		},
 		{
 			"nombre":
 			<El atributo nombre aquí no es una lista porque queremos aplicar estas características
 			a un único personaje>
 				"minijefe1,
-			"tipo": "slime-fuego_minijefe_1"
+			"tipo": "slime_fuego-minijefe-1"
 		}
 	],
 	"cofres": {

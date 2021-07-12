@@ -7,6 +7,7 @@ signal portal_collision
 signal chest_collision
 signal item_collision
 
+var velocity = Vector2(0,0)
 
 func _ready():
 	# TODO
@@ -19,14 +20,15 @@ func _ready():
 
 
 func get_direction() -> Vector2:
-	var velocity: = Vector2()
+	self.velocity = Vector2(0,0)
+	
 	if Input.is_action_pressed('down'):
 		$Sprite.play("walk-down")
 		velocity.y += 1
 	elif Input.is_action_pressed('up'):
 		$Sprite.play("walk-up")
 		velocity.y -= 1
-	elif Input.is_action_pressed('right'):
+	if Input.is_action_pressed('right'):
 		$Sprite.play("walk-side")
 		velocity.x += 1
 	elif Input.is_action_pressed('left'):
@@ -52,7 +54,7 @@ func run_animation():
 
 
 func _process(delta):
-	var direction: = get_direction()
+	var direction = get_direction()
 	_velocity = direction.normalized() * speed
 	run_animation()
 	_velocity = move_and_slide(_velocity)

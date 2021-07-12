@@ -5,11 +5,23 @@ class_name Enemy
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export var enemies = ["normal_slime", "fire_slime", "fire_slime"]
+# Esta variable se define en el json del nivel
+export var enemies = []  #"normal_slime", "fire_slime", "fire_slime"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	var enemy = enemies[0]
+	var name = enemy.split("-")[0]
+	var type = enemy.split("-")[1]
+	var level = enemy.split("-")[2]
+	
+	if type == "basico":
+		pass
+	elif type == "minijefe":
+		self.scale *= Vector2(1.25, 1.25)
+	
+	$AnimatedSprite.frames = load("res://assets/animations/{}.tres".format([name], "{}"))
+	$AnimatedSprite.animation = "idle"
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

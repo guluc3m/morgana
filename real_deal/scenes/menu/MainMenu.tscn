@@ -1,14 +1,23 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://real_deal/scripts/menu/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/prototipos/escena_tileset.tres" type="TileSet" id=2]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.494118, 0.129412, 0.129412, 1 )
+[node name="Fondo" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 400, 400 )
+format = 1
+tile_data = PoolIntArray( 0, 15, 0, 1, 15, 0, 2, 15, 0, 65536, 15, 0, 65537, 15, 0, 65538, 15, 0 )
+
+[node name="FondoNegro" type="ColorRect" parent="."]
+margin_left = 417.0
+margin_top = 226.0
+margin_right = 607.0
+margin_bottom = 370.0
+color = Color( 0, 0, 0, 0.494118 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
