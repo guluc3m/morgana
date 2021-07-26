@@ -1,7 +1,7 @@
 extends Actor
 
 onready var card_database = preload("res://real_deal/scripts/utils/CardsDatabase.gd").DATA
-onready var funciones = preload("res://real_deal/scripts/duel/CardEffects.gd").new()
+onready var inventory_node = preload("res://real_deal/scenes/menu/Inventory.tscn")
 
 signal portal_collision
 signal chest_collision
@@ -9,14 +9,30 @@ signal item_collision
 
 var velocity = Vector2(0,0)
 
+
 func _ready():
-	# TODO
 	pass
-	
-	
-#func _input(event):
-#	if Input.is_action_pressed("ui_right"):
-#		SceneManager.goto_scene("res://real_deal/scenes/menu//MainMenu.tscn", null)
+	# TODO
+#	var Item = load("res://real_deal/scripts/utils/player/Item.gd")
+#	var item = Item.new()
+#	item.init_item("berry")
+#	PlayerManager.inventory.add_item(item)
+#	PlayerManager.inventory.add_item(item)
+
+
+func _input(event):
+	if event.is_action_released("inventory"):
+		var inv = get_node_or_null("Inventory")
+		if inv:
+			# Elimina el nodo del árbol
+			remove_child(inv)
+		else:
+			# La añade al árbol
+			add_child(inventory_node.instance())
+		
+		# Conectamos su señal con la función presente en este fichero (nombre señal, script que se enlaza, función del script)
+		#get_node("OptionsMenu").connect("CloseOptionsMenu", self, "close_options_menu")
+		# SceneManager.goto_scene("res://real_deal/scenes/menu//MainMenu.tscn", null)
 
 
 func get_direction() -> Vector2:

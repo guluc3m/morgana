@@ -10,6 +10,7 @@ var item_database = preload("res://real_deal/scripts/utils/ItemDatabase.gd").DAT
 var card_functions = preload("res://real_deal/scripts/duel/CardEffects.gd").new()
 
 var name;
+var image;
 var type;
 var description;
 var effects;
@@ -23,6 +24,7 @@ func init_item(key: String):
 		y definido en ItemDatabase.gd
 	"""
 	self.name = item_database[key]['name']
+	self.image = item_database[key]['image']
 	self.type = item_database[key]['type']
 	self.description = item_database[key]['description']
 	self.effects = item_database[key]['effects']

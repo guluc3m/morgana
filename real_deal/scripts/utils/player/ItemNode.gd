@@ -11,10 +11,13 @@ var with_item = false
 
 
 func _ready():
+	# TESTING ITEM
 	var test_item = load("res://real_deal/scripts/utils/player/Item.gd").new()
 	test_item.init_item('berry')
 	self.init_item(test_item)
-	print("testing")
+	###########
+	# Si esto no está aquí no se ajustan bien los márgenes para que esté centrado
+	$Item/Image/Background.set_margins_preset(Control.PRESET_CENTER)
 
 
 func init_item(item):
@@ -22,12 +25,12 @@ func init_item(item):
 		cambia la imagen, etc y genera las cosas correspondientes
 		para poder interactuar con el mismo
 	"""
-	
 	self.item = item
 	self.with_item = true
-	# TODO Cambiar la imagen según el nombre del objeto
+	var tmp_texture = ImageTexture.new()
+	tmp_texture.load("res://assets/prototipos/elementos/items/{}.png".format([item.image], "{}"))
+	$Item/Image.set_texture(tmp_texture);
 	$Item.connect("gui_input", self, "_on_Item_gui_input")
-	#$Item/Image.texture = Texture.new()
 	self.add_options_to_item()
 	
 
@@ -46,6 +49,7 @@ func add_options_to_item():
 
 	$Menu/ItemList.add_item(text)
 	$Menu/ItemList.add_item("Descartar")
+	# $Menu.set_position($Item.
 	
 
 func use():
@@ -65,14 +69,16 @@ func drop():
 		$Menu/ItemList.remove_item(0)
 	
 	$Item.disconnect("gui_input", self, "_on_Item_gui_input")
-	$Item/Image.texture = Texture.new()
+	$Item/Image.set_texture(ImageTexture.new())
+	# Si esto no está aquí no se ajustan bien los márgenes para que esté centrado
+	$Item/Image/Background.set_margins_preset(Control.PRESET_CENTER)
 
 
 func _on_Item_gui_input(event):
 	""" Capturamos eventos para saber cuándo se hace click derecho para
 		mostrar el menú
 	"""
-	if Input.is_action_pressed("mouse_left"):
+	if Input.is_action_just_released("mouse_left"):
 		$Menu.visible = !$Menu.visible
 
 

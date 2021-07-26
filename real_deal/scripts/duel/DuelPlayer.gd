@@ -18,3 +18,4 @@ func _on_Battle_Player_playerAttack():
 	var bleed = load("res://real_deal/scenes/duel/effects/bleed.tscn").instance()
 	bleed.set_emitting(true)
 	target.add_child(bleed)
+ 

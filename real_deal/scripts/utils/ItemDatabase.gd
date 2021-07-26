@@ -1,6 +1,7 @@
 const DATA = {
 	"placeholder": {
 		"name": "",
+		"image": "same as key",
 		"type": "",
 		"description": "",
 		"effects": "",
@@ -10,6 +11,7 @@ const DATA = {
 	},
 	"berry": {
 		"name": "Baya",
+		"image": "berry",
 		"type": "object",
 		"description": "Una baya que parece venenosa... Bueno soy un fantasma, seguro que no me mata",
 		"effects": "Cura 5 puntos de vida",
@@ -21,6 +23,7 @@ const DATA = {
 	},
 	"helmet": {
 		"name": "Casco",
+		"image": "helmet",
 		"type": "equipment",
 		"description": "Un casco de hierro",
 		"effects": "Te otorga la carta thump",
@@ -30,6 +33,7 @@ const DATA = {
 	},
 	"slime_remains": {
 		"name": "Restos de slime",
+		"image": "slime_remains",
 		"type": "object",
 		"description": "Restos de un slime",
 		"effects": "",
