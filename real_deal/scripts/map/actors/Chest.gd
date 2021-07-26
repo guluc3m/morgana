@@ -9,6 +9,7 @@ func _on_Player_item_collision(body):
 	if body == self:
 		if full:
 			$Sprite.play("open_full")
+			# TODO: Aquí devolvemos el loot al jugador
 		else:
 			$Sprite.play("open_empty")
 

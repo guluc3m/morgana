@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/prototipos/elementos/limb_chest.png" type="Texture" id=1]
 [ext_resource path="res://real_deal/scripts/map/actors/Chest.gd" type="Script" id=2]
+[ext_resource path="res://assets/prototipos/elementos/limb_chest_open.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 55.7315, 43.0597 )
+extents = Vector2( 113.639, 83.1505 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -13,14 +14,14 @@ animations = [ {
 "name": "closed",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": false,
-"name": "open_full",
+"name": "open_empty",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ) ],
 "loop": false,
-"name": "open_empty",
+"name": "open_full",
 "speed": 5.0
 } ]
 
@@ -40,6 +41,5 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="." groups=[
 "items",
 ]]
-scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 2 )
 animation = "closed"

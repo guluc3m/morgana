@@ -1,8 +1,3 @@
-extends Node
-
-func _ready():
-	pass
-
 const DATA = {
 	"normal_slime": {
 		"name": "Slime",
@@ -28,8 +23,8 @@ const DATA = {
 		"strategy": "basic",
 		"skills": [],
 		"loot": [
-			[SlimeRemains, 1.0], # Object and probability
-			[SlimeRemains, 0.3]
+			["slime_remains", 1.0], # Object and probability
+			["slime_remains", 0.3]
 		]
 	},
 	"fire_slime": {

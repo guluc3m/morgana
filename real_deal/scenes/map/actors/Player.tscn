@@ -3,8 +3,9 @@
 [ext_resource path="res://assets/prototipos/personaje/Prototipo Final/player_sprite.png" type="Texture" id=1]
 [ext_resource path="res://real_deal/scripts/map/actors/Player.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.46059, 7.57044 )
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 64.9999
+height = 66.5229
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
@@ -14,22 +15,22 @@ region = Rect2( 190, 0, 190, 211 )
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 190, 211 )
+region = Rect2( 190, 0, 190, 211 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 190, 0, 190, 211 )
+region = Rect2( 380, 0, 190, 211 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 380, 0, 190, 211 )
+region = Rect2( 0, 0, 190, 211 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 570, 0, 190, 211 )
+region = Rect2( 190, 0, 190, 211 )
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
@@ -39,7 +40,7 @@ region = Rect2( 380, 0, 190, 211 )
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 190, 0, 190, 211 )
+region = Rect2( 570, 0, 190, 211 )
 
 [sub_resource type="AtlasTexture" id=9]
 flags = 4
@@ -53,20 +54,20 @@ animations = [ {
 "name": "idle",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
-"loop": false,
-"name": "attack",
-"speed": 8.0
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "walk-down",
+"speed": 1.0
 }, {
-"frames": [ SubResource( 7 ) ],
+"frames": [ SubResource( 4 ) ],
 "loop": true,
 "name": "walk-side",
 "speed": 1.0
 }, {
-"frames": [ SubResource( 8 ) ],
-"loop": true,
-"name": "walk-down",
-"speed": 1.0
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": false,
+"name": "attack",
+"speed": 8.0
 }, {
 "frames": [ SubResource( 9 ) ],
 "loop": true,
@@ -74,8 +75,9 @@ animations = [ {
 "speed": 1.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 96.119, 104.094 )
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 68.1066
+height = 75.2926
 
 [node name="Player" type="KinematicBody2D" groups=[
 "Sensitive",
@@ -86,7 +88,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 50.0 ]
 }
-speed = 400
+speed = 450
 
 [node name="PhysicsCollisions" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

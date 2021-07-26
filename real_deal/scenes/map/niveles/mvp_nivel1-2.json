@@ -1,0 +1,25 @@
+{
+	"portal": {
+		"hacia": "mvp_limbo",
+		"abierto": false
+	},
+	"enemy": [
+		{
+			"nombre": [
+				"enemigo1","enemigo3"
+			],
+			"enemies": ["slime_normal-basico-1"]
+		},
+		{
+			"nombre": "enemigo2",
+			"enemies": ["slime_fire-basico-1"]
+		},
+		{
+			"nombre": "jefe1",
+			"enemies": ["slime_fire-jefe-1"]
+		}
+	],
+	"chest": {
+		"recompensa": "random"
+	}
+}

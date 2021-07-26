@@ -65,14 +65,14 @@ func _generate_loot(loot_posibilities):
 			loot.append((loot_option[0]))
 	return loot
 		
-func _on_Battle_Enemy_Swampy_card_target():
+func _on_Battle_Enemy_card_target():
 	""" Start being a targeteable object
 	"""
 	get_tree().call_group("card", "get_target", self)
 	print("Enable target")
 
 
-func _on_Battle_Enemy_Swampy_not_card_target():
+func _on_Battle_Enemy_not_card_target():
 	self.mouse_over = false
 	get_tree().call_group("card", "get_target", false)
 	print("Disable target")
@@ -86,3 +86,7 @@ func select_card():
 		print(self.name, " va a jugar: ", _hand[0]["name"])
 		return self._hand[0]
 	return false
+
+
+func _on_Battle_Enemy_playCard():
+	pass # Replace with function body.

@@ -18,16 +18,27 @@ var health
 var max_health
 var energy
 var max_energy
+var card_collection
 
 func _ready():
-	max_hand_size = 5
-	draw_amount = 3
-	health = 50
-	max_health = 50
-	energy = 3
-	max_energy = 3
+	self.max_hand_size = 5
+	self.draw_amount = 3
+	self.health = 50
+	self.max_health = 50
+	self.energy = 3
+	self.max_energy = 3
 	
-	deck = [
+	# Diccionario donde la clave es el nombre de la carta y el valor es el nº de veces que existen
+	# en el mazo del jugador
+	self.card_collection = {
+		"attack_1": 3,
+		"attack_2": 3,
+		"attack_3": 2,
+		"potion": 2,
+		"fire": 2
+	}
+	
+	self.deck = [
 		"attack_1",
 		"attack_1",
 		"attack_1",
@@ -41,7 +52,7 @@ func _ready():
 		"fire",
 		"fire"
 	]
-	inventory = Inventory.new()
+	self.inventory = Inventory.new()
 	
 
 func restore_player():
@@ -55,14 +66,15 @@ func save():
 	var save_game = File.new()
 	save_game.open(path_save_directory, File.WRITE)
 	var save_dict = {
-		"max_hand_size": max_hand_size,
-		"draw_amount": draw_amount,
-		"health": health,
-		"max_health": max_health,
-		"energy": energy,
-		"max_energy": max_energy,
-		"deck": deck,
-		"inventory": inventory
+		"max_hand_size": self.max_hand_size,
+		"draw_amount": self.draw_amount,
+		"health": self.health,
+		"max_health": self.max_health,
+		"energy": self.energy,
+		"max_energy": self.max_energy,
+		"deck": self.deck,
+		"inventory": self.inventory,
+		"card_collection": self.card_collection
 	}
 	save_game.store_line(to_json(save_dict))
 	save_game.close()
@@ -81,9 +93,11 @@ func load():
 			self.set(i, node_data[i])
 	save_game.close()
 
+
 func add_reward(reward):
 	for item in reward:
 		self.inventory.add_item(item)
+
 
 func _process(delta):
 	pass#print(self.inventory.get_items())

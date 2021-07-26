@@ -1,17 +1,18 @@
 {
 	"portal": {
-		"hacia": "mvp_nivel2"
+		"hacia": "mvp_nivel2",
+		"abierto": false
 	},
 	"enemy": [
 		{
 			"nombre": [
-				"enemigo1","enemigo2","enemigo3","enemigo4","enemigo5","enemigo6","enemigo7","enemigo8"
+				"enemigo1","enemigo2","enemigo3"
 			],
-			"tipo": "slime_basico_1"
+			"enemies": ["slime_normal-basico-1"],
 		},
 		{
 			"nombre": "minijefe1",
-			"tipo": "slime-fuego_minijefe_1"
+			"enemies": ["slime_fire-basico-1"]
 		}
 	],
 	"chest": {

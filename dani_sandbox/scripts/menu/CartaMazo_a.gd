@@ -7,6 +7,10 @@ func _ready():
 	pass # Replace with function body.
 
 
+func init_image(card_tpye: String):
+	pass
+
+
 func _on_CartaMazo_gui_input(event):
 	""" Evento para saber cuándo el usuario hace click y así eliminarla (visualmente)
 		del mazo.
