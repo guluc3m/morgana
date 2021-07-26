@@ -1,10 +1,22 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://real_deal/scenes/utils/MouseCollision.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/prototipos/escena/Duel/battle_background.png" type="Texture" id=2]
 [ext_resource path="res://real_deal/scripts/duel/DuelManager.gd" type="Script" id=3]
 [ext_resource path="res://assets/prototipos/escena_tileset.tres" type="TileSet" id=4]
-[ext_resource path="res://assets/prototipos/characters_sprites/crate.png" type="Texture" id=5]
-[ext_resource path="res://real_deal/scenes/duel/DuelLife.tscn" type="PackedScene" id=6]
+[ext_resource path="res://real_deal/scripts/duel/DuelLife.gd" type="Script" id=5]
+[ext_resource path="res://assets/prototipos/escena/Duel/deck_pile.png" type="Texture" id=6]
+[ext_resource path="res://assets/prototipos/escena/Duel/battle_template.png" type="Texture" id=7]
+[ext_resource path="res://assets/prototipos/escena/Duel/hud.png" type="Texture" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 265, 115 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.184314, 0.678431, 0.027451, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.219608, 0, 0.356863, 1 )
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -18,7 +30,17 @@ __meta__ = {
 
 [node name="Fondo" type="Node2D" parent="."]
 
+[node name="BackgroundGuide" type="Sprite" parent="Fondo"]
+visible = false
+texture = ExtResource( 7 )
+centered = false
+
+[node name="Background" type="Sprite" parent="Fondo"]
+texture = ExtResource( 2 )
+centered = false
+
 [node name="Base" type="TileMap" parent="Fondo"]
+visible = false
 scale = Vector2( 0.5, 0.5 )
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 400, 400 )
@@ -27,6 +49,7 @@ format = 1
 tile_data = PoolIntArray( 0, 8, 0, 1, 8, 0, 2, 8, 0, 3, 8, 0, 4, 8, 0, 5, 8, 0, 131071, 8, 0, 65536, 8, 0, 65537, 8, 0, 65538, 8, 0, 65539, 8, 0, 65540, 8, 0, 65541, 8, 0, 196607, 8, 0, 131072, 8, 0, 131073, 8, 0, 131074, 8, 0, 131075, 8, 0, 131076, 8, 0, 131077, 8, 0, 262143, 8, 0, 196608, 8, 0, 196609, 8, 0, 196610, 8, 0, 196611, 8, 0, 196612, 8, 0, 196613, 8, 0 )
 
 [node name="Nubes" type="TileMap" parent="Fondo"]
+visible = false
 scale = Vector2( 0.5, 0.5 )
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 400, 400 )
@@ -37,56 +60,84 @@ tile_data = PoolIntArray( 65535, 15, 0, 0, 15, 0, 1, 11, 0, 2, 10, 0, 3, 13, 0, 
 [node name="UI_Elements_left" type="MarginContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 27.7183
-margin_top = -84.6965
-margin_right = 55.7183
-margin_bottom = -56.6965
-rect_scale = Vector2( 2, 2 )
+margin_top = -231.0
+margin_right = 531.0
+rect_min_size = Vector2( 531, 231 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="UI_Elements_left"]
-margin_right = 28.0
-margin_bottom = 28.0
-icon = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Area2D" type="Area2D" parent="UI_Elements_left"]
+script = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="UI_Elements_left/Area2D"]
+texture = ExtResource( 8 )
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI_Elements_left/Area2D"]
+position = Vector2( 265, 115 )
+shape = SubResource( 1 )
+
+[node name="BarConatiner" type="MarginContainer" parent="UI_Elements_left"]
+margin_right = 531.0
+margin_bottom = 231.0
+custom_constants/margin_top = 188
+
+[node name="ProgressBar" type="ProgressBar" parent="UI_Elements_left/BarConatiner"]
+margin_top = 188.0
+margin_right = 531.0
+margin_bottom = 218.0
+rect_min_size = Vector2( 500, 30 )
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 3 )
 
 [node name="Hand" type="Node" parent="."]
-
-[node name="UI_Elements_right" type="MarginContainer" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -50.4169
-margin_top = -109.538
-margin_right = -46.4169
-margin_bottom = -95.5383
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" parent="UI_Elements_right" instance=ExtResource( 6 )]
 
 [node name="Player" type="Position2D" parent="."]
 position = Vector2( 1380.94, 299.762 )
 
-[node name="Enemigos" type="Node" parent="."]
+[node name="Enemigos" type="HBoxContainer" parent="."]
+margin_left = 310.0
+margin_top = 75.0
+margin_right = 1610.0
+margin_bottom = 645.0
+rect_min_size = Vector2( 1200, 500 )
+custom_constants/separation = 0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Enemy_0" type="Position2D" parent="Enemigos"]
-position = Vector2( 516.433, 241.43 )
+[node name="Enemy_0" type="CenterContainer" parent="Enemigos"]
+margin_left = 2.0
+margin_right = 434.0
+margin_bottom = 570.0
+rect_min_size = Vector2( 432, 0 )
 
-[node name="Enemy_1" type="Position2D" parent="Enemigos"]
-position = Vector2( 192.042, 265.002 )
+[node name="Enemy_1" type="CenterContainer" parent="Enemigos"]
+margin_left = 434.0
+margin_right = 866.0
+margin_bottom = 570.0
+rect_min_size = Vector2( 432, 0 )
 
-[node name="Enemy_2" type="Position2D" parent="Enemigos"]
-position = Vector2( 819.498, 267.247 )
+[node name="Enemy_2" type="CenterContainer" parent="Enemigos"]
+margin_left = 866.0
+margin_right = 1298.0
+margin_bottom = 570.0
+rect_min_size = Vector2( 432, 0 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = 1651.29
+margin_top = 753.142
+margin_right = 1879.29
+margin_bottom = 1050.14
+icon = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="addCard" from="." to="." method="_on_Main_addCard"]
 [connection signal="playCard" from="." to="." method="_on_Main_playCard"]
 [connection signal="removeCard" from="." to="." method="_on_Main_removeCard"]
-[connection signal="pressed" from="UI_Elements_left/Button" to="." method="_on_Button_pressed"]
+[connection signal="card_target" from="UI_Elements_left/Area2D" to="UI_Elements_left/Area2D" method="_on_Area2D_card_target"]
+[connection signal="not_card_target" from="UI_Elements_left/Area2D" to="UI_Elements_left/Area2D" method="_on_Area2D_not_card_target"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

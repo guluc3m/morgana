@@ -19,7 +19,7 @@ var scene_main_menu = "res://real_deal/scenes/menu/MainMenu.tscn"
 
 ###### Variables para la mano
 # Referencia: https://www.youtube.com/watch?v=gUNhn5BJlJ0
-onready var hand_center = get_viewport().get_visible_rect().size * Vector2(0.5, 1.4)
+onready var hand_center = get_viewport().get_visible_rect().size * Vector2(0.5, 1.2)
 onready var h_rad = get_viewport().get_visible_rect().size.x * 0.45
 onready var v_rad = get_viewport().get_visible_rect().size.y * 0.4
 
@@ -74,6 +74,10 @@ func _init_entities(enemy_datas):
 		PlayerManager.max_energy
 	)
 	
+	# Conectamos la barra de vida y la inicializamos. Esto habría que sacarlo a una clase propia y refactorizarlo un rato
+	player._healthBar = $UI_Elements_left/BarConatiner/ProgressBar
+	player._healthBar.max_value = player._max_health
+	player._healthBar.value = player._health
 	# TESTING quizás luego es random o algo, yuqse
 	self.turn_sequence.append(player)
 	self.current_turn = player
@@ -132,7 +136,7 @@ func place_card(card):
 	self.OvalAngleVector = Vector2(self.h_rad * cos(self.angle), -self.v_rad * sin(self.angle))
 	
 	card.rect_position = self.hand_center + self.OvalAngleVector - card.rect_size * Vector2(0.25, 0.5)
-	card.rect_scale = self.card_size/card.rect_size
+	#card.rect_scale = self.card_size/card.rect_size
 	card.rect_rotation = (90 - rad2deg(self.angle))/4
 
 	self.angle += 0.25
