@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://axel_sandbox/src/actors/ActorA.gd"
 }, {
-"base": "Node",
-"class": "DungeonManager",
-"language": "GDScript",
-"path": "res://real_deal/scripts/exploration/dungeon_manager.gd"
-}, {
 "base": "Actor",
 "class": "Enemy",
 "language": "GDScript",
@@ -34,48 +29,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://axel_sandbox/src/actors/EnemyA.gd"
 }, {
-"base": "Actor",
-"class": "EnemyGroup",
-"language": "GDScript",
-"path": "res://real_deal/scripts/exploration/actors/enemy_group.gd"
-}, {
 "base": "Object",
 "class": "Inventory",
 "language": "GDScript",
 "path": "res://real_deal/scripts/utils/player/inventory.gd"
-}, {
-"base": "Object",
-"class": "Item",
-"language": "GDScript",
-"path": "res://real_deal/scripts/utils/player/item.gd"
-}, {
-"base": "Item",
-"class": "Potion",
-"language": "GDScript",
-"path": "res://real_deal/scripts/utils/player/items/potion.gd"
-}, {
-"base": "Node",
-"class": "Room",
-"language": "GDScript",
-"path": "res://real_deal/scripts/exploration/room.gd"
-}, {
-"base": "Item",
-"class": "SlimeRemains",
-"language": "GDScript",
-"path": "res://real_deal/scripts/utils/player/items/slime_remains.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
 "ActorA": "",
-"DungeonManager": "",
 "Enemy": "",
 "EnemyA": "",
-"EnemyGroup": "",
-"Inventory": "",
-"Item": "",
-"Potion": "",
-"Room": "",
-"SlimeRemains": ""
+"Inventory": ""
 }
 
 [application]

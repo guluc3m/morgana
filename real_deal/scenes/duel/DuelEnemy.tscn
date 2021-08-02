@@ -93,6 +93,6 @@ custom_constants/separation = 2
 
 [node name="EnemyLeftPosition" type="Position2D" parent="."]
 position = Vector2( 216, 470 )
-[connection signal="card_target" from="." to="." method="_on_Battle_Enemy_Swampy_card_target"]
-[connection signal="not_card_target" from="." to="." method="_on_Battle_Enemy_Swampy_not_card_target"]
+[connection signal="card_target" from="." to="." method="_on_Battle_Enemy_card_target"]
+[connection signal="not_card_target" from="." to="." method="_on_Battle_Enemy_not_card_target"]
 [connection signal="animation_finished" from="Character" to="." method="_on_Character_animation_finished"]

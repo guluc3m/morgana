@@ -8,7 +8,7 @@
 			"nombre": [
 				"enemigo1","enemigo2","enemigo3"
 			],
-			"enemies": ["slime_normal-basico-1"],
+			"enemies": ["slime_normal-basico-1", "slime_normal-basico-1", "slime_normal-basico-1"],
 		},
 		{
 			"nombre": "minijefe1",

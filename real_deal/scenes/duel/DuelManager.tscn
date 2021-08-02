@@ -12,7 +12,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 265, 115 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.184314, 0.678431, 0.027451, 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
@@ -88,7 +88,7 @@ margin_top = 188.0
 margin_right = 531.0
 margin_bottom = 218.0
 rect_min_size = Vector2( 500, 30 )
-custom_styles/fg = SubResource( 4 )
+custom_styles/fg = SubResource( 2 )
 custom_styles/bg = SubResource( 3 )
 
 [node name="Hand" type="Node" parent="."]

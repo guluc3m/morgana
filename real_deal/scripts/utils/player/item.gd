@@ -3,7 +3,7 @@
 	Para una representación gráfica, ir a ItemNode.gd
 """
 
-class_name Item
+#class_name Item
 extends Object
 
 var item_database = preload("res://real_deal/scripts/utils/ItemDatabase.gd").DATA

@@ -1,5 +1,7 @@
+extends Node
+
 const DATA = {
-	"normal_slime": {
+	"slime_normal": {
 		"name": "Slime",
 		"scene": preload("res://real_deal/scenes/duel/DuelEnemy.tscn"), # Quizá ésta habría que quitarla
 		"animation": "slime_normal",
@@ -27,7 +29,7 @@ const DATA = {
 			["slime_remains", 0.3]
 		]
 	},
-	"fire_slime": {
+	"slime_fire": {
 		"name": "Fire Slime",
 		"scene": preload("res://real_deal/scenes/duel/DuelEnemy.tscn"),
 		"animation": "slime_fire",
