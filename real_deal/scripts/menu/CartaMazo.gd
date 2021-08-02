@@ -2,7 +2,7 @@ extends Control
 
 var card_database = load("res://real_deal/scripts/utils/CardsDatabase.gd").DATA
 
-signal a_coleccion;
+# signal a_coleccion;
 var card_name;
 
 

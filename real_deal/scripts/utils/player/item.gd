@@ -62,6 +62,8 @@ func equip():
 	""" Función para equipar un objeto si es de tipo 'equipment'
 	"""
 	print("equip")
+	if len(PlayerManager.equipped_items) < 4:
+		PlayerManager.equipped_items.append(self)
 	if self.add_cart:
 		PlayerManager.deck.append(self.card_name)
 	
@@ -70,5 +72,6 @@ func unequip():
 	""" Función a llamar cuando se desequipa un objeto de tipo 'equipment'
 	"""
 	print("unequip")
+	PlayerManager.equipped_items.remove(self)
 	if self.add_cart:
 		PlayerManager.deck.erase(self.card_name)

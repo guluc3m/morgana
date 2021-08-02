@@ -3,6 +3,8 @@
 """
 extends Control
 
+signal is_equipment
+
 # Variable interna para contener al item
 var item;
 # Variable interna para luego en el front identificar
@@ -12,11 +14,12 @@ var with_item = false
 
 func _ready():
 	# TESTING ITEM
-	var test_item = load("res://real_deal/scripts/utils/player/Item.gd").new()
-	test_item.init_item('berry')
-	self.init_item(test_item)
+#	var test_item = load("res://real_deal/scripts/utils/player/Item.gd").new()
+#	test_item.init_item('berry')
+#	self.init_item(test_item)
 	###########
 	# Si esto no está aquí no se ajustan bien los márgenes para que esté centrado
+	$Item.rect_min_size = $Item/Image/Background.rect_size*$Item/Image.scale
 	$Item/Image/Background.set_margins_preset(Control.PRESET_CENTER)
 
 
@@ -32,7 +35,6 @@ func init_item(item):
 	$Item/Image.set_texture(tmp_texture);
 	$Item.connect("gui_input", self, "_on_Item_gui_input")
 	self.add_options_to_item()
-	
 
 
 func add_options_to_item():
@@ -49,13 +51,14 @@ func add_options_to_item():
 
 	$Menu/ItemList.add_item(text)
 	$Menu/ItemList.add_item("Descartar")
-	# $Menu.set_position($Item.
-	
+
 
 func use():
 	""" Punto de entrada común para objetos y equipo
 	"""
 	self.item.use()
+	if self.item.type == "equipment":
+		emit_signal("is_equipment")
 	# Después de usarlo podemos descartarlo (y así ahorramos código)
 	self.drop()
 

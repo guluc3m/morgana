@@ -9,7 +9,32 @@ func _ready():
 	self.init_tab_personalizacion();
 	#### TAB MAZO ####
 	self.init_tab_mazo();
+
+
+func draw_equipped_items():
+	""" Dibuja los objetos equipados
+	"""
+	print("draw")
+	var equipo_node = $Container/TabContainer/PanelPJ/HBox/Equipo;
+	var player_equipped = PlayerManager.equipped_items
+	for n in equipo_node.get_node("MarginContainer/ItemsContainer/Items").get_children():
+		equipo_node.get_node("MarginContainer/ItemsContainer/Items").remove_child(n)
+		n.queue_free()
+		
+	for item in player_equipped:
+		# Rellenamos con los items del jugador
+		var itemNode = Item.instance()
+		itemNode.init_item(item)
+		itemNode.connect("is_equipment", self, "draw_equipped_items")
+		equipo_node.get_node("MarginContainer/ItemsContainer/Items").add_child(itemNode);
 	
+	var item_count = equipo_node.get_node("MarginContainer/ItemsContainer/Items").get_child_count()
+	while item_count == 0 or item_count < 4:
+		# Rellenamos con casillas vacías
+		var itemNode = Item.instance()
+		itemNode.connect("is_equipment", self, "draw_equipped_items")
+		equipo_node.get_node("MarginContainer/ItemsContainer/Items").add_child(itemNode);
+		item_count += 1
 	
 func init_tab_personalizacion(items=[]):
 	""" Inicializa las dimensiones y cosas correspondientes al tab
@@ -24,30 +49,43 @@ func init_tab_personalizacion(items=[]):
 	equipo_node.rect_min_size = Vector2(panel_node.get_size().x*0.3, equipo_node.get_size().y);
 	stats_node.rect_min_size = Vector2(panel_node.get_size().x*0.65, stats_node.get_size().y);
 	
-	# Contenedor equipo
+	# Contenedor objetos equipados
+	self.draw_equipped_items()
+		
+	equipo_node.get_node("MarginContainer").add_constant_override("margin_left", 50);
+	equipo_node.get_node("MarginContainer").add_constant_override("margin_top", 50);
+	equipo_node.get_node("MarginContainer").add_constant_override("margin_right", 0);
+	########################
+	
+	# Contenedor items
 	# Iteramos por los objetos del jugador
 	var player_items = PlayerManager.inventory.get_items()
 	for item in player_items:
 		# Rellenamos con los items del jugador
 		var itemNode = Item.instance()
 		itemNode.init_item(item)
-		stats_node.get_node("VBox/Items/Grid").add_child(itemNode);
+		itemNode.connect("is_equipment", self, "draw_equipped_items")
+		stats_node.get_node("VBox/ItemsCenter/Grid").add_child(itemNode);
 	
-	var item_count = stats_node.get_node("VBox/Items/Grid").get_child_count()
+	var item_count = stats_node.get_node("VBox/ItemsCenter/Grid").get_child_count()
 	while item_count == 0 or item_count % 12 != 0:
 		# Rellenamos con casillas vacías
 		var itemNode = Item.instance()
-		stats_node.get_node("VBox/Items/Grid").add_child(itemNode);
+		itemNode.connect("is_equipment", self, "draw_equipped_items")
+		stats_node.get_node("VBox/ItemsCenter/Grid").add_child(itemNode);
 		item_count += 1
 	
-	stats_node.get_node("VBox/Items/Grid").add_constant_override("hseparation", 90)
-	stats_node.get_node("VBox/Items/Grid").add_constant_override("vseparation", 90)
+	stats_node.get_node("VBox/ItemsCenter/Grid").add_constant_override("hseparation", 20)
+	stats_node.get_node("VBox/ItemsCenter/Grid").add_constant_override("vseparation", 20)
+	
+	stats_node.get_node("VBox/ItemsCenter").rect_min_size.y = stats_node.rect_min_size.y/2;
+	stats_node.get_node("VBox/ItemsCenter").rect_min_size.x = stats_node.rect_min_size.x;
+	stats_node.get_node("VBox/ItemsCenter").add_constant_override("margin_left", 50);
+	stats_node.get_node("VBox/ItemsCenter").add_constant_override("margin_top", 50);
 	########################
 	
 	# Contenedor estadísticas
 	stats_node.get_node("VBox/Stats/Text").text = "AAAA CHUGUENÑAAAA CHIBABA ULIASNDJADjaiDISAD";
-		
-	stats_node.get_node("VBox/Items").rect_min_size.y = stats_node.rect_min_size.y/2;
 	stats_node.get_node("VBox/Stats").rect_min_size.y = stats_node.rect_min_size.y/2;
 	#########################
 

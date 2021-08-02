@@ -19,6 +19,7 @@ var max_health
 var energy
 var max_energy
 var card_collection
+var equipped_items
 
 func _ready():
 	self.max_hand_size = 5
@@ -53,6 +54,7 @@ func _ready():
 		"fire"
 	]
 	self.inventory = Inventory.new()
+	self.equipped_items = []  # Lista de objetos equipados actualmente (max 4)
 	
 
 func restore_player():
