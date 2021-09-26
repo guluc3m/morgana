@@ -10,6 +10,7 @@ var _items = []
 var _saved_items = ["helmet", "berry"]
 # Deberíamos cambiarlo a un diccionario donde se guarden los objetos usando su referencia y el número de unidades
 
+
 func _init():
 	print("Inventario - jajaja")
 	for item in _saved_items:
@@ -21,11 +22,16 @@ func _init():
 func add_item(item):
 	_items.append(item)
 
+
 func remove_item(item):
-	_items.remove(item)
-	
-func get_item(item_type):
-	print("get_item IS NOT IMPLEMENTED")
-	
+	var item_pos = _items.find(item)
+	_items.remove(item_pos)
+
+
+func get_item(item):
+	var item_pos = _items.find(item)
+	return _items[item_pos]
+
+
 func get_items():
 	return _items.duplicate()

@@ -21,6 +21,7 @@ var max_energy
 var card_collection
 var equipped_items
 
+
 func _ready():
 	self.max_hand_size = 5
 	self.draw_amount = 3
