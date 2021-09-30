@@ -10,6 +10,7 @@ var _deck = null
 var _graveyard = null
 export var _max_hand_size = 5
 export var _draw_amount = 3
+var _healthBar
 
 # Estadíscitas básicas
 export var _health = 10

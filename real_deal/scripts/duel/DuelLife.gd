@@ -2,6 +2,7 @@
 	con ella como si fuese un elemento más de la escena.
 """
 extends Area2D
+#extends MarginContainer
 # extends "res://real_deal/scripts/duel/DuelCharacter.gd"
 
 signal card_target

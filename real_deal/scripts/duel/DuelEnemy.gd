@@ -17,8 +17,15 @@ var skills = []
 var loot = []
 
 
+var _sprite
+var _states
+
+
 func _ready():
 	add_to_group("enemies")
+	_healthBar = $HealthBarContainer/Container/HealthBar
+	_sprite = $Character
+	_states = $StatesContainer/States
 	# Se añaden al grupo de "targetebles" cuando se empieza a usar una carta
 	# para evitar colisiones cuando no debe
 	## add_to_group("targeteable")
@@ -26,18 +33,18 @@ func _ready():
 func set_data(enemy_data):
 	self._init_params(
 		enemy_data["deck"],
-		null,
+		false,
 		enemy_data["max_hand_size"],
 		enemy_data["max_health"],
 		enemy_data["max_health"],
 		enemy_data["max_energy"],
 		enemy_data["max_energy"]
 	)
-	$HealthBar.max_value = enemy_data["max_health"]
-	$HealthBar.value = $HealthBar.max_value
+	_healthBar.max_value = enemy_data["max_health"]
+	_healthBar.value = _healthBar.max_value
 	self.enemy_name = enemy_data["name"]
-	$Character.frames = load("res://assets/animations/{}.tres".format([enemy_data["animation"]], "{}"))
-	$Character.animation = "idle"
+	_sprite.frames = load("res://assets/animations/{}.tres".format([enemy_data["animation"]], "{}"))
+	_sprite.animation = "idle"
 	self.enemy_class = enemy_data["class"]
 	self.type = enemy_data["type"]
 	self.level = enemy_data["level"]
@@ -47,7 +54,7 @@ func set_data(enemy_data):
 
 func modify_health(amount):
 	.modify_health(amount)
-	$HealthBar.value += amount
+	_healthBar.value += amount
 
 func _generate_loot(loot_posibilities):
 	var loot = []

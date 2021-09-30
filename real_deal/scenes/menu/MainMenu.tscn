@@ -35,13 +35,13 @@ __meta__ = {
 }
 
 [node name="LeftIcons" type="HBoxContainer" parent="MarginContainer"]
-margin_right = 984.0
-margin_bottom = 560.0
+margin_right = 1880.0
+margin_bottom = 1040.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/LeftIcons"]
 margin_right = 48.0
-margin_bottom = 560.0
+margin_bottom = 1040.0
 mouse_filter = 2
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/LeftIcons/VBoxContainer"]
@@ -52,23 +52,23 @@ text = "Menú"
 align = 2
 
 [node name="CenterIcons" type="HBoxContainer" parent="MarginContainer"]
-margin_right = 984.0
-margin_bottom = 560.0
+margin_right = 1880.0
+margin_bottom = 1040.0
 mouse_filter = 2
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterIcons"]
-margin_left = 417.0
-margin_right = 566.0
-margin_bottom = 560.0
+margin_left = 865.0
+margin_right = 1014.0
+margin_bottom = 1040.0
 mouse_filter = 2
 custom_constants/separation = 10
 alignment = 1
 
 [node name="TitleName" type="Label" parent="MarginContainer/CenterIcons/VBoxContainer"]
-margin_top = 227.0
+margin_top = 467.0
 margin_right = 149.0
-margin_bottom = 258.0
+margin_bottom = 498.0
 text = "PERO MIRA QUE JUEGO
 MÁS BONICO"
 align = 1
@@ -78,17 +78,17 @@ __meta__ = {
 }
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/CenterIcons/VBoxContainer"]
-margin_top = 268.0
+margin_top = 508.0
 margin_right = 149.0
-margin_bottom = 272.0
+margin_bottom = 512.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Start" type="Button" parent="MarginContainer/CenterIcons/VBoxContainer"]
-margin_top = 282.0
+margin_top = 522.0
 margin_right = 149.0
-margin_bottom = 302.0
+margin_bottom = 542.0
 mouse_default_cursor_shape = 2
 text = "QUE EMPIENZA"
 __meta__ = {
@@ -96,22 +96,22 @@ __meta__ = {
 }
 
 [node name="Quit" type="Button" parent="MarginContainer/CenterIcons/VBoxContainer"]
-margin_top = 312.0
+margin_top = 552.0
 margin_right = 149.0
-margin_bottom = 332.0
+margin_bottom = 572.0
 mouse_default_cursor_shape = 2
 text = "Bueno, si eso luego"
 
 [node name="RightIcons" type="HBoxContainer" parent="MarginContainer"]
-margin_right = 984.0
-margin_bottom = 560.0
+margin_right = 1880.0
+margin_bottom = 1040.0
 mouse_filter = 2
 alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RightIcons"]
-margin_left = 984.0
-margin_right = 984.0
-margin_bottom = 560.0
+margin_left = 1880.0
+margin_right = 1880.0
+margin_bottom = 1040.0
 mouse_filter = 2
 alignment = 2
 [connection signal="pressed" from="MarginContainer/LeftIcons/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
