@@ -3,6 +3,9 @@
 """
 extends Control
 
+signal is_equipment
+signal is_used
+
 # Variable interna para contener al item
 var item;
 # Variable interna para luego en el front identificar
@@ -12,11 +15,12 @@ var with_item = false
 
 func _ready():
 	# TESTING ITEM
-	var test_item = load("res://real_deal/scripts/utils/player/Item.gd").new()
-	test_item.init_item('berry')
-	self.init_item(test_item)
+#	var test_item = load("res://real_deal/scripts/utils/player/Item.gd").new()
+#	test_item.init_item('berry')
+#	self.init_item(test_item)
 	###########
 	# Si esto no está aquí no se ajustan bien los márgenes para que esté centrado
+	$Item.rect_min_size = $Item/Image/Background.rect_size*$Item/Image.scale
 	$Item/Image/Background.set_margins_preset(Control.PRESET_CENTER)
 
 
@@ -32,7 +36,6 @@ func init_item(item):
 	$Item/Image.set_texture(tmp_texture);
 	$Item.connect("gui_input", self, "_on_Item_gui_input")
 	self.add_options_to_item()
-	
 
 
 func add_options_to_item():
@@ -42,36 +45,47 @@ func add_options_to_item():
 	# TODO Añadir al menú de opciones las entradas y hacer sus "attachs" a las
 	# funciones correspondientes
 	var text = "";
-	if self.item.type == "object":
-		text = "Usar"
-	elif self.item.type == "equipment":
-		text = "Equipar"
-
-	$Menu/ItemList.add_item(text)
-	$Menu/ItemList.add_item("Descartar")
-	# $Menu.set_position($Item.
+	var in_equipped = false;
+	for it in PlayerManager.equipped_items:
+		if self.item == it:
+			in_equipped = true;
 	
+	if not in_equipped:
+		if self.item.type == "object":
+			text = "Usar"
+		elif self.item.type == "equipment":
+			text = "Equipar"
+
+		$Menu/CanvasLayer/ItemList.add_item(text)
+		$Menu/CanvasLayer/ItemList.add_item("Descartar")
+	else:
+		$Menu/CanvasLayer/ItemList.add_item("Desequipar")
+		
+	$Menu/CanvasLayer/ItemList.add_to_group("open-menu")
+
 
 func use():
 	""" Punto de entrada común para objetos y equipo
 	"""
 	self.item.use()
-	# Después de usarlo podemos descartarlo (y así ahorramos código)
-	self.drop()
+	emit_signal("is_used")
+	if self.item.type == "equipment":
+		emit_signal("is_equipment")
 
 
 func drop():
 	""" Función para eliminar el objeto del inventario
 	"""
 	self.item.drop()
-	self.item = null
-	for i in range($Menu/ItemList.get_item_count()):
-		$Menu/ItemList.remove_item(0)
+	emit_signal("is_used")
 	
-	$Item.disconnect("gui_input", self, "_on_Item_gui_input")
-	$Item/Image.set_texture(ImageTexture.new())
-	# Si esto no está aquí no se ajustan bien los márgenes para que esté centrado
-	$Item/Image/Background.set_margins_preset(Control.PRESET_CENTER)
+
+func unequip():
+	""" Como es un poco especial, va aquí por separado
+	"""
+	self.item.unequip()
+	emit_signal("is_used")
+	emit_signal("is_equipment")
 
 
 func _on_Item_gui_input(event):
@@ -79,15 +93,21 @@ func _on_Item_gui_input(event):
 		mostrar el menú
 	"""
 	if Input.is_action_just_released("mouse_left"):
-		$Menu.visible = !$Menu.visible
+		for node in get_tree().get_nodes_in_group("open-menu"):
+			node.visible = false
+		$Menu/CanvasLayer/ItemList.visible = !$Menu/CanvasLayer/ItemList.visible
+		# Para no poner el menú encima del click, se mueve un pelin fuera
+		$Menu/CanvasLayer/ItemList.set_position(get_viewport().get_mouse_position()+Vector2(5,5));
 
 
 func _on_ItemList_item_activated(index):
-	var item_text = $Menu/ItemList.get_item_text(index)
+	var item_text = $Menu/CanvasLayer/ItemList.get_item_text(index)
 	if item_text in ["Usar", "Equipar"]:
 		self.use()
+	elif item_text in ['Desequipar']:
+		self.unequip()
 	elif item_text in ["Descartar"]:
 		self.drop()
-	
-	$Menu.visible = false
-	$Menu/ItemList.unselect_all()
+
+	$Menu/CanvasLayer/ItemList.visible = false
+	$Menu/CanvasLayer/ItemList.unselect_all()
