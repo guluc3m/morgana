@@ -1,10 +1,13 @@
-extends Node
+""" Fichero que contiene funciones que representan las acciones
+	que se puede realizar con objetos/cartas
+"""
 
+extends Node
 
 # Definir un diccionario como argumento para evitar tener que repetir el for y
 # otras cosas en todas las funciones
-#func apply(objectives, func_name, **kwargs):
-#	func_name(objectives, kwargs)
+# func apply(objectives, func_name, **kwargs):
+#     func_name(objectives, kwargs)
 
 func card_func(func_name, kwargs={}):
 	""" Ejecuta la función especificada
@@ -17,7 +20,7 @@ func card_func(func_name, kwargs={}):
 	for objective in objectives:
 		var function = funcref(self, func_name)
 		function.call_func(objective, kwargs)
-		
+
 
 func base_damage(objective, kwargs):
 	objective.modify_health(kwargs["amount"])

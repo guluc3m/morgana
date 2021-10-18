@@ -10,13 +10,20 @@ script = ExtResource( 1 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 400, 400 )
 format = 1
-tile_data = PoolIntArray( 0, 15, 0, 1, 15, 0, 2, 15, 0, 65536, 15, 0, 65537, 15, 0, 65538, 15, 0 )
+tile_data = PoolIntArray( 0, 15, 0, 1, 15, 0, 2, 15, 0, 3, 15, 0, 4, 15, 0, 65536, 15, 0, 65537, 15, 0, 65538, 15, 0, 65539, 15, 0, 65540, 15, 0, 131072, 15, 0, 131073, 15, 0, 131074, 15, 0, 131075, 15, 0, 131076, 15, 0 )
 
 [node name="FondoNegro" type="ColorRect" parent="."]
-margin_left = 417.0
-margin_top = 226.0
-margin_right = 607.0
-margin_bottom = 370.0
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -326.0
+margin_top = -180.5
+margin_right = 326.0
+margin_bottom = 180.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
 color = Color( 0, 0, 0, 0.494118 )
 __meta__ = {
 "_edit_use_anchors_": false

@@ -10,6 +10,9 @@ func _ready():
 	self.init_tab_personalizacion()
 	#### TAB MAZO ####
 	self.init_tab_mazo()
+	
+	# Recentramos el inventario ya que su tamaño ha cambiado con respecto al nodo original
+	$Container.set_anchors_and_margins_preset(Control.PRESET_CENTER)
 
 
 func draw_equipped_items():
@@ -129,7 +132,7 @@ func init_tab_mazo(coleccion=[], cartas=[]):
 	var coleccion_node = $Container/TabContainer/Mazo/VBox/HBoxCartas/Coleccion
 	var cartas_node = $Container/TabContainer/Mazo/VBox/HBoxCartas/Cartas
 	# Contenedores principales
-	$Container/TabContainer/Mazo/VBox/HBoxCartas.rect_min_size.y = mazo_node.get_size().y*0.9
+	# $Container/TabContainer/Mazo/VBox/HBoxCartas.rect_min_size.y = mazo_node.get_size().y*0.9
 	# Contenedor coleción cartas
 	coleccion_node.rect_min_size = Vector2(mazo_node.get_size().x*0.6, coleccion_node.get_size().y)
 	coleccion_node.get_node("ScrollContainer").rect_min_size.x = coleccion_node.get_size().x
