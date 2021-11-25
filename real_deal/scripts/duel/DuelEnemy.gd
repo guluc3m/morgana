@@ -18,7 +18,6 @@ var loot = []
 
 
 var _sprite
-var _states
 
 
 func _ready():
@@ -82,9 +81,10 @@ func select_card():
 	""" En esta función reside la inteligencia de los enemigos.
 	Al llamarla, estos escogen que carta quieren jugar y la retornan.
 	"""
-	if self._hand:
-		print(self.name, " va a jugar: ", _hand[0]["name"])
-		return self._hand[0]
+	if deck_handler.can_play():
+		var card_to_play = deck_handler.select_random_card_from_hand()
+		print(self.name, " va a jugar: ", card_to_play["name"])
+		return card_to_play
 	return false
 
 

@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "Inventory",
 "language": "GDScript",
-"path": "res://real_deal/scripts/utils/player/Inventory.gd"
+"path": "res://real_deal/scripts/utils/player/inventory.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
