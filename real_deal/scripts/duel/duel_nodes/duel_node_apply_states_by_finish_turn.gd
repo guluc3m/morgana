@@ -8,6 +8,6 @@ func _init(duel_manager).(duel_manager):
 	
 func process():
 	print("Aplico los estados de " + _duel_manager.current_turn.name)
-	_duel_manager.current_turn.process_on_finish_states()
+	_duel_manager.current_turn.process_states("on_finish")
 		
 	_duel_manager.next_node()

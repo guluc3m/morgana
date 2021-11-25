@@ -21,13 +21,13 @@ var _armor = null
 var _damage_bonus = null
 
 # Estados
-var _states = [] ## Habrá que ver si esto es necesario,
-				 ## para rendimiento mejor seprados,
-				 ## pero quizá necesitemos agruparlos en algún momento
-var _on_start_states = []
-var _on_finish_states = []
-var _on_play_card_states = []
-var _on_recived_card = []
+var _states = {
+	"on_start": [],
+	"on_finish": [],
+	"on_play_card": [],
+	"on_recived_card": []
+	}
+var _ui_states
 
 func is_alive():
 	return _health > 0
@@ -65,12 +65,12 @@ func _dead():
 	play_animation("dead")
 	
 # ESTATES
-func add_on_finish_state(state):
-	_on_finish_states.append((state))
+func add_state(state):
+	_states[state.type].append((state))
 	# TODO: EVENTOS Y COSAS PARA ACTUALIZAR UI O LO QUE SURJA
 
-func process_on_finish_states():
-	for state in _on_finish_states:
+func process_states(state_type):
+	for state in _states[state_type]:
 		for effect in state.get_effect():
 			var func_name = effect[0]
 			var args = effect[1]

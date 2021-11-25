@@ -35,7 +35,7 @@ func apply_condition(objective, kwargs):
 
 func apply_burn(objective, kwargs):
 	var state = state_burned.new(kwargs["amount"])
-	objective.add_on_finish_state(state)
+	objective.add_state(state)
 	print(objective.name, " ha sido quemado con valor de ", kwargs["amount"])
 
 

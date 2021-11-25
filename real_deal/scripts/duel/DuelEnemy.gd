@@ -24,7 +24,7 @@ func _ready():
 	add_to_group("enemies")
 	_healthBar = $HealthBarContainer/Container/HealthBar
 	_sprite = $Character
-	_states = $StatesContainer/States
+	_ui_states = $StatesContainer/States
 	# Se añaden al grupo de "targetebles" cuando se empieza a usar una carta
 	# para evitar colisiones cuando no debe
 	## add_to_group("targeteable")
