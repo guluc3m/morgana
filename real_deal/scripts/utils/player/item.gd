@@ -27,7 +27,7 @@ func init_item(key: String):
 	self.type = item_database[key]['type']
 	self.description = item_database[key]['description']
 	self.effects = item_database[key]['effects']
-	self.add_cart = item_database[key]['add_cart']
+	#self.add_cart = item_database[key]['add_cart']
 	self.card_name = item_database[key]['card_name']
 	self.actions = item_database[key]['actions']
 

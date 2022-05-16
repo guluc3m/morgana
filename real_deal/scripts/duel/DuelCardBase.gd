@@ -58,7 +58,7 @@ func _input(event):
 		
 		if self.card_data["target"] in ["enemy", "both"]:
 			for _target in get_tree().get_nodes_in_group("enemies"):
-				if _target.is_alive:
+				if _target.is_alive():
 					_target.add_to_group("targeteable")
 					
 		if self.card_data["target"] in ["player", "both"]:

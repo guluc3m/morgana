@@ -41,17 +41,17 @@ func _ready():
 	}
 	
 	self.deck = [
-		"attack_1",
-		"attack_1",
-		"attack_1",
-		"attack_2",
-		"attack_2",
-		"attack_2",
-		"attack_3",
-		"attack_3",
-		"potion",
-		"potion",
 		"fire",
+		"attack_1",
+		"attack_1",
+		"attack_1",
+		"attack_2",
+		"attack_2",
+		"attack_2",
+		"attack_3",
+		"attack_3",
+		"potion",
+		"potion",
 		"fire"
 	]
 	self.inventory = Inventory.new()
