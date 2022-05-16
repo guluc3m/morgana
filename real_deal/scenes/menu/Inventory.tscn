@@ -4,7 +4,6 @@
 [ext_resource path="res://real_deal/scripts/menu/Inventory.gd" type="Script" id=3]
 
 [node name="Inventory" type="CanvasLayer"]
-follow_viewport_enable = true
 script = ExtResource( 3 )
 
 [node name="Container" type="MarginContainer" parent="."]
@@ -12,10 +11,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -244.0
-margin_top = -205.5
-margin_right = 244.0
-margin_bottom = 205.5
+margin_left = -447.0
+margin_top = -376.5
+margin_right = 447.0
+margin_bottom = 376.5
 custom_constants/margin_right = 75
 custom_constants/margin_top = 75
 custom_constants/margin_left = 75
@@ -27,17 +26,16 @@ __meta__ = {
 [node name="TabContainer" type="TabContainer" parent="Container"]
 margin_left = 75.0
 margin_top = 75.0
-margin_right = 413.0
-margin_bottom = 336.0
+margin_right = 819.0
+margin_bottom = 678.0
 size_flags_vertical = 5
 tab_align = 0
 
 [node name="PanelPJ" type="PanelContainer" parent="Container/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -21.9999
-margin_top = -12.0
+margin_left = 4.0
+margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 grow_horizontal = 0
@@ -46,20 +44,20 @@ grow_vertical = 0
 [node name="HBox" type="HBoxContainer" parent="Container/TabContainer/PanelPJ"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 349.0
-margin_bottom = 262.0
+margin_right = 729.0
+margin_bottom = 560.0
 size_flags_stretch_ratio = 0.0
 custom_constants/separation = 15
 
 [node name="Equipo" type="MarginContainer" parent="Container/TabContainer/PanelPJ/HBox"]
 margin_right = 188.0
-margin_bottom = 254.0
+margin_bottom = 553.0
 
 [node name="Background" type="TextureRect" parent="Container/TabContainer/PanelPJ/HBox/Equipo"]
 show_behind_parent = true
-margin_top = 21.0
+margin_top = 171.0
 margin_right = 188.0
-margin_bottom = 232.0
+margin_bottom = 382.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
@@ -69,12 +67,12 @@ stretch_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="Container/TabContainer/PanelPJ/HBox/Equipo"]
 margin_right = 188.0
-margin_bottom = 254.0
+margin_bottom = 553.0
 
 [node name="ItemsContainer" type="HBoxContainer" parent="Container/TabContainer/PanelPJ/HBox/Equipo/MarginContainer"]
-margin_top = 127.0
+margin_top = 276.0
 margin_right = 188.0
-margin_bottom = 127.0
+margin_bottom = 276.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 alignment = 1
@@ -92,26 +90,26 @@ __meta__ = {
 [node name="VSeparator" type="VSeparator" parent="Container/TabContainer/PanelPJ/HBox"]
 margin_left = 203.0
 margin_right = 207.0
-margin_bottom = 254.0
+margin_bottom = 553.0
 
 [node name="Stats" type="MarginContainer" parent="Container/TabContainer/PanelPJ/HBox"]
 margin_left = 222.0
 margin_right = 316.0
-margin_bottom = 254.0
+margin_bottom = 553.0
 grow_horizontal = 2
 
 [node name="VBox" type="VBoxContainer" parent="Container/TabContainer/PanelPJ/HBox/Stats"]
 margin_right = 94.0
-margin_bottom = 254.0
+margin_bottom = 553.0
 grow_horizontal = 0
 size_flags_horizontal = 5
 size_flags_vertical = 5
 alignment = 1
 
 [node name="ItemsCenter" type="MarginContainer" parent="Container/TabContainer/PanelPJ/HBox/Stats/VBox"]
-margin_top = 118.0
+margin_top = 267.0
 margin_right = 94.0
-margin_bottom = 118.0
+margin_bottom = 267.0
 
 [node name="Grid" type="GridContainer" parent="Container/TabContainer/PanelPJ/HBox/Stats/VBox/ItemsCenter"]
 margin_right = 94.0
@@ -120,9 +118,9 @@ custom_constants/hseparation = 20
 columns = 6
 
 [node name="Stats" type="CenterContainer" parent="Container/TabContainer/PanelPJ/HBox/Stats/VBox"]
-margin_top = 122.0
+margin_top = 271.0
 margin_right = 94.0
-margin_bottom = 136.0
+margin_bottom = 285.0
 
 [node name="Text" type="Label" parent="Container/TabContainer/PanelPJ/HBox/Stats/VBox/Stats"]
 margin_right = 94.0
@@ -137,7 +135,7 @@ anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 24.0
 margin_right = -4.0
-margin_bottom = -4.0
+margin_bottom = -12.0
 grow_horizontal = 0
 grow_vertical = 0
 
@@ -145,7 +143,7 @@ grow_vertical = 0
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 819.0
-margin_bottom = 445.0
+margin_bottom = 560.0
 custom_constants/separation = 10
 
 [node name="HBoxCartas" type="HBoxContainer" parent="Container/TabContainer/Mazo/VBox"]
@@ -219,17 +217,18 @@ margin_right = 436.0
 margin_bottom = 20.0
 text = "Aceptar"
 
-[node name="Cerrar" type="Button" parent="Container/TabContainer"]
+[node name="X" type="Button" parent="Container/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 542.5
-margin_top = 234.5
-margin_right = 534.5
-margin_bottom = 198.5
-text = "X"
+margin_left = 4.0
+margin_top = 24.0
+margin_right = -4.0
+margin_bottom = -4.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="tab_changed" from="Container/TabContainer" to="." method="_on_TabContainer_tab_changed"]
+[connection signal="tab_selected" from="Container/TabContainer" to="." method="_on_TabContainer_tab_selected"]
 [connection signal="pressed" from="Container/TabContainer/Mazo/VBox/HBoxBotones/Guardar" to="." method="_on_Aceptar_pressed"]
-[connection signal="pressed" from="Container/TabContainer/Cerrar" to="." method="_on_Cerrar_pressed"]
+[connection signal="pressed" from="Container/TabContainer/X" to="." method="_on_Cerrar_pressed"]

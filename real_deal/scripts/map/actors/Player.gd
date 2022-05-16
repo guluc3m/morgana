@@ -84,9 +84,14 @@ func _on_PlayerInfluece_body_entered(body):
 		emit_signal("chest_collision", body.get_path())
 		
 	elif body is KinematicBody2D and body.is_in_group("enemies"):
+		# Si el jugador pierde irá hacia "atrás" y si gana, pues el enemigo ya no está
 		body.queue_free()
+		print("env", body.post_event)
 		SceneManager.goto_scene(
 			"res://real_deal/scenes/duel/DuelManager.tscn",
-			{"enemigos": body.enemies},
+			{
+				"enemigos": body.enemies,
+				"env": body.post_event
+			},
 			true
 		)

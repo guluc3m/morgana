@@ -13,6 +13,7 @@ func _ready():
 	
 	# Recentramos el inventario ya que su tamaño ha cambiado con respecto al nodo original
 	$Container.set_anchors_and_margins_preset(Control.PRESET_CENTER)
+	# $Container/TabContainer.set_tab_disabled($Container/TabContainer.get_tab_count()-1, true)
 
 
 func draw_equipped_items():
@@ -132,13 +133,22 @@ func init_tab_mazo(coleccion=[], cartas=[]):
 	var coleccion_node = $Container/TabContainer/Mazo/VBox/HBoxCartas/Coleccion
 	var cartas_node = $Container/TabContainer/Mazo/VBox/HBoxCartas/Cartas
 	# Contenedores principales
-	# $Container/TabContainer/Mazo/VBox/HBoxCartas.rect_min_size.y = mazo_node.get_size().y*0.9
+	$Container/TabContainer/Mazo/VBox/HBoxCartas.rect_min_size.y = mazo_node.get_size().y*0.9
 	# Contenedor coleción cartas
 	coleccion_node.rect_min_size = Vector2(mazo_node.get_size().x*0.6, coleccion_node.get_size().y)
 	coleccion_node.get_node("ScrollContainer").rect_min_size.x = coleccion_node.get_size().x
-	
-	# Contenedor cartas equipadas
 	cartas_node.rect_min_size = Vector2(mazo_node.get_size().x*0.3, cartas_node.get_size().y)
+	
+	# Cartas que vienen de objetos equipados
+	for obj in PlayerManager.equipped_items:
+		if obj.card_name:
+			# TODO: estas cartas tienen que verse de forma distinta
+			# ya que no se pueden desequipar
+			cartas_node.get_node(
+				"ScrollContainer/Grid"
+			).add_child(create_node_deck(obj.card_name))
+	
+	# Cartas actuales en el mazo
 	for k in PlayerManager.deck:
 		PlayerManager.card_collection[k] -= 1  # Se reduce el nº de cartas disponibles
 		cartas_node.get_node(
@@ -183,3 +193,19 @@ func _on_Cerrar_pressed():
 	""" Cerrar el desplegable sin guardar ningún cambio en el mazo
 	"""
 	queue_free()
+
+
+func _on_TabContainer_tab_changed(tab):
+	""" Función para realizar acciones al cambiar de pestaña
+	"""
+	for node in get_tree().get_nodes_in_group("open-menu"):
+			node.visible = false
+
+
+func _on_TabContainer_tab_selected(tab):
+	""" Función para automáticamente realizar acciones
+		al cambiar a alguna pestaña
+	"""
+	# Cuando se selecciona la pestaña de cerrar. Cierra
+	if tab == $Container/TabContainer.get_tab_count()-1:
+		self._on_Cerrar_pressed()

@@ -7,6 +7,10 @@ class_name Enemy
 # var b = "text"
 # Esta variable se define en el json del nivel
 export var enemies = []  #"normal_slime", "fire_slime", "fire_slime"]
+var post_event = []
+# Variable donde se almacenan eventos y cambios que haya que
+# ejecutar posterior al combate. Se ejecutaría llamando en el
+# levelLoader a update_data con la clave 'env' en los datos
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -11,7 +11,7 @@
 			"enemies": ["slime_normal-basico-1", "slime_normal-basico-1", "slime_normal-basico-1"],
 		},
 		{
-			"nombre": "minijefe1",
+			"nombre": ["minijefe1"],
 			"enemies": ["slime_fire-basico-1"]
 		}
 	],

@@ -65,8 +65,8 @@ func equip():
 	print("equip")
 	if len(PlayerManager.equipped_items) < 4:
 		PlayerManager.equipped_items.append(self)
-	if self.add_cart:
-		PlayerManager.deck.append(self.card_name)
+	# if self.add_cart:
+	#     PlayerManager.deck.append(self.card_name)
 	
 
 func unequip():

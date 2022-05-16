@@ -14,7 +14,7 @@ var enemies = []
 var current_turn = "" # Id del nodo
 var turn_sequence = []  # TODO: Trnasformar en estructura de cola
 var turn_sequence_index = 0
-
+var poscombat = {}  # En caso de que tras el combate haya que hacer algo
 var scene_main_menu = "res://real_deal/scenes/menu/MainMenu.tscn"
 
 ###### Variables para la mano
@@ -89,8 +89,6 @@ func _init_entities(enemy_datas):
 		self.turn_sequence.append(enemy)
 		get_node("Enemigos/Enemy_{i}".format({'i':enemies.size() - 1})).add_child(enemies[enemies.size() - 1])
 		enemy.set_data(enemy_data)
-
-
 
 
 func add_to_hand(card):
@@ -181,16 +179,15 @@ func _player_win_duel():
 	PlayerManager.health = self.player._health # TODO: Cambiar acceso a estas variables
 	PlayerManager.energy = self.player._energy
 	PlayerManager.save()
-	SceneManager.goto_scene(SceneManager.previous_scene, {
-		"enemy_defeat": true  #TODO Lista con el path del nodo que no hay que cargar
-	})
-	
+	SceneManager.goto_scene(SceneManager.previous_scene, {"env": self.poscombat})
+
 
 func _are_enemies_dead():
 	for enemy in self.enemies:
 		if enemy.is_alive:
 			return false
 	return true
+
 
 func _get_reward():
 	"""
@@ -206,6 +203,7 @@ func _get_reward():
 	print(reward)
 	return reward
 
+
 func update_data(data):
 	var enemies_data = []
 	var enemy_name = ""
@@ -213,6 +211,8 @@ func update_data(data):
 		enemy_name = enemy.split("-")[0]
 		enemies_data.append(EnemiesDatabase.DATA[enemy_name])
 	_init_entities(enemies_data)  # Esto quiza lo tiene que llamar el scene manager (aunque indirectamente lo hace)
+	if "env" in data:
+		self.poscombat = data['env']
 
 
 func _on_Main_addCard(card):

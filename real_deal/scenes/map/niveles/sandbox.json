@@ -8,11 +8,14 @@
 			"nombre": [
 				"enemigo1","enemigo3"
 			],
-			"enemies": ["slime_normal-basico-1"],
+			"enemies": ["slime_normal-basico-1"]
 		},
 		{
 			"nombre": ["enemigo2"],
-			"enemies": ["slime_fire-basico-1"]
+			"enemies": ["slime_fire-basico-1"],
+			"post_event": [{
+				"Cofre2": [["visible", false]]
+			}]
 		},
 		{
 			"nombre": ["jefe1"],

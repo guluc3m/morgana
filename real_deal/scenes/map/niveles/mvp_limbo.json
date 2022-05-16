@@ -1,19 +1,19 @@
 {
     "portal": [
         {
-            "nombre": "portal1",
+            "nombre": ["portal1"],
             "hacia": "mvp_nivel1",
-            "abierto": true
-        },
-        {
-            "nombre": "portal2",
-            "hacia": "mvp_nivel1-2",
-            "abierto": true
-        },
-        {
-            "nombre": "portal3",
-            "hacia": "mvp_nivel3",
             "abierto": false
+        },
+        {
+            "nombre": ["portal2"],
+            "hacia": "mvp_nivel1-2",
+            "abierto": false
+        },
+        {
+            "nombre": ["portal3"],
+            "hacia": "sandbox",
+            "abierto": true
         }
     ]
 }

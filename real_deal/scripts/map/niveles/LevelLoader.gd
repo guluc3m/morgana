@@ -43,6 +43,8 @@ func init_level(nombre_escena):
 			for node in nodes:
 				var element = load("res://real_deal/scenes/map/actors/{}.tscn".format([k], "{}")).instance()
 				element.position = node.position
+				element.name = node.name
+				node.queue_free()
 				# Sobreescribimos atributos
 				for vals in def_escena[k].keys():
 					element.set_indexed(vals, def_escena[k][vals])
@@ -58,21 +60,12 @@ func init_level(nombre_escena):
 						if sub_node.name in subset['nombre']:
 							var element = load("res://real_deal/scenes/map/actors/{}.tscn".format([k], "{}")).instance()
 							element.position = sub_node.position
+							element.name = sub_node.name
+							sub_node.queue_free()
 							# Sobreescribimos atributos
 							for vals in subset.keys():
 								if vals != "nombre":  # Ignoramos el nombre, ya que es un poco irrelevante
-									element.set_indexed(vals, subset[vals])
-							get_tree().get_current_scene().call_deferred("add_child", element)
-				# Se aplica a un elemento individual del grupo
-				elif typeof(subset["nombre"]) == typeof(String()):
-					var element_node = get_tree().get_nodes_in_group(k)
-					for sub_node in element_node:
-						if sub_node.name == subset['nombre']:
-							var element = load("res://real_deal/scenes/map/actors/{}.tscn".format([k], "{}")).instance()
-							element.position = sub_node.position
-							# Sobreescribimos atributos
-							for vals in subset.keys():
-								if vals != "nombre":  # Ignoramos el nombre, ya que es un poco irrelevante
+									print(vals, subset[vals])
 									element.set_indexed(vals, subset[vals])
 							get_tree().get_current_scene().call_deferred("add_child", element)
 							
@@ -118,16 +111,49 @@ func update_data(data):
 	# var r = get_tree().get_nodes_in_group("Sensitive")
 	_update_player(data)
 	_update_enemies(data)
+	_update_env(data)
 	
 	
 func _update_player(data):
+	""" Actualiza datos en la instancia del jugador
+	"""
 	if 'player' in data:
 		var player = get_tree().get_root().find_node("Player", true, false)
 	
 	
 func _update_enemies(data):
+	""" Actualiza datos en los enemigos
+		En desuso, probablemente hay que eliminarlo
+	"""
 	pass
 #	if 'enemy_defeat' in data:
 #		var enemy = get_tree().get_root().find_node("EnemyOne", true, false)
 #		if data["enemy_defeat"]:
 #			enemy.queue_free()
+
+func _update_env(data):
+	""" Actualiza datos en el entorno.
+		pj: Ocultar elementos, cambiar objetos, etc
+		
+		La estructura esperada de data debería ser lo siguiente:
+		data: {
+			'env': [{
+				'nombre del nodo': [
+					(atributo a cambiar, **parámetros esperados),
+					...
+				]
+			},...]
+		}
+	"""
+	if not ('env' in data):
+		return
+
+	for obj in data['env']:
+		for obj_name in obj.keys():
+			var node = get_tree().get_root().find_node(obj_name, true, false)
+			# TODO ver esto cómo se comportaría cuando se quiere cambiar un atributo como la posición
+			# que son Vector2 y tal, pensar en algo o quizás incluso en ver si sería posible
+			# ejecutar código directamente
+			for attr in obj[obj_name]:
+				# TODO Es posible que esto tenga que cambiarse a llamadas a funciones del propio objeto
+				node.set(attr[0], attr[1])

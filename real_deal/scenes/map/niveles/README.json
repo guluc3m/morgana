@@ -7,24 +7,20 @@
 		aquí se especificarán casos concretos>
 		{
 			"nombre": 
-			<El atributo nombre en este caso en una lista porque queremos ponerle a
+			<El atributo nombre es una lista porque queremos ponerle a
 			todos estos enemigos las mismas "características">
 			[
 				"enemigo1","enemigo2","enemigo3","enemigo4",
 				"enemigo5","enemigo6","enemigo7","enemigo8"
 			],
-			"tipo": <aquí definimos el tipo de enemigo que será. El nombre de los enemigos
+			"enemies": <aquí definimos el tipo de enemigo que será. El nombre de los enemigos
 			vendrá definido en el siguiente formato para poder generarlos "automáticamente"
 			<nombre-del-enemigo>_<categoría [basico,minijefe,jefe]>_<nivel>. Ejemplos:
 				slime_normal-basico-1 <-- Slime normal, categoría básico de nivel 1
 				slime_fuego-minijefe-3 <-- Slime de fuego, categoría minijefe y nivel 3>
-		},
-		{
-			"nombre":
-			<El atributo nombre aquí no es una lista porque queremos aplicar estas características
-			a un único personaje>
-				"minijefe1,
-			"tipo": "slime_fuego-minijefe-1"
+			"post_event": <Lista de diccionarios. Cada valor de las claves del diccionario será 
+			una lista de tuplas, donde cada tupla se corresponderá con el nombre de la propiedad
+			a cambiar y su nuevo valor.>. Ej: {[{"Cofre2": [["visible", false]]}]}
 		}
 	],
 	"cofres": {
