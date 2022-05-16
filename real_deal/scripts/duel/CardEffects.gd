@@ -1,8 +1,10 @@
 """ Fichero que contiene funciones que representan las acciones
 	que se puede realizar con objetos/cartas
 """
-
 extends Node
+var state_burned = preload("res://real_deal/scripts/duel/states/state_burned.gd")
+
+
 
 # Definir un diccionario como argumento para evitar tener que repetir el for y
 # otras cosas en todas las funciones
@@ -30,6 +32,12 @@ func base_damage(objective, kwargs):
 func apply_condition(objective, kwargs):
 	objective.modify_health(kwargs["amount"])
 	print(objective.name, " se cura ", kwargs["amount"], " puntos de daño.")
+
+func apply_burn(objective, kwargs):
+	var state = state_burned.new(kwargs["amount"])
+	objective.add_state(state)
+	print(objective.name, " ha sido quemado con valor de ", kwargs["amount"])
+
 
 
 func set_armor(objective, kwargs):

@@ -98,7 +98,7 @@ const DATA = {
 		"exiled": true,
 		"actions": [
 			["base_damage", {"amount": -1}],
-			["apply_condition", {"amount": -5, "condition": "ardiendo"}],
+			["apply_burn", {"amount": 2}],
 		],
 	},
 	"thump": {

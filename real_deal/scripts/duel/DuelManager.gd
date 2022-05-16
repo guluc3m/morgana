@@ -8,6 +8,11 @@ const CardBase = preload("res://real_deal/scenes/duel/DuelCardBase.tscn")
 onready var card_functions = preload("res://real_deal/scripts/duel/CardEffects.gd").new()
 onready var _player_instance = preload("res://real_deal/scenes/duel/DuelPlayer.tscn")
 
+# Nodes
+onready var duel_node_classic_duel_process = preload("res://real_deal/scripts/duel/duel_nodes/duel_node_classic_duel_process.gd").new(self)
+onready var duel_node_start_turn = preload("res://real_deal/scripts/duel/duel_nodes/duel_node_start_turn.gd").new(self)
+onready var duel_node_apply_states_by_finish_turn = preload("res://real_deal/scripts/duel/duel_nodes/duel_node_apply_states_by_finish_turn.gd").new(self)
+
 var player = ""
 var mano = null
 var enemies = []
@@ -15,6 +20,12 @@ var current_turn = "" # Id del nodo
 var turn_sequence = []  # TODO: Trnasformar en estructura de cola
 var turn_sequence_index = 0
 var poscombat = {}  # En caso de que tras el combate haya que hacer algo
+
+### COSAS NUEVAS PARA LA GESTION DE NODOS
+var duel_nodes = []
+var current_duel_node
+####
+
 var scene_main_menu = "res://real_deal/scenes/menu/MainMenu.tscn"
 
 ###### Variables para la mano
@@ -31,33 +42,23 @@ var OvalAngleVector = Vector2()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	duel_nodes.append(duel_node_start_turn)
+	duel_nodes.append(duel_node_classic_duel_process)
+	duel_nodes.append(duel_node_apply_states_by_finish_turn)
+	current_duel_node = duel_nodes.pop_front()
+	current_duel_node.on_enter_node()
 
 
 func _process(delta):
-	# HABRÍA QUE REVISAR ESTO PORQUE ES UN POCO PEGOTE
-	if self.current_turn == player:
-		if self.current_turn.is_alive:
-			if _are_enemies_dead():
-				_player_win_duel()
-				return
-			else:
-				return
-		else:
-			_player_lose_duel()
-			return
-	# Enemy turn 
-	if self.current_turn.is_alive:
-		var card_to_play = self.current_turn.select_card()
-		while card_to_play:
-			self._on_Main_playCard(
-				null,
-				card_to_play,
-				player
-			)
-			card_to_play = self.current_turn.select_card()
-	self._on_finish_turn()
-	
+	current_duel_node.process()
+
+
+func next_node():
+	print("CAMBIANDO DE NODO")
+	current_duel_node.on_exit_node()
+	duel_nodes.push_back(current_duel_node)
+	current_duel_node = duel_nodes.pop_front()
+	current_duel_node.on_enter_node()
 
 func _init_entities(enemy_datas):
 	# Init player
@@ -141,10 +142,12 @@ func place_card(card):
 
 
 func _on_finish_turn():
-	# TODO: efectos de finalizar el turno
+	# TODO: Intentar migrar al nodo de finalizar turno
+	# y efectos de finalizar el turno
 	self.turn_sequence_index = (self.turn_sequence_index + 1) % self.turn_sequence.size()
 	self.current_turn = self.turn_sequence[self.turn_sequence_index]
 	_on_start_turn(self.current_turn)
+	next_node()
 
 
 func _on_start_turn(character_node):
@@ -184,7 +187,7 @@ func _player_win_duel():
 
 func _are_enemies_dead():
 	for enemy in self.enemies:
-		if enemy.is_alive:
+		if enemy.is_alive():
 			return false
 	return true
 
