@@ -31,24 +31,16 @@ format = 1
 
 [node name="posiciones" type="Node2D" parent="."]
 
-[node name="jugador" type="Position2D" parent="posiciones" groups=[
-"jugador",
-]]
+[node name="jugador" type="Position2D" parent="posiciones" groups=["jugador"]]
 position = Vector2( 833.183, 181.428 )
 
 [node name="portales" type="Node" parent="posiciones"]
 
-[node name="portal1" type="Position2D" parent="posiciones/portales" groups=[
-"portal",
-]]
+[node name="portal1" type="Position2D" parent="posiciones/portales" groups=["portal"]]
 position = Vector2( 823.01, -208.58 )
 
-[node name="portal2" type="Position2D" parent="posiciones/portales" groups=[
-"portal",
-]]
+[node name="portal2" type="Position2D" parent="posiciones/portales" groups=["portal"]]
 position = Vector2( 454.899, 418.152 )
 
-[node name="portal3" type="Position2D" parent="posiciones/portales" groups=[
-"portal",
-]]
+[node name="portal3" type="Position2D" parent="posiciones/portales" groups=["portal"]]
 position = Vector2( 1164.69, 446.468 )

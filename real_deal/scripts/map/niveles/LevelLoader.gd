@@ -39,7 +39,7 @@ func init_level(nombre_escena):
 	for k in def_escena.keys():
 		# Caso aplicar mismas propiedades a todos en el grupo
 		if typeof(def_escena[k]) == typeof(Dictionary()):
-			var nodes = get_tree().get_nodes_in_group(k)
+			var nodes = get_tree().get_nodes_in_group(k.to_lower())
 			for node in nodes:
 				var element = load("res://real_deal/scenes/map/actors/{}.tscn".format([k], "{}")).instance()
 				element.position = node.position
@@ -54,7 +54,7 @@ func init_level(nombre_escena):
 			for subset in def_escena[k]:
 				# Se aplica a un subset concreto de elementos en el grupo
 				if typeof(subset["nombre"]) == typeof(Array()):
-					var element_nodes = get_tree().get_nodes_in_group(k)
+					var element_nodes = get_tree().get_nodes_in_group(k.to_lower())
 					for sub_node in element_nodes:
 						# Filtramos por los nodos que queremos
 						if sub_node.name in subset['nombre']:

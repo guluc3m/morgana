@@ -1,5 +1,5 @@
 {
-    "portal": [
+    "Portal": [
         {
             "nombre": ["portal1"],
             "hacia": "mvp_nivel1",

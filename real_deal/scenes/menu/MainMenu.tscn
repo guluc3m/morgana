@@ -121,6 +121,7 @@ margin_right = 1880.0
 margin_bottom = 1040.0
 mouse_filter = 2
 alignment = 2
+
 [connection signal="pressed" from="MarginContainer/LeftIcons/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="MarginContainer/CenterIcons/VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="MarginContainer/CenterIcons/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

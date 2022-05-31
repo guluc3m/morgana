@@ -1,8 +1,8 @@
 {
-	"portal": {
+	"Portal": {
 		"hacia": <aquí se escribe el nombre del siguiente nivel que habría que cargar>
 	},
-	"enemigos": [  
+	"Enemy": [  
 		<Al ser una lista, cada elemento debe llevar un atributo "nombre", ya que
 		aquí se especificarán casos concretos>
 		{
@@ -23,7 +23,7 @@
 			a cambiar y su nuevo valor.>. Ej: {[{"Cofre2": [["visible", false]]}]}
 		}
 	],
-	"cofres": {
+	"Chest": {
 		<Al contrario que en "enemigos" al no ser esto una lista se entiende que queremos definir
 		estas características a TODOS los elementos en el grupo>
 		"recompensa": <Aquí se define el tipo de recompensa para los cofres, puede ser [random/fija]

@@ -1,9 +1,9 @@
 {
-	"portal": {
+	"Portal": {
 		"hacia": "mvp_nivel2",
 		"abierto": false
 	},
-	"enemy": [
+	"Enemy": [
 		{
 			"nombre": [
 				"enemigo1","enemigo2","enemigo3"
@@ -15,7 +15,7 @@
 			"enemies": ["slime_fire-basico-1"]
 		}
 	],
-	"chest": {
+	"Chest": {
 		"recompensa": "random"
 	}
 }
