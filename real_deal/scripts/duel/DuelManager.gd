@@ -7,6 +7,7 @@ signal addCard
 const CardBase = preload("res://real_deal/scenes/duel/DuelCardBase.tscn")
 onready var card_functions = preload("res://real_deal/scripts/duel/CardEffects.gd").new()
 onready var _player_instance = preload("res://real_deal/scenes/duel/DuelPlayer.tscn")
+var Item = preload("res://real_deal/scripts/utils/player/Item.gd")
 
 # Nodes
 onready var duel_node_classic_duel_process = preload("res://real_deal/scripts/duel/duel_nodes/duel_node_classic_duel_process.gd").new(self)
@@ -202,7 +203,9 @@ func _get_reward():
 	var reward = []
 	for enemy in self.enemies:
 		for item in enemy.loot:
-			reward.append(item)
+			var it = Item.new()
+			it.init_item(item)
+			reward.append(it)
 	print(reward)
 	return reward
 

@@ -151,9 +151,10 @@ func _update_env(data):
 	for obj in data['env']:
 		for obj_name in obj.keys():
 			var node = get_tree().get_root().find_node(obj_name, true, false)
-			# TODO ver esto cómo se comportaría cuando se quiere cambiar un atributo como la posición
-			# que son Vector2 y tal, pensar en algo o quizás incluso en ver si sería posible
-			# ejecutar código directamente
-			for attr in obj[obj_name]:
-				# TODO Es posible que esto tenga que cambiarse a llamadas a funciones del propio objeto
-				node.set(attr[0], attr[1])
+			# Se ejecutan las funciones definidas en el nodo
+			for func_args in obj[obj_name]:
+				if node.has_method(func_args[0]):
+					if len(func_args) > 1:  # Función con 1 o + argumentos
+						node.callv(func_args[0], func_args[1])
+					else:  # Función sin argumentos
+						node.call(func_args[0])

@@ -25,3 +25,6 @@ func save():
 	}
 	return save_dict
 
+
+func open():
+	print("ABIERTO!")

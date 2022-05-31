@@ -16,7 +16,15 @@ func _ready():
 func close_portal():
 	""" Cambia el sprite a la versión cerrada del portal
 	"""
+	self.abierto = false
 	$Sprite.texture = load("res://assets/prototipos/elementos/limb_portal_locked.png")
+
+
+func open_portal():
+	""" Abre el portal. Cambia el sprite y la variable
+	"""
+	self.abierto = true
+	$Sprite.texture = load("res://assets/prototipos/elementos/limb_portal.png")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

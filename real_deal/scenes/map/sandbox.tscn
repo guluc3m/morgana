@@ -35,52 +35,33 @@ tile_data = PoolIntArray( 131093, 7, 0, 131094, 2, 0, 131095, 2, 0, 131096, 2, 0
 
 [node name="posiciones" type="Node2D" parent="."]
 
-[node name="jugador" type="Position2D" parent="posiciones" groups=[
-"jugador",
-]]
+[node name="jugador" type="Position2D" parent="posiciones" groups=["jugador"]]
 position = Vector2( 9843.88, 3892.19 )
 
 [node name="enemigos" type="Node2D" parent="posiciones"]
 
-[node name="enemigo1" type="Position2D" parent="posiciones/enemigos" groups=[
-"enemy",
-]]
+[node name="enemigo1" type="Position2D" parent="posiciones/enemigos" groups=["enemy"]]
 position = Vector2( 10264.9, 3940.06 )
 
-[node name="enemigo2" type="Position2D" parent="posiciones/enemigos" groups=[
-"enemy",
-]]
+[node name="enemigo2" type="Position2D" parent="posiciones/enemigos" groups=["enemy"]]
 position = Vector2( 9843.88, 3620.17 )
 
-[node name="enemigo3" type="Position2D" parent="posiciones/enemigos" groups=[
-"enemy",
-]]
+[node name="enemigo3" type="Position2D" parent="posiciones/enemigos" groups=["enemy"]]
 position = Vector2( 9528.59, 3892.19 )
 
-[node name="jefe1" type="Position2D" parent="posiciones/enemigos" groups=[
-"enemy",
-"minijefes",
-]]
+[node name="jefe1" type="Position2D" parent="posiciones/enemigos" groups=["enemy", "minijefes"]]
 position = Vector2( 9798.69, 4799.52 )
 
 [node name="cofres" type="Node2D" parent="posiciones"]
 
-[node name="Cofre1" type="Position2D" parent="posiciones/cofres" groups=[
-"chest",
-]]
+[node name="Cofre1" type="Position2D" parent="posiciones/cofres" groups=["chest"]]
 position = Vector2( 9281.41, 3940.06 )
 
-[node name="Cofre2" type="Position2D" parent="posiciones/cofres" groups=[
-"chest",
-]]
+[node name="Cofre2" type="Position2D" parent="posiciones/cofres" groups=["chest"]]
 position = Vector2( 9843.88, 3345.13 )
 
-[node name="Cofre3" type="Position2D" parent="posiciones/cofres" groups=[
-"chest",
-]]
+[node name="Cofre3" type="Position2D" parent="posiciones/cofres" groups=["chest"]]
 position = Vector2( 10504, 3940.06 )
 
-[node name="portal" type="Position2D" parent="posiciones" groups=[
-"portal",
-]]
+[node name="portal" type="Position2D" parent="posiciones" groups=["portal"]]
 position = Vector2( 9798.69, 5208.51 )

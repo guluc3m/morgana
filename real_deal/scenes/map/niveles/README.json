@@ -19,12 +19,12 @@
 				slime_normal-basico-1 <-- Slime normal, categoría básico de nivel 1
 				slime_fuego-minijefe-3 <-- Slime de fuego, categoría minijefe y nivel 3>
 			"post_event": <Lista de diccionarios. Cada valor de las claves del diccionario será 
-			una lista de tuplas, donde cada tupla se corresponderá con el nombre de la propiedad
-			a cambiar y su nuevo valor.>. Ej: {[{"Cofre2": [["visible", false]]}]}
+			una lista de tuplas, donde cada tupla se corresponderá con el nombre de la función que
+			se quiere ejecutar y sus argumentos.>. Ej: {[{"Cofre2": [["change_visibility", false]]}]}
 		}
 	],
 	"Chest": {
-		<Al contrario que en "enemigos" al no ser esto una lista se entiende que queremos definir
+		<Al contrario que en "Enemy" al no ser esto una lista se entiende que queremos definir
 		estas características a TODOS los elementos en el grupo>
 		"recompensa": <Aquí se define el tipo de recompensa para los cofres, puede ser [random/fija]
 		  si la recompensa es "fija", además habría que especificar una clave más "objetos" con los recompensas TBD>

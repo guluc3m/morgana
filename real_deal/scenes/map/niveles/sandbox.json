@@ -14,12 +14,19 @@
 			"nombre": ["enemigo2"],
 			"enemies": ["slime_fire-basico-1"],
 			"post_event": [{
-				"Cofre2": [["visible", false]]
+				"Cofre2": [["open"]],
+                "nivel": [
+                    ["set_cell", [24, 10, -1]],
+                    ["set_cell", [24, 11, -1]]
+                ]
 			}]
 		},
 		{
 			"nombre": ["jefe1"],
-			"enemies": ["slime_fire-jefe-1"]
+			"enemies": ["slime_fire-jefe-1"],
+            "post_event": [{
+                "portal": [["open_portal"]]
+            }]
 		}
 	],
 	"Chest": {
